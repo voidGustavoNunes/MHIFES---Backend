@@ -1,13 +1,13 @@
-package com.RFID.MHIFES.service;
+package com.rfid.mhifes.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.RFID.MHIFES.exception.RegistroNotFoundException;
-import com.RFID.MHIFES.model.Disciplina;
-import com.RFID.MHIFES.repository.DisciplinaRepository;
+import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.model.Disciplina;
+import com.rfid.mhifes.repository.DisciplinaRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

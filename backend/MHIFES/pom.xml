@@ -8,10 +8,10 @@
 		<version>3.2.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.RFID</groupId>
-	<artifactId>MHIFES</artifactId>
+	<groupId>com.rfid</groupId>
+	<artifactId>mhifes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MHIFES</name>
+	<name>mhifes</name>
 	<description>Projeto WEB para a Coordenadoria do Ifes</description>
 	<properties>
 		<java.version>17</java.version>

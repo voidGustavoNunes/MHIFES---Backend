@@ -1,11 +1,7 @@
-package com.RFID.MHIFES;
+package com.rfid.mhifes;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import com.RFID.MHIFES.repository.EquipamentoRepository;
 
 @SpringBootApplication
 public class MhifesApplication {

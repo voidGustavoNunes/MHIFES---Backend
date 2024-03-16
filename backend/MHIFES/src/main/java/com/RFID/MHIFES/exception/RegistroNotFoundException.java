@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.exception;
+package com.rfid.mhifes.exception;
 
 public class RegistroNotFoundException extends RuntimeException {
     

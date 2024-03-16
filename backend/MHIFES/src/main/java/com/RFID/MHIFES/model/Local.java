@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 public class Local {
 

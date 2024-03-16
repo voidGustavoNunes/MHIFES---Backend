@@ -1,6 +1,4 @@
-package com.RFID.MHIFES.model;
-
-import javax.annotation.processing.Generated;
+package com.rfid.mhifes.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

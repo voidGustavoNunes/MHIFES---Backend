@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import jakarta.persistence.Entity;
 
