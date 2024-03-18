@@ -1,4 +1,4 @@
-package com.rfid.mhifes;
+package com.RFID.MHIFES;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

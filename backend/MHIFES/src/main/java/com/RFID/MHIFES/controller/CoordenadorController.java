@@ -1,4 +1,4 @@
-package com.rfid.mhifes.controller;
+package com.RFID.MHIFES.controller;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rfid.mhifes.model.Coordenador;
-import com.rfid.mhifes.service.CoordenadorService;
+import com.RFID.MHIFES.model.Coordenador;
+import com.RFID.MHIFES.service.CoordenadorService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
