@@ -41,6 +41,7 @@ public class ProfessorService {
                 .map(professorEditado -> {
                     professorEditado.setNome(professor.getNome());
                     professorEditado.setMatricula(professor.getMatricula());
+                    professorEditado.setCurso(professor.getCurso());
                     return professorRepository.save(professorEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }

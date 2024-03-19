@@ -41,6 +41,7 @@ public class CoordenadorService {
                 .map(coordenadorEditado -> {
                     coordenadorEditado.setNome(coordenador.getNome());
                     coordenadorEditado.setMatricula(coordenador.getMatricula());
+                    coordenadorEditado.setCurso(coordenador.getCurso());
                     return coordenadorRepository.save(coordenadorEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }

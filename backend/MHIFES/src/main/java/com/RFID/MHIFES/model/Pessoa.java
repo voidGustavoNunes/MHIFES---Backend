@@ -23,4 +23,7 @@ public class Pessoa {
     @Column(length = 150, nullable = false)
     private String matricula;
     
+    @Column(length = 150, nullable = false)
+    private String curso;
+    
 }
