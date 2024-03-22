@@ -41,6 +41,7 @@ public class AlunoService {
                 .map(alunoEditado -> {
                     alunoEditado.setNome(aluno.getNome());
                     alunoEditado.setMatricula(aluno.getMatricula());
+                    alunoEditado.setCurso(aluno.getCurso());
                     return alunoRepository.save(alunoEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
