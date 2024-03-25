@@ -23,7 +23,7 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @RestController
-@RequestMapping("/api/local")
+@RequestMapping("/api/locais")
 public class LocalController {
     
     private final LocalService localService;

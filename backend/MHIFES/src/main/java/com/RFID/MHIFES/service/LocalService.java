@@ -42,6 +42,7 @@ public class LocalService {
                 .map(localEditado -> {
                     localEditado.setNome(local.getNome());
                     localEditado.setCapacidade(local.getCapacidade());
+                    localEditado.setEquipamentos(local.getEquipamentos());
                     return localRepository.save(localEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }

@@ -24,7 +24,7 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @RestController
-@RequestMapping("/api/evento")
+@RequestMapping("/api/eventos")
 public class EventoController {
     
     private final EventoService eventoService;
