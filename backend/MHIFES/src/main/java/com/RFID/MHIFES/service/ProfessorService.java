@@ -42,6 +42,7 @@ public class ProfessorService {
                     professorEditado.setNome(professor.getNome());
                     professorEditado.setMatricula(professor.getMatricula());
                     professorEditado.setCurso(professor.getCurso());
+                    professorEditado.setEhCoordenador(professor.isEhCoordenador());
                     return professorRepository.save(professorEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
