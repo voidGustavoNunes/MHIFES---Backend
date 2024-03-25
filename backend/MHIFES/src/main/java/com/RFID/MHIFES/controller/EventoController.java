@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.RFID.MHIFES.model.Aluno;
 import com.RFID.MHIFES.model.Evento;
-import com.RFID.MHIFES.service.AlunoService;
+import com.RFID.MHIFES.service.EventoService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

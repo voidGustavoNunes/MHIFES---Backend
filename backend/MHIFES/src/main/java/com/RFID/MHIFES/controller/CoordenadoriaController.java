@@ -29,7 +29,7 @@ public class CoordenadoriaController {
     
     private final CoordenadoriaService coordenadoriaService;
 
-    public CoordenadorController(CoordenadoriaService coordenadoriaService) {
+    public CoordenadoriaController(CoordenadoriaService coordenadoriaService) {
         this.coordenadoriaService = coordenadoriaService;
     }
 

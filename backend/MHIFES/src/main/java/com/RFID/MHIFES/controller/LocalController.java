@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.RFID.MHIFES.model.Aluno;
 import com.RFID.MHIFES.model.Local;
-import com.RFID.MHIFES.service.AlunoService;
 import com.RFID.MHIFES.service.LocalService;
 
 import jakarta.validation.Valid;
@@ -35,23 +33,23 @@ public class LocalController {
     }
 
     @GetMapping
-    public List<Aluno> listar() {
+    public List<Local> listar() {
         return localService.listar();
     }
 
     @GetMapping("/{id}")
-    public Aluno buscarPorId(@PathVariable @NotNull @Positive Long id) {
+    public Local buscarPorId(@PathVariable @NotNull @Positive Long id) {
         return localService.buscarPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Aluno criar(@RequestBody @Valid @NotNull Local local) {
+    public Local criar(@RequestBody @Valid @NotNull Local local) {
         return localService.criar(local);
     }
 
     @PutMapping("/{id}")
-    public Aluno atualizar(@PathVariable @NotNull @Positive Long id,
+    public Local atualizar(@PathVariable @NotNull @Positive Long id,
             @RequestBody @Valid @NotNull Local local) {
         return localService.atualizar(id, local);
     }

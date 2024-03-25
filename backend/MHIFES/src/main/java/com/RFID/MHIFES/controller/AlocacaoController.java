@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RFID.MHIFES.model.Alocacao;
-import com.RFID.MHIFES.model.Aluno;
 import com.RFID.MHIFES.service.AlocacaoService;
 
 import jakarta.validation.Valid;
@@ -51,7 +50,7 @@ public class AlocacaoController {
     }
 
     @PutMapping("/{id}")
-    public Aluno atualizar(@PathVariable @NotNull @Positive Long id,
+    public Alocacao atualizar(@PathVariable @NotNull @Positive Long id,
             @RequestBody @Valid @NotNull Alocacao alocacao) {
         return alocacaoService.atualizar(id, alocacao);
     }

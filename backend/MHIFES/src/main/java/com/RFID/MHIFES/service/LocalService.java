@@ -17,7 +17,8 @@ import jakarta.validation.constraints.Positive;
 @Service
 @Validated
 public class LocalService {
-        private LocalRepository localRepository;
+    
+    private LocalRepository localRepository;
 
     public LocalService(LocalRepository localRepository) {
         this.localRepository = localRepository;
