@@ -1,6 +1,5 @@
 package com.RFID.MHIFES.service;
 
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -15,38 +14,21 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @Service
-public class DisciplinaService {
+public class DisciplinaService  extends GenericServiceImpl<Disciplina, DisciplinaRepository> {
 
-    private DisciplinaRepository disciplinaRepository;
 
     public DisciplinaService(DisciplinaRepository disciplinaRepository) {
-        this.disciplinaRepository = disciplinaRepository;
+        super(disciplinaRepository);
+
     }
 
-    public List<Disciplina> listar() {
-        return disciplinaRepository.findAll();
-    }
-
-    public Disciplina buscarPorId(@NotNull @Positive Long id) {
-        return disciplinaRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id));
-    }
-
-    public Disciplina criar(@Valid @NotNull Disciplina disciplina) {
-        return disciplinaRepository.save(disciplina);
-    }
-
+    @Override
     public Disciplina atualizar(@NotNull @Positive Long id, @Valid @NotNull Disciplina disciplina) {
-        return disciplinaRepository.findById(id)
+        return repository.findById(id)
                 .map(disciplinaEditado -> {
                     disciplinaEditado.setNome(disciplina.getNome());
-                    return disciplinaRepository.save(disciplinaEditado);
+                    return repository.save(disciplinaEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
-    }
-
-    public void excluir(@NotNull @Positive Long id) {
-        disciplinaRepository.delete(disciplinaRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id)));
     }
 
 }

@@ -1,6 +1,5 @@
 package com.RFID.MHIFES.service;
 
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -15,40 +14,23 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @Service
-public class AlunoService {
-
-    private AlunoRepository alunoRepository;
+public class AlunoService  extends GenericServiceImpl<Aluno, AlunoRepository> {
 
     public AlunoService(AlunoRepository alunoRepository) {
-        this.alunoRepository = alunoRepository;
+        super(alunoRepository);
     }
 
-    public List<Aluno> listar() {
-        return alunoRepository.findAll();
-    }
-
-    public Aluno buscarPorId(@NotNull @Positive Long id) {
-        return alunoRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id));
-    }
-
-    public Aluno criar(@Valid @NotNull Aluno aluno) {
-        return alunoRepository.save(aluno);
-    }
-
+    @Override
     public Aluno atualizar(@NotNull @Positive Long id, @Valid @NotNull Aluno aluno) {
-        return alunoRepository.findById(id)
+        return repository.findById(id)
                 .map(alunoEditado -> {
                     alunoEditado.setNome(aluno.getNome());
                     alunoEditado.setMatricula(aluno.getMatricula());
                     alunoEditado.setCurso(aluno.getCurso());
-                    return alunoRepository.save(alunoEditado);
+                    return repository.save(alunoEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
-    public void excluir(@NotNull @Positive Long id) {
-        alunoRepository.delete(alunoRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id)));
-    }
+
 
 }

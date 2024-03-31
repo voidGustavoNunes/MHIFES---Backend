@@ -1,5 +1,11 @@
 package com.RFID.MHIFES.service;
 
-public abstract class GenericService {
-    
+import java.util.List;
+
+public interface GenericService<T> {
+    List<T> listar();
+    T buscarPorId(Long id);
+    T criar(T entity);
+    T atualizar(Long id, T entity);
+    void excluir(Long id);
 }

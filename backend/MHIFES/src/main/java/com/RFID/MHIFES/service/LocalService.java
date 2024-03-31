@@ -1,7 +1,5 @@
 package com.RFID.MHIFES.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -16,40 +14,25 @@ import jakarta.validation.constraints.Positive;
 
 @Service
 @Validated
-public class LocalService {
+public class LocalService  extends GenericServiceImpl<Local, LocalRepository> {
     
-    private LocalRepository localRepository;
 
     public LocalService(LocalRepository localRepository) {
-        this.localRepository = localRepository;
+        super(localRepository);
+
     }
 
-    public List<Local> listar() {
-        return localRepository.findAll();
-    }
-
-    public Local buscarPorId(@NotNull @Positive Long id) {
-        return localRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id));
-    }
-
-    public Local criar(@Valid @NotNull Local local) {
-        return localRepository.save(local);
-    }
-
+    @Override
     public Local atualizar(@NotNull @Positive Long id, @Valid @NotNull Local local) {
-        return localRepository.findById(id)
+        return repository.findById(id)
                 .map(localEditado -> {
                     localEditado.setNome(local.getNome());
                     localEditado.setCapacidade(local.getCapacidade());
                     localEditado.setEquipamentos(local.getEquipamentos());
-                    return localRepository.save(localEditado);
+                    return repository.save(localEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
-    public void excluir(@NotNull @Positive Long id) {
-        localRepository.delete(localRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id)));
-    }
+
 
 }

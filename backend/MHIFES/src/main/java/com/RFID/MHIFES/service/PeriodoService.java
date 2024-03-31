@@ -1,6 +1,5 @@
 package com.RFID.MHIFES.service;
 
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -15,40 +14,24 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @Service
-public class PeriodoService {
+public class PeriodoService  extends GenericServiceImpl<Periodo, PeriodoRepository> {
 
-    private PeriodoRepository periodoRepository;
 
     public PeriodoService(PeriodoRepository periodoRepository) {
-        this.periodoRepository = periodoRepository;
+        super(periodoRepository);
+
     }
 
-    public List<Periodo> listar() {
-        return periodoRepository.findAll();
-    }
-
-    public Periodo buscarPorId(@NotNull @Positive Long id) {
-        return periodoRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id));
-    }
-
-    public Periodo criar(@Valid @NotNull Periodo periodo) {
-        return periodoRepository.save(periodo);
-    }
-
+    @Override
     public Periodo atualizar(@NotNull @Positive Long id, @Valid @NotNull Periodo periodo) {
-        return periodoRepository.findById(id)
+        return repository.findById(id)
                 .map(periodoEditado -> {
                     periodoEditado.setDataInicio(periodo.getDataInicio());
                     periodoEditado.setDataFim(periodo.getDataFim());
                     periodoEditado.setDescricao(periodo.getDescricao());
-                    return periodoRepository.save(periodoEditado);
+                    return repository.save(periodoEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
-    public void excluir(@NotNull @Positive Long id) {
-        periodoRepository.delete(periodoRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id)));
-    }
 
 }

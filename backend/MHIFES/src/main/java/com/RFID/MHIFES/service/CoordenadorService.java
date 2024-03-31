@@ -1,6 +1,5 @@
 package com.RFID.MHIFES.service;
 
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -15,40 +14,22 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @Service
-public class CoordenadorService {
-
-    private CoordenadorRepository coordenadorRepository;
+public class CoordenadorService extends GenericServiceImpl<Coordenador, CoordenadorRepository>  {
 
     public CoordenadorService(CoordenadorRepository coordenadorRepository) {
-        this.coordenadorRepository = coordenadorRepository;
+        super(coordenadorRepository);
     }
 
-    public List<Coordenador> listar() {
-        return coordenadorRepository.findAll();
-    }
 
-    public Coordenador buscarPorId(@NotNull @Positive Long id) {
-        return coordenadorRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id));
-    }
-
-    public Coordenador criar(@Valid @NotNull Coordenador coordenador) {
-        return coordenadorRepository.save(coordenador);
-    }
-
+    @Override
     public Coordenador atualizar(@NotNull @Positive Long id, @Valid @NotNull Coordenador coordenador) {
-        return coordenadorRepository.findById(id)
+        return repository.findById(id)
                 .map(coordenadorEditado -> {
                     coordenadorEditado.setNome(coordenador.getNome());
                     coordenadorEditado.setMatricula(coordenador.getMatricula());
                     coordenadorEditado.setCurso(coordenador.getCurso());
-                    return coordenadorRepository.save(coordenadorEditado);
+                    return repository.save(coordenadorEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
-    }
-
-    public void excluir(@NotNull @Positive Long id) {
-        coordenadorRepository.delete(coordenadorRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id)));
     }
 
 }
