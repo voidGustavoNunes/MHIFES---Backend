@@ -21,6 +21,6 @@ public class EventoService extends GenericServiceImpl<Evento, EventoRepository> 
                     eventoEditado.setLocal(evento.getLocal());
                     eventoEditado.setDescricao(evento.getDescricao());
                     return repository.save(eventoEditado);
-                }).orElseThrow(() -> new RegistroNotFoundException(id)); 
+                }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 }

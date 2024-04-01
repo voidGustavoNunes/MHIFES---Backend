@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @Entity
 @Table(name = "coordenador")
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class Coordenador extends Pessoa {
-    
+
 }

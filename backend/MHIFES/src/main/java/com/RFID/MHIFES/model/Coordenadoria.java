@@ -10,7 +10,7 @@ import lombok.Data;
 @Entity
 @Table(name = "coordenadoria")
 public class Coordenadoria {
-    
+
     @Id
     private Long id;
 

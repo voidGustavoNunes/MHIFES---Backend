@@ -11,7 +11,7 @@ import com.rfid.mhifes.service.PeriodoService;
 @Validated
 @RestController
 @RequestMapping("/api/periodos")
-public class PeriodoController extends GenericController<Periodo>{
+public class PeriodoController extends GenericController<Periodo> {
 
     public PeriodoController(PeriodoService periodoService) {
         super(periodoService);

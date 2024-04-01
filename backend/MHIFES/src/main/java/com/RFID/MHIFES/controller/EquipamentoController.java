@@ -11,7 +11,7 @@ import com.rfid.mhifes.service.EquipamentoService;
 @Validated
 @RestController
 @RequestMapping("/api/equipamentos")
-public class EquipamentoController extends GenericController<Equipamento>{
+public class EquipamentoController extends GenericController<Equipamento> {
 
     public EquipamentoController(EquipamentoService equipamentoService) {
         super(equipamentoService);

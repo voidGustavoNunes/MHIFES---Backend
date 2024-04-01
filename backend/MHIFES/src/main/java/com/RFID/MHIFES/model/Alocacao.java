@@ -14,7 +14,7 @@ import lombok.Data;
 @Data
 @Table(name = "alocacao")
 public class Alocacao {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

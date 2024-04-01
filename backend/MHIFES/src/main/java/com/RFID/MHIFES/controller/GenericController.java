@@ -18,34 +18,33 @@ import jakarta.validation.constraints.Positive;
 public abstract class GenericController<T> {
 
     private final GenericService<T> genericService;
-    
 
-    public GenericController(GenericService<T> genericService) {
+    protected GenericController(GenericService<T> genericService) {
         this.genericService = genericService;
     }
 
-    @GetMapping("/{resource}")
+    @GetMapping
     public List<T> listar() {
         return genericService.listar();
     }
 
-    @GetMapping("/{resource}/{id}")
+    @GetMapping("/{id}")
     public T buscarPorId(@PathVariable @NotNull @Positive Long id) {
         return genericService.buscarPorId(id);
     }
 
-    @PostMapping("/{resource}")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public T criar(@RequestBody @Valid @NotNull T entity) {
         return genericService.criar(entity);
     }
 
-    @PutMapping("/{resource}/{id}")
+    @PutMapping("/{id}")
     public T atualizar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid @NotNull T entity) {
         return genericService.atualizar(id, entity);
     }
 
-    @DeleteMapping("/{resource}/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void excluir(@PathVariable @NotNull @Positive Long id) {
         genericService.excluir(id);

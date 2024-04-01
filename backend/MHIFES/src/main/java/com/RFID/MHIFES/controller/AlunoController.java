@@ -11,7 +11,7 @@ import com.rfid.mhifes.service.AlunoService;
 @Validated
 @RestController
 @RequestMapping("/api/alunos")
-public class AlunoController extends GenericController<Aluno>{
+public class AlunoController extends GenericController<Aluno> {
 
     public AlunoController(AlunoService alunoService) {
         super(alunoService);

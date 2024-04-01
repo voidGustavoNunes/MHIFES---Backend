@@ -11,7 +11,7 @@ import com.rfid.mhifes.service.ProfessorService;
 @Validated
 @RestController
 @RequestMapping("/api/professores")
-public class ProfessorController extends GenericController<Professor>{
+public class ProfessorController extends GenericController<Professor> {
 
     public ProfessorController(ProfessorService professorService) {
         super(professorService);

@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Positive;
 @Validated
 @Service
 public class CoordenadoriaService extends GenericServiceImpl<Coordenadoria, CoordenadoriaRepository> {
-    
+
     public CoordenadoriaService(CoordenadoriaRepository coordenadoriaRepository) {
         super(coordenadoriaRepository);
     }

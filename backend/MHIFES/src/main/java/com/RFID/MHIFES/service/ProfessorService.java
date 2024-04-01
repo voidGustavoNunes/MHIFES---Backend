@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @Service
-public class ProfessorService  extends GenericServiceImpl<Professor, ProfessorRepository> {
+public class ProfessorService extends GenericServiceImpl<Professor, ProfessorRepository> {
 
     public ProfessorService(ProfessorRepository professorRepository) {
         super(professorRepository);

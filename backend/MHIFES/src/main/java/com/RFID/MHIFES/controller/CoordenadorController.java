@@ -10,7 +10,7 @@ import com.rfid.mhifes.service.CoordenadorService;
 @Validated
 @RestController
 @RequestMapping("/api/coordenadores")
-public class CoordenadorController extends GenericController<Coordenador>{
+public class CoordenadorController extends GenericController<Coordenador> {
 
     public CoordenadorController(CoordenadorService coordenadorService) {
         super(coordenadorService);

@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @Service
-public class PeriodoService  extends GenericServiceImpl<Periodo, PeriodoRepository> {
+public class PeriodoService extends GenericServiceImpl<Periodo, PeriodoRepository> {
 
     public PeriodoService(PeriodoRepository periodoRepository) {
         super(periodoRepository);

@@ -11,7 +11,7 @@ import com.rfid.mhifes.service.DisciplinaService;
 @Validated
 @RestController
 @RequestMapping("/api/disciplinas")
-public class DisciplinaController extends GenericController<Disciplina>{
+public class DisciplinaController extends GenericController<Disciplina> {
 
     public DisciplinaController(DisciplinaService disciplinaService) {
         super(disciplinaService);

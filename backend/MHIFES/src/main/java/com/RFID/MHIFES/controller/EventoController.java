@@ -11,8 +11,8 @@ import com.rfid.mhifes.service.EventoService;
 @Validated
 @RestController
 @RequestMapping("/api/eventos")
-public class EventoController extends GenericController<Evento>{
-    
+public class EventoController extends GenericController<Evento> {
+
     public EventoController(EventoService eventoService) {
         super(eventoService);
     }

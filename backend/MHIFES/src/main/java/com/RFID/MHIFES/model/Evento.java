@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "evento")
 @EqualsAndHashCode(callSuper = false)
 public class Evento {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

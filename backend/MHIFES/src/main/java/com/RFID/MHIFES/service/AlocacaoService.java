@@ -13,8 +13,8 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @Service
-public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoRepository>  {
-    
+public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoRepository> {
+
     public AlocacaoService(AlocacaoRepository alocacaoRepository) {
         super(alocacaoRepository);
     }
@@ -30,4 +30,3 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 }
-
