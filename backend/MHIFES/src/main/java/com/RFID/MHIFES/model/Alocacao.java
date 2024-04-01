@@ -1,6 +1,6 @@
 package com.rfid.mhifes.model;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,9 +19,9 @@ public class Alocacao {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Time horaInicio;
+    private LocalTime horaInicio;
 
-    private Time horaFinal;
+    private LocalTime horaFinal;
 
     @Column(length = 5, nullable = false)
     private String turma;

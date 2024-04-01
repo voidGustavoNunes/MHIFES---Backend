@@ -1,7 +1,7 @@
 package com.rfid.mhifes.model;
 
-import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +21,7 @@ public class Log {
 
     private LocalDate data;
 
-    private Time hora;
+    private LocalTime hora;
 
     private String descricao;
 }
