@@ -1,12 +1,11 @@
-package com.RFID.MHIFES.service;
-
+package com.rfid.mhifes.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.RFID.MHIFES.exception.RegistroNotFoundException;
-import com.RFID.MHIFES.model.Alocacao;
-import com.RFID.MHIFES.repository.AlocacaoRepository;
+import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.model.Alocacao;
+import com.rfid.mhifes.repository.AlocacaoRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -30,7 +29,5 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
                     return repository.save(alocacaoEditada);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
-
-
 }
 

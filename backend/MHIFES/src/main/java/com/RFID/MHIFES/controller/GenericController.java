@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.controller;
+package com.rfid.mhifes.controller;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import com.RFID.MHIFES.service.GenericService;
+import com.rfid.mhifes.service.GenericService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package com.RFID.MHIFES;
+package com.rfid.mhifes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

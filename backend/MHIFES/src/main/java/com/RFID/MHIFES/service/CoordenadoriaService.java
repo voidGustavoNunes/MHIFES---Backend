@@ -1,12 +1,11 @@
-package com.RFID.MHIFES.service;
-
+package com.rfid.mhifes.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.RFID.MHIFES.exception.RegistroNotFoundException;
-import com.RFID.MHIFES.model.Coordenadoria;
-import com.RFID.MHIFES.repository.CoordenadoriaRepository;
+import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.model.Coordenadoria;
+import com.rfid.mhifes.repository.CoordenadoriaRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +15,6 @@ import jakarta.validation.constraints.Positive;
 @Service
 public class CoordenadoriaService extends GenericServiceImpl<Coordenadoria, CoordenadoriaRepository> {
     
-
     public CoordenadoriaService(CoordenadoriaRepository coordenadoriaRepository) {
         super(coordenadoriaRepository);
     }
@@ -29,6 +27,4 @@ public class CoordenadoriaService extends GenericServiceImpl<Coordenadoria, Coor
                     return repository.save(coordenadoriaEditada);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
-
-
 }

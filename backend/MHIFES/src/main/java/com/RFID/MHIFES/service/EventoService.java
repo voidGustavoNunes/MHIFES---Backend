@@ -1,10 +1,10 @@
-package com.RFID.MHIFES.service;
+package com.rfid.mhifes.service;
 
 import org.springframework.stereotype.Service;
 
-import com.RFID.MHIFES.exception.RegistroNotFoundException;
-import com.RFID.MHIFES.model.Evento;
-import com.RFID.MHIFES.repository.EventoRepository;
+import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.model.Evento;
+import com.rfid.mhifes.repository.EventoRepository;
 
 @Service
 public class EventoService extends GenericServiceImpl<Evento, EventoRepository> {

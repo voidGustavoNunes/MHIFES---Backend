@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import java.sql.Time;
 
@@ -25,7 +25,4 @@ public class Alocacao {
 
     @Column(length = 5, nullable = false)
     private String turma;
-
-    
-
 }

@@ -1,8 +1,8 @@
-package com.RFID.MHIFES.service;
+package com.rfid.mhifes.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.RFID.MHIFES.exception.RegistroNotFoundException;
+import com.rfid.mhifes.exception.RegistroNotFoundException;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public abstract class GenericServiceImpl<T, R extends JpaRepository<T, Long>> im
 
     protected R repository;
 
-    public GenericServiceImpl(R repository) {
+    protected GenericServiceImpl(R repository) {
         this.repository = repository;
     }
 

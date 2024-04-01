@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import java.sql.Time;
 import java.time.LocalDate;
@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
-
 
 @Data
 @Entity
@@ -25,5 +24,4 @@ public class Log {
     private Time hora;
 
     private String descricao;
-    
 }

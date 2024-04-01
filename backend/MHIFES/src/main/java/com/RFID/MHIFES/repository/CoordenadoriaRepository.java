@@ -1,8 +1,8 @@
-package com.RFID.MHIFES.repository;
+package com.rfid.mhifes.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.RFID.MHIFES.model.Coordenadoria;
+import com.rfid.mhifes.model.Coordenadoria;
 
 public interface CoordenadoriaRepository extends JpaRepository<Coordenadoria, Long>{
     
