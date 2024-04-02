@@ -1,11 +1,11 @@
-package com.RFID.MHIFES.controller;
+package com.rfid.mhifes.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.RFID.MHIFES.exception.RegistroNotFoundException;
+import com.rfid.mhifes.exception.RegistroNotFoundException;
 
 @RestControllerAdvice
 public class AplicationControllerAdvice {

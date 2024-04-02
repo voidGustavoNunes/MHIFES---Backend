@@ -1,13 +1,11 @@
-package com.RFID.MHIFES.service;
-
-import java.util.List;
+package com.rfid.mhifes.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.RFID.MHIFES.exception.RegistroNotFoundException;
-import com.RFID.MHIFES.model.Professor;
-import com.RFID.MHIFES.repository.ProfessorRepository;
+import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.model.Professor;
+import com.rfid.mhifes.repository.ProfessorRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -15,41 +13,21 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @Service
-public class ProfessorService {
-
-    private ProfessorRepository professorRepository;
+public class ProfessorService extends GenericServiceImpl<Professor, ProfessorRepository> {
 
     public ProfessorService(ProfessorRepository professorRepository) {
-        this.professorRepository = professorRepository;
+        super(professorRepository);
     }
 
-    public List<Professor> listar() {
-        return professorRepository.findAll();
-    }
-
-    public Professor buscarPorId(@NotNull @Positive Long id) {
-        return professorRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id));
-    }
-
-    public Professor criar(@Valid @NotNull Professor professor) {
-        return professorRepository.save(professor);
-    }
-
+    @Override
     public Professor atualizar(@NotNull @Positive Long id, @Valid @NotNull Professor professor) {
-        return professorRepository.findById(id)
+        return repository.findById(id)
                 .map(professorEditado -> {
                     professorEditado.setNome(professor.getNome());
                     professorEditado.setMatricula(professor.getMatricula());
                     professorEditado.setCurso(professor.getCurso());
                     professorEditado.setEhCoordenador(professor.isEhCoordenador());
-                    return professorRepository.save(professorEditado);
+                    return repository.save(professorEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
-
-    public void excluir(@NotNull @Positive Long id) {
-        professorRepository.delete(professorRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id)));
-    }
-
 }

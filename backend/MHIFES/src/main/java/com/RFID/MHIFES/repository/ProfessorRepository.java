@@ -1,9 +1,9 @@
-package com.RFID.MHIFES.repository;
+package com.rfid.mhifes.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.RFID.MHIFES.model.Professor;
+import com.rfid.mhifes.model.Professor;
 
 public interface ProfessorRepository extends JpaRepository<Professor, Long> {
-    
+
 }

@@ -1,9 +1,9 @@
-package com.RFID.MHIFES.repository;
+package com.rfid.mhifes.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.RFID.MHIFES.model.Evento;
+import com.rfid.mhifes.model.Evento;
 
-public interface EventoRepository extends JpaRepository<Evento, Long>{
-    
+public interface EventoRepository extends JpaRepository<Evento, Long> {
+
 }

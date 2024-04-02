@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,6 +28,4 @@ public class Pessoa {
 
     @Column(length = 150, nullable = false)
     private String curso;
-    
-    
 }

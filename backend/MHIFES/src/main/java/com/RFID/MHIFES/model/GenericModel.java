@@ -1,5 +1,5 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 public abstract class GenericModel {
-    
+
 }

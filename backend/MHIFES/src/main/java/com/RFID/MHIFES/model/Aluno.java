@@ -1,13 +1,14 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Entity
 @Data
+@Entity
 @Table(name = "aluno")
+@EqualsAndHashCode(callSuper = false)
 public class Aluno extends Pessoa {
-
 
 }

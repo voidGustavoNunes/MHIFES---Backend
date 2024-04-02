@@ -1,10 +1,9 @@
-package com.RFID.MHIFES.repository;
+package com.rfid.mhifes.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.RFID.MHIFES.model.Alocacao;
+import com.rfid.mhifes.model.Alocacao;
 
+public interface AlocacaoRepository extends JpaRepository<Alocacao, Long> {
 
-public interface AlocacaoRepository extends JpaRepository<Alocacao, Long>{
-    
 }

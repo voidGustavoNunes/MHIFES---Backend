@@ -1,6 +1,6 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,18 +14,15 @@ import lombok.Data;
 @Data
 @Table(name = "alocacao")
 public class Alocacao {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Time horaInicio;
+    private LocalTime horaInicio;
 
-    private Time horaFinal;
+    private LocalTime horaFinal;
 
     @Column(length = 5, nullable = false)
     private String turma;
-
-    
-
 }
