@@ -31,7 +31,7 @@ public class LocalService extends GenericServiceImpl<Local, LocalRepository> {
         this.equipamentoRepository = equipamentoRepository;
     }
 
-    public Local criar(Local local, List<Equipamento> equipamentos, List<LocalEquipamento> localEquipamentos) {
+    public Local criar(@Valid @NotNull Local local, @Valid @NotNull List<Equipamento> equipamentos, @Valid List<LocalEquipamento> localEquipamentos) {
         Local localSalvo = repository.save(local);
 
         for (Equipamento equipamento : equipamentos) {
@@ -59,20 +59,14 @@ public class LocalService extends GenericServiceImpl<Local, LocalRepository> {
     }
 
     @Override
-    public Local atualizar(Long id, Local entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
+    public Local atualizar(@NotNull @Positive Long id, @Valid @NotNull Local local) {
+        return repository.findById(id)
+                .map(localEditado -> {
+                    localEditado.setNome(local.getNome());
+                    localEditado.setCapacidade(local.getCapacidade());
+                    localEditado.setLocalEquipamentos(local.getLocalEquipamentos());
+                    return repository.save(localEditado);
+                }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
-    // @Override
-    // public Local atualizar(@NotNull @Positive Long id, @Valid @NotNull Local
-    // local) {
-    // return repository.findById(id)
-    // .map(localEditado -> {
-    // localEditado.setNome(local.getNome());
-    // localEditado.setCapacidade(local.getCapacidade());
-    // localEditado.setLocalEquipamentos(local.getLocalEquipamentos());
-    // return repository.save(localEditado);
-    // }).orElseThrow(() -> new RegistroNotFoundException(id));
-    // }
 }

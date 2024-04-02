@@ -1,19 +1,12 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.rfid.mhifes.model.Aluno;
-import com.rfid.mhifes.model.Disciplina;
-import com.rfid.mhifes.model.Local;
-import com.rfid.mhifes.model.Periodo;
-import com.rfid.mhifes.model.Professor;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -66,6 +59,6 @@ public class Alocacao {
     @JoinColumn(name = "professor")
     private Professor professor;
 
-    @OneToMany(mappedBy = "alunos")
-    private List<Aluno> alunos = new ArrayList<>();
+    // @OneToMany(mappedBy = "alunos")
+    // private List<Aluno> alunos = new ArrayList<>();
 }
