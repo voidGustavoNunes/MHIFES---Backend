@@ -7,7 +7,7 @@ import com.rfid.mhifes.model.Alocacao;
 import com.rfid.mhifes.service.AlocacaoService;
 
 @RestController
-@RequestMapping("/api/alocacao")
+@RequestMapping("/api/alocacoes")
 public class AlocacaoController extends GenericController<Alocacao> {
 
     public AlocacaoController(AlocacaoService alocacaoService) {
