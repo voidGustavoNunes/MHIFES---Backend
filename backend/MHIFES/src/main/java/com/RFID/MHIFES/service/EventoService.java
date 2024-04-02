@@ -42,9 +42,11 @@ public class EventoService {
     public Evento atualizar(@NotNull @Positive Long id, @Valid @NotNull Evento evento) {
         return eventoRepository.findById(id)
                 .map(eventoEditado -> {
-                    eventoEditado.setIntervaloData(evento.getIntervaloData());
-                    eventoEditado.setLocal(evento.getLocal());
+                    eventoEditado.setDataEvento(evento.getDataEvento());
                     eventoEditado.setDescricao(evento.getDescricao());
+                    eventoEditado.setHorarioInicio(evento.getHorarioInicio());
+                    eventoEditado.setHorarioFim(evento.getHorarioFim());
+                    eventoEditado.setLocal(evento.getLocal());
                     return eventoRepository.save(eventoEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }

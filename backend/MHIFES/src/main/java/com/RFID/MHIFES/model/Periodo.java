@@ -25,6 +25,6 @@ public class Periodo {
     @Column(nullable = false)
     private LocalDate dataFim;
 
-    @Column(length = 150, nullable = false)
+    @Column(length = 5000, nullable = false)
     private String descricao;
 }

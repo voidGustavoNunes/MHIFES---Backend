@@ -1,6 +1,8 @@
 package com.RFID.MHIFES.model;
 
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -25,12 +27,20 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private List<LocalDate> intervaloData;
-
-    @Column(length = 150, nullable = false)
+    @Column(nullable = false)
+    private LocalDate dataEvento;
+    
+    @Column(length = 5000, nullable = false)
     private String descricao;
+
+    @Column(nullable = false)
+    private LocalTime horarioInicio;
+
+    @Column(nullable = false)
+    private LocalTime horarioFim;
 
     @ManyToOne
     @JoinColumn(name = "local")
     private Local local;
+
 }
