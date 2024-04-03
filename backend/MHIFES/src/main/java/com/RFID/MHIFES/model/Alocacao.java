@@ -34,10 +34,10 @@ public class Alocacao {
     @Column(nullable = false)
     private LocalTime horaFinal;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 30, nullable = false)
     private String turma;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 30, nullable = false)
     private String diaSemana;
     
     @Column(nullable = false)
