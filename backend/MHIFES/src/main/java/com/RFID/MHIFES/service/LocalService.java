@@ -1,17 +1,18 @@
-package com.RFID.MHIFES.service;
+package com.rfid.mhifes.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.RFID.MHIFES.exception.RegistroNotFoundException;
-import com.RFID.MHIFES.model.Equipamento;
-import com.RFID.MHIFES.model.Local;
-import com.RFID.MHIFES.model.LocalEquipamento;
-import com.RFID.MHIFES.repository.EquipamentoRepository;
-import com.RFID.MHIFES.repository.LocalEquipamentoRepository;
-import com.RFID.MHIFES.repository.LocalRepository;
+import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.model.Equipamento;
+import com.rfid.mhifes.model.Local;
+import com.rfid.mhifes.model.LocalEquipamento;
+import com.rfid.mhifes.repository.EquipamentoRepository;
+import com.rfid.mhifes.repository.LocalEquipamentoRepository;
+import com.rfid.mhifes.repository.LocalRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -31,25 +32,12 @@ public class LocalService extends GenericServiceImpl<Local, LocalRepository> {
         this.equipamentoRepository = equipamentoRepository;
     }
 
-    public Local criar(@Valid @NotNull Local local, @Valid @NotNull List<Equipamento> equipamentos, @Valid List<LocalEquipamento> localEquipamentos) {
-        // Local localSalvo = repository.save(local);
+    public Local criar(@Valid @NotNull Local local, @Valid List<LocalEquipamento> localEquipamentos) {
+        
+        repository.save(local);
 
-        for (Equipamento equipamento : equipamentos) {
-            LocalEquipamento localEquipamento = new LocalEquipamento();
-            localEquipamento.setEquipamento(equipamento);
-            localEquipamento.setLocal(local);
-
-            for (LocalEquipamento localEquipamento2 : localEquipamentos) {
-                if (localEquipamento2.getEquipamento().getId().equals(equipamento.getId())) {
-                    localEquipamento.setQuantidade(localEquipamento2.getQuantidade());
-                    break;
-                }
-            }
-
+        for(LocalEquipamento localEquipamento : localEquipamentos) {
             localEquipamentoRepository.save(localEquipamento);
-
-            equipamento.setLocalEquipamentos(localEquipamentos);
-            equipamentoRepository.save(equipamento);
         }
 
         local.setLocalEquipamentos(localEquipamentos);
