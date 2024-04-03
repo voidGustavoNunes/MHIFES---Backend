@@ -1,8 +1,8 @@
-package com.RFID.MHIFES.service;
+package com.rfid.mhifes.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.RFID.MHIFES.exception.RegistroNotFoundException;
+import com.rfid.mhifes.exception.RegistroNotFoundException;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

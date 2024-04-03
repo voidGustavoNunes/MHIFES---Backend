@@ -1,8 +1,8 @@
-package com.RFID.MHIFES.repository;
+package com.rfid.mhifes.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.RFID.MHIFES.model.LocalEquipamento;
+import com.rfid.mhifes.model.LocalEquipamento;
 
 public interface LocalEquipamentoRepository extends JpaRepository<LocalEquipamento, Long> {
 
