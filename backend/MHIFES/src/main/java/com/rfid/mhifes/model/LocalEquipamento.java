@@ -1,4 +1,4 @@
-package com.rfid.mhifes.model;
+package com.RFID.MHIFES.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

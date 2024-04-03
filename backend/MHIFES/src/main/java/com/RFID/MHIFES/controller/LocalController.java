@@ -1,4 +1,4 @@
-package com.rfid.mhifes.controller;
+package com.RFID.MHIFES.controller;
 
 import java.util.List;
 
@@ -7,10 +7,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rfid.mhifes.model.Equipamento;
-import com.rfid.mhifes.model.Local;
-import com.rfid.mhifes.model.LocalEquipamento;
-import com.rfid.mhifes.service.LocalService;
+import com.RFID.MHIFES.model.Equipamento;
+import com.RFID.MHIFES.model.Local;
+import com.RFID.MHIFES.model.LocalDTO;
+import com.RFID.MHIFES.model.LocalEquipamento;
+import com.RFID.MHIFES.service.LocalService;
 
 import jakarta.validation.Valid;
 
@@ -29,9 +30,10 @@ public class LocalController extends GenericController<Local> {
         this.localService = localService;
     }
 
-    @PostMapping("criar")
-    public Local criar(@RequestBody @Valid Local local,
-            @RequestBody @Valid List<LocalEquipamento> localEquipamentos) {
-        return localService.criar(local, localEquipamentos);
+    @PostMapping("/criar")
+    public Local criar(@RequestBody @Valid LocalDTO localDTO
+            // @RequestBody @Valid List<LocalEquipamento> localEquipamentos
+            ) {
+        return localService.criar(localDTO);
     }
 }

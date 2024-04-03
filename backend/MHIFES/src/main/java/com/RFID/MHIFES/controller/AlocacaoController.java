@@ -1,10 +1,10 @@
-package com.rfid.mhifes.controller;
+package com.RFID.MHIFES.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rfid.mhifes.model.Alocacao;
-import com.rfid.mhifes.service.AlocacaoService;
+import com.RFID.MHIFES.model.Alocacao;
+import com.RFID.MHIFES.service.AlocacaoService;
 
 @RestController
 @RequestMapping("/api/alocacoes")
