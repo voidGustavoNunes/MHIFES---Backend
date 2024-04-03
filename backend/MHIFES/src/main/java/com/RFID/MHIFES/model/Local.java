@@ -1,4 +1,4 @@
-package com.rfid.mhifes.model;
+package com.RFID.MHIFES.model;
 
 import java.util.List;
 
@@ -27,6 +27,7 @@ public class Local {
     private int capacidade;
 
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
+    @Column(nullable = true)
     private List<LocalEquipamento> localEquipamentos;
 
 }

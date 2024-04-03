@@ -1,4 +1,4 @@
-package com.rfid.mhifes.model;
+package com.RFID.MHIFES.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -21,8 +21,8 @@ public class LocalEquipamento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "local_id", nullable = false)
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "local_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Local local;
 

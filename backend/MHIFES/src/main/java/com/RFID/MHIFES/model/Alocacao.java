@@ -1,4 +1,4 @@
-package com.rfid.mhifes.model;
+package com.RFID.MHIFES.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -59,6 +59,6 @@ public class Alocacao {
     @JoinColumn(name = "professor")
     private Professor professor;
 
-    // @OneToMany(mappedBy = "alunos")
-    // private List<Aluno> alunos = new ArrayList<>();
+    @OneToMany
+    private List<Aluno> alunos = new ArrayList<>();
 }

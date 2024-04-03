@@ -1,17 +1,17 @@
-package com.rfid.mhifes.service;
+package com.RFID.MHIFES.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.model.Equipamento;
-import com.rfid.mhifes.model.Local;
-import com.rfid.mhifes.model.LocalEquipamento;
-import com.rfid.mhifes.repository.EquipamentoRepository;
-import com.rfid.mhifes.repository.LocalEquipamentoRepository;
-import com.rfid.mhifes.repository.LocalRepository;
+import com.RFID.MHIFES.exception.RegistroNotFoundException;
+import com.RFID.MHIFES.model.Equipamento;
+import com.RFID.MHIFES.model.Local;
+import com.RFID.MHIFES.model.LocalEquipamento;
+import com.RFID.MHIFES.repository.EquipamentoRepository;
+import com.RFID.MHIFES.repository.LocalEquipamentoRepository;
+import com.RFID.MHIFES.repository.LocalRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -32,12 +32,12 @@ public class LocalService extends GenericServiceImpl<Local, LocalRepository> {
     }
 
     public Local criar(@Valid @NotNull Local local, @Valid @NotNull List<Equipamento> equipamentos, @Valid List<LocalEquipamento> localEquipamentos) {
-        Local localSalvo = repository.save(local);
+        // Local localSalvo = repository.save(local);
 
         for (Equipamento equipamento : equipamentos) {
             LocalEquipamento localEquipamento = new LocalEquipamento();
             localEquipamento.setEquipamento(equipamento);
-            localEquipamento.setLocal(localSalvo);
+            localEquipamento.setLocal(local);
 
             for (LocalEquipamento localEquipamento2 : localEquipamentos) {
                 if (localEquipamento2.getEquipamento().getId().equals(equipamento.getId())) {
@@ -52,10 +52,10 @@ public class LocalService extends GenericServiceImpl<Local, LocalRepository> {
             equipamentoRepository.save(equipamento);
         }
 
-        localSalvo.setLocalEquipamentos(localEquipamentos);
-        repository.save(localSalvo);
+        local.setLocalEquipamentos(localEquipamentos);
+        repository.save(local);
 
-        return localSalvo;
+        return local;
     }
 
     @Override
