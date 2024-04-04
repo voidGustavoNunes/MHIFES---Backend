@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -59,6 +61,9 @@ public class Alocacao {
     @JoinColumn(name = "professor")
     private Professor professor;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name = "alocacao_aluno",
+            joinColumns = @JoinColumn(name = "alocacao_id"),
+            inverseJoinColumns = @JoinColumn(name = "aluno_id"))
     private List<Aluno> alunos = new ArrayList<>();
 }
