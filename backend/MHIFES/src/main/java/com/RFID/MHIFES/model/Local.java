@@ -1,5 +1,6 @@
 package com.rfid.mhifes.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -24,10 +25,9 @@ public class Local {
     @Column(length = 150, nullable = false)
     private String nome;
 
-    private int capacidade;
+    private Integer capacidade;
 
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
     @Column(nullable = true)
-    private List<LocalEquipamento> localEquipamentos;
-
+    private List<LocalEquipamento> localEquipamentos = new ArrayList<>();
 }

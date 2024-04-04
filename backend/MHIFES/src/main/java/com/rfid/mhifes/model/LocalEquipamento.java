@@ -2,6 +2,7 @@ package com.rfid.mhifes.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class LocalEquipamento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(optional = true)
+    @ManyToOne
     @JoinColumn(name = "local_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Local local;

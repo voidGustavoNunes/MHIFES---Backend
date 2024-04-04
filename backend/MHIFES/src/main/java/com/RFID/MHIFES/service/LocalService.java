@@ -33,6 +33,19 @@ public class LocalService extends GenericServiceImpl<Local, LocalRepository> {
     }
 
     @Override
+    public Local criar(@Valid @NotNull Local local) {
+        Local localNovo = repository.save(local);
+
+        for(LocalEquipamento localEquipamento : local.getLocalEquipamentos()) {
+            localEquipamento.setLocal(local);
+            localEquipamento.setEquipamento(equipamentoRepository.findById(localEquipamento.getEquipamento().getId()).get());
+            localEquipamentoRepository.save(localEquipamento);
+        }
+
+        return localNovo;
+    }
+
+    @Override
     public Local atualizar(@NotNull @Positive Long id, @Valid @NotNull Local local) {
         return repository.findById(id)
                 .map(localEditado -> {

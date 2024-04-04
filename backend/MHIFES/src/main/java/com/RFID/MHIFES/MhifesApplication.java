@@ -38,39 +38,39 @@ public class MhifesApplication {
 			equipamento2.setNome("Notebook");
 			equipamentoRepository.save(equipamento2);
 
-			localRepository.deleteAll();
-			Local local = new Local();
-			local.setNome("Sala 1");
-			local.setCapacidade(50);
+			// localRepository.deleteAll();
+			// Local local = new Local();
+			// local.setNome("Sala 1");
+			// local.setCapacidade(50);
 			
-			Local local2 = new Local();
-			local2.setNome("Sala 2");
-			local2.setCapacidade(30);
+			// Local local2 = new Local();
+			// local2.setNome("Sala 2");
+			// local2.setCapacidade(30);
 
 
-			localEquipamentoRepository.deleteAll();
-			LocalEquipamento localEquipamento = new LocalEquipamento();
-			localEquipamento.setLocal(local);
-			localEquipamento.setEquipamento(equipamento);
-			localEquipamento.setQuantidade(2);
+			// localEquipamentoRepository.deleteAll();
+			// LocalEquipamento localEquipamento = new LocalEquipamento();
+			// localEquipamento.setLocal(local);
+			// localEquipamento.setEquipamento(equipamento);
+			// localEquipamento.setQuantidade(2);
 
-			LocalEquipamento localEquipamento2 = new LocalEquipamento();
-			localEquipamento2.setLocal(local);
-			localEquipamento2.setEquipamento(equipamento2);
-			localEquipamento2.setQuantidade(1);
+			// LocalEquipamento localEquipamento2 = new LocalEquipamento();
+			// localEquipamento2.setLocal(local);
+			// localEquipamento2.setEquipamento(equipamento2);
+			// localEquipamento2.setQuantidade(1);
 
-			List<LocalEquipamento> localEquipamentos = new ArrayList<>();
-			localEquipamentos.add(localEquipamento);
-			localEquipamentos.add(localEquipamento2);
+			// List<LocalEquipamento> localEquipamentos = new ArrayList<>();
+			// localEquipamentos.add(localEquipamento);
+			// localEquipamentos.add(localEquipamento2);
 
-			List<Equipamento> equipamentos = new ArrayList<>();
-			equipamentos.add(equipamento);
-			equipamentos.add(equipamento2);
+			// List<Equipamento> equipamentos = new ArrayList<>();
+			// equipamentos.add(equipamento);
+			// equipamentos.add(equipamento2);
 
-			local.setLocalEquipamentos(localEquipamentos);
+			// local.setLocalEquipamentos(localEquipamentos);
 			
-			localController.criar(local2);
-			localController.criar(local);
+			// localController.criar(local);
+			// localController.criar(local2);
 			};
 		}
 }
