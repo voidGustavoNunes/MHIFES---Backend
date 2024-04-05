@@ -1,8 +1,5 @@
 package com.rfid.mhifes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,8 +7,6 @@ import org.springframework.context.annotation.Bean;
 
 import com.rfid.mhifes.controller.LocalController;
 import com.rfid.mhifes.model.Equipamento;
-import com.rfid.mhifes.model.Local;
-import com.rfid.mhifes.model.LocalEquipamento;
 import com.rfid.mhifes.repository.EquipamentoRepository;
 import com.rfid.mhifes.repository.LocalEquipamentoRepository;
 import com.rfid.mhifes.repository.LocalRepository;
