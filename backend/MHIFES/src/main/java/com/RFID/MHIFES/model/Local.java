@@ -3,6 +3,8 @@ package com.rfid.mhifes.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,9 +27,9 @@ public class Local {
     @Column(length = 150, nullable = false)
     private String nome;
 
+    @Column(nullable = false)
     private Integer capacidade;
 
-    @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
-    @Column(nullable = true)
+    @OneToMany(mappedBy = "local", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LocalEquipamento> localEquipamentos = new ArrayList<>();
 }
