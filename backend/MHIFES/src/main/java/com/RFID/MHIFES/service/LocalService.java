@@ -1,14 +1,8 @@
 package com.rfid.mhifes.service;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
-=======
->>>>>>> 26dbf7b570945b4354e5be0b38c9f4c2a2e2a3d4
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -17,12 +11,7 @@ import com.rfid.mhifes.model.Local;
 import com.rfid.mhifes.model.LocalEquipamento;
 import com.rfid.mhifes.repository.LocalRepository;
 
-<<<<<<< HEAD
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-=======
->>>>>>> 26dbf7b570945b4354e5be0b38c9f4c2a2e2a3d4
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
