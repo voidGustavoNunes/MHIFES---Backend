@@ -1,6 +1,7 @@
 package com.rfid.mhifes.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,5 +11,6 @@ import lombok.EqualsAndHashCode;
 @Table(name = "coordenador")
 @EqualsAndHashCode(callSuper = false)
 public class Coordenador extends Pessoa {
+    
 
 }
