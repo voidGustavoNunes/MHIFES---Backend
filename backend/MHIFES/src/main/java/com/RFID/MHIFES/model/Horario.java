@@ -36,8 +36,8 @@ public class Horario{
      private DiaSemana diaSemana;
 
     @Column(nullable = false)
-    private Time horaInicio;
+    private LocalTime horaInicio;
 
     @Column(nullable = false)
-    private Time horaFim;
+    private LocalTime horaFim;
 }

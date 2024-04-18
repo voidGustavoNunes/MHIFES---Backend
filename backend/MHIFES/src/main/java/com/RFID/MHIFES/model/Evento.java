@@ -30,11 +30,15 @@ public class Evento {
     @Column(length = 5000, nullable = false)
     private String descricao;
 
-    @Column(nullable = false)
-    private LocalTime horarioInicio;
+    @ManyToOne
+    @JoinColumn(name = "horario")
+    private Horario horario;
 
-    @Column(nullable = false)
-    private LocalTime horarioFim;
+    // @Column(nullable = false)
+    // private LocalTime horarioInicio;
+
+    // @Column(nullable = false)
+    // private LocalTime horarioFim;
 
     @ManyToOne
     @JoinColumn(name = "local")

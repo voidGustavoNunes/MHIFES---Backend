@@ -23,8 +23,7 @@ public class EventoService extends GenericServiceImpl<Evento, EventoRepository> 
                 .map(eventoEditado -> {
                     eventoEditado.setDataEvento(evento.getDataEvento());
                     eventoEditado.setDescricao(evento.getDescricao());
-                    eventoEditado.setHorarioInicio(evento.getHorarioInicio());
-                    eventoEditado.setHorarioFim(evento.getHorarioFim());
+                    eventoEditado.setHorario(evento.getHorario());
                     eventoEditado.setLocal(evento.getLocal());
                     return repository.save(eventoEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
