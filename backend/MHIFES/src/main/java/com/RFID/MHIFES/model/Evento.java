@@ -27,18 +27,21 @@ public class Evento {
     @Column(nullable = false)
     private LocalDate dataEvento;
     
+    @Column(length = 50, nullable = false)
+    private String nome;
+    
     @Column(length = 5000, nullable = false)
     private String descricao;
 
-    @ManyToOne
-    @JoinColumn(name = "horario")
-    private Horario horario;
+    // @ManyToOne
+    // @JoinColumn(name = "horario")
+    // private Horario horario;
 
-    // @Column(nullable = false)
-    // private LocalTime horarioInicio;
+    @Column(nullable = false)
+    private LocalTime horarioInicio;
 
-    // @Column(nullable = false)
-    // private LocalTime horarioFim;
+    @Column(nullable = false)
+    private LocalTime horarioFim;
 
     @ManyToOne
     @JoinColumn(name = "local")

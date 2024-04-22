@@ -22,7 +22,7 @@ public class HorarioService extends GenericServiceImpl<Horario, HorarioRepositor
                 .map(horarioEditado -> {
                     horarioEditado.setDiaSemana(horario.getDiaSemana());
                     horarioEditado.setHoraFim(horario.getHoraFim());
-                    horarioEditado.setHoraInicio(horarioEditado.getHoraInicio());
+                    horarioEditado.setHoraInicio(horario.getHoraInicio());
                     return repository.save(horarioEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
