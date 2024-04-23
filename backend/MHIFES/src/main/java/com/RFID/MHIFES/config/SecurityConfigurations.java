@@ -28,8 +28,8 @@ public class SecurityConfigurations {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() //permitir que qualquer pessoa consiga fazer login
-                    .requestMatchers(HttpMethod.POST, "/auth/register").permitAll() //permitir que qualquer pessoa consiga se cadastrar
+                    .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll() //permitir que qualquer pessoa consiga fazer login
+                    .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll() //permitir que qualquer pessoa consiga se cadastrar
                     .requestMatchers(HttpMethod.POST, "/disciplina").hasRole("ADMIN")
                     .anyRequest().authenticated()
                     )

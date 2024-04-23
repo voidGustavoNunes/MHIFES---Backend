@@ -1,5 +1,14 @@
 package com.rfid.mhifes.controller;
 
+import java.io.UnsupportedEncodingException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,22 +19,11 @@ import com.rfid.mhifes.model.RegisterDTO;
 import com.rfid.mhifes.model.Users;
 import com.rfid.mhifes.repository.UserRepository;
 
-import io.micrometer.core.ipc.http.HttpSender.Response;
 import jakarta.validation.Valid;
-
-import java.io.UnsupportedEncodingException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("/api/auth")
 public class AutheticationController {
 
     @Autowired
@@ -44,6 +42,7 @@ public class AutheticationController {
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((Users) auth.getPrincipal());
+        System.out.println(token);
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
@@ -60,7 +59,7 @@ public class AutheticationController {
 
         this.repository.save(newUser);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(data);
     }
     
 

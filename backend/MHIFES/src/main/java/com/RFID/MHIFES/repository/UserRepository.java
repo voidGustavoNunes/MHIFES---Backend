@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.rfid.mhifes.model.Users;
 
 
-public interface UserRepository extends JpaRepository<Users, Long>{
+public interface UserRepository extends JpaRepository<Users, String>{
     
 
     UserDetails findByLogin(String login);

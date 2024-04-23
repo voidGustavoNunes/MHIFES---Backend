@@ -30,7 +30,7 @@ public class TokenService {
             Date expirationDate = Date.from(genExpirationDate());
 
             String token = JWT.create()
-                    .withIssuer("auth-api")
+                    .withIssuer("api/auth")
                     .withSubject(user.getLogin())
                     .withExpiresAt(expirationDate)
                     .sign(algorithm);
@@ -45,7 +45,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("auth-api")
+                    .withIssuer("api/auth")
                     .build()
                     .verify(token)
                     .getSubject();
