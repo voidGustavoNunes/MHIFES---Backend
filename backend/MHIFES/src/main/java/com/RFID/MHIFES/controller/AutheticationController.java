@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rfid.mhifes.config.TokenService;
-import com.rfid.mhifes.model.AutheticationDTO;
-import com.rfid.mhifes.model.LoginResponseDTO;
-import com.rfid.mhifes.model.RegisterDTO;
+import com.rfid.mhifes.dto.AutheticationDTO;
+import com.rfid.mhifes.dto.LoginResponseDTO;
+import com.rfid.mhifes.dto.RegisterDTO;
 import com.rfid.mhifes.model.Users;
 import com.rfid.mhifes.repository.UserRepository;
 

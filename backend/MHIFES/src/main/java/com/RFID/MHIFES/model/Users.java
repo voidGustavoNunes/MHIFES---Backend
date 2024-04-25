@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Users implements UserDetails{
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -35,12 +35,12 @@ public class Users implements UserDetails{
 
     private UserRole role;
 
-    public Users(String login, String password){
+    public Users(String login, String password) {
         this.login = login;
         this.password = password;
     }
 
-    public Users(String login, String password, UserRole role){
+    public Users(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
@@ -48,8 +48,10 @@ public class Users implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if (this.role == UserRole.ADMIN)
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
 
     }
 
@@ -78,6 +80,4 @@ public class Users implements UserDetails{
         return true;
     }
 
-
-    
 }
