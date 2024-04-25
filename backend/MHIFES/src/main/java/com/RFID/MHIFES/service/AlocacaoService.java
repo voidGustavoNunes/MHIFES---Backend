@@ -12,7 +12,7 @@ import com.rfid.mhifes.enums.Operacao;
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.model.Alocacao;
 import com.rfid.mhifes.model.Log;
-import com.rfid.mhifes.model.Users;
+import com.rfid.mhifes.model.Usuario;
 import com.rfid.mhifes.repository.AlocacaoRepository;
 
 import jakarta.validation.Valid;
@@ -34,12 +34,12 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
     public Alocacao criar(@Valid @NotNull Alocacao alocacao) {
         Alocacao alocacaoCriada = repository.save(alocacao);
 
-        Users usuario = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Log log = new Log(LocalDate.now(), LocalTime.now(), alocacaoCriada.toString(), Operacao.INCLUSAO,
-                alocacaoCriada.getId(), usuario.getNome());
+                alocacaoCriada.getId(), usuario);
         logService.criar(log);
-
+        
         return alocacaoCriada;
     }
 
@@ -62,10 +62,10 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
                     return repository.save(alocacaoEditada);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
 
-        Users usuario = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Log log = new Log(LocalDate.now(), LocalTime.now(), alocacaoAlterada.toString(), Operacao.ALTERACAO,
-                alocacaoAlterada.getId(), usuario.getNome());
+                alocacaoAlterada.getId(), usuario);
         logService.criar(log);
 
         return alocacaoAlterada;

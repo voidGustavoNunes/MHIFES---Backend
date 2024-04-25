@@ -16,8 +16,8 @@ import com.rfid.mhifes.config.TokenService;
 import com.rfid.mhifes.dto.AutheticationDTO;
 import com.rfid.mhifes.dto.LoginResponseDTO;
 import com.rfid.mhifes.dto.RegisterDTO;
-import com.rfid.mhifes.model.Users;
-import com.rfid.mhifes.repository.UserRepository;
+import com.rfid.mhifes.model.Usuario;
+import com.rfid.mhifes.repository.UsuarioRepository;
 
 import jakarta.validation.Valid;
 
@@ -30,7 +30,7 @@ public class AutheticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository repository;
+    private UsuarioRepository repository;
 
     @Autowired
     private TokenService tokenService;
@@ -41,7 +41,7 @@ public class AutheticationController {
 
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        var token = tokenService.generateToken((Users) auth.getPrincipal());
+        var token = tokenService.generateToken((Usuario) auth.getPrincipal());
         System.out.println(token);
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
@@ -55,7 +55,7 @@ public class AutheticationController {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
 
-        Users newUser = new Users(data.login(), data.nome(), encryptedPassword, data.role());
+        Usuario newUser = new Usuario(data.login(), data.nome(), encryptedPassword, data.role());
 
         this.repository.save(newUser);
 

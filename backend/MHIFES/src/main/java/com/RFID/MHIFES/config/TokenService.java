@@ -13,7 +13,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.rfid.mhifes.model.Users;
+import com.rfid.mhifes.model.Usuario;
 
 
 @Service
@@ -24,7 +24,7 @@ public class TokenService {
     private String secret;
 
     
-    public String generateToken(Users user) throws IllegalArgumentException, UnsupportedEncodingException{
+    public String generateToken(Usuario user) throws IllegalArgumentException, UnsupportedEncodingException{
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             Date expirationDate = Date.from(genExpirationDate());
