@@ -3,6 +3,8 @@ package com.rfid.mhifes.service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -10,6 +12,7 @@ import com.rfid.mhifes.enums.Operacao;
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.model.Alocacao;
 import com.rfid.mhifes.model.Log;
+import com.rfid.mhifes.model.Usuario;
 import com.rfid.mhifes.repository.AlocacaoRepository;
 
 import jakarta.validation.Valid;
@@ -30,9 +33,13 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
     @Override
     public Alocacao criar(@Valid @NotNull Alocacao alocacao) {
         Alocacao alocacaoCriada = repository.save(alocacao);
+
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         Log log = new Log(LocalDate.now(), LocalTime.now(), alocacaoCriada.toString(), Operacao.INCLUSAO,
-                alocacaoCriada.getId());
+                alocacaoCriada.getId(), usuario);
         logService.criar(log);
+        
         return alocacaoCriada;
     }
 
@@ -46,7 +53,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
                     alocacaoEditada.setHorarioFim(alocacao.getHorarioFim());
                     alocacaoEditada.setTurma(alocacao.getTurma());
                     // alocacaoEditada.setDiaSemana(alocacao.getDiaSemana());
-                    // alocacaoEditada.setDataAula(alocacao.getDataAula());
+                    alocacaoEditada.setDataAula(alocacao.getDataAula());
                     alocacaoEditada.setLocal(alocacao.getLocal());
                     alocacaoEditada.setDisciplina(alocacao.getDisciplina());
                     alocacaoEditada.setPeriodo(alocacao.getPeriodo());
@@ -55,10 +62,11 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
                     return repository.save(alocacaoEditada);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
 
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         Log log = new Log(LocalDate.now(), LocalTime.now(), alocacaoAlterada.toString(), Operacao.ALTERACAO,
-                alocacaoAlterada.getId());
+                alocacaoAlterada.getId(), usuario);
         logService.criar(log);
-        System.out.println(log);
 
         return alocacaoAlterada;
     }

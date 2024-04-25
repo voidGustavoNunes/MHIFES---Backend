@@ -19,8 +19,8 @@ import com.rfid.mhifes.dto.AutheticationDTO;
 import com.rfid.mhifes.dto.LoginResponseDTO;
 import com.rfid.mhifes.dto.RegisterDTO;
 import com.rfid.mhifes.enums.UserRole;
-import com.rfid.mhifes.model.Users;
-import com.rfid.mhifes.repository.UserRepository;
+import com.rfid.mhifes.model.Usuario;
+import com.rfid.mhifes.repository.UsuarioRepository;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
@@ -36,7 +36,7 @@ public class AutheticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository repository;
+    private UsuarioRepository repository;
 
     @Autowired
     private TokenService tokenService;
@@ -47,7 +47,7 @@ public class AutheticationController {
 
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        var token = tokenService.generateToken((Users) auth.getPrincipal());
+        var token = tokenService.generateToken((Usuario) auth.getPrincipal());
         System.out.println(token);
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
@@ -61,7 +61,7 @@ public class AutheticationController {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
 
-        Users newUser = new Users(data.login(), encryptedPassword, data.role());
+        Usuario newUser = new Usuario(data.login(), data.nome(), encryptedPassword, data.role());
 
         this.repository.save(newUser);
 
@@ -71,6 +71,7 @@ public class AutheticationController {
     @PostConstruct
     public void initUserAdminAndToken () throws Exception {
         RegisterDTO registerAdmin = new RegisterDTO(
+            "admin@2024",
             "Admin", 
             "123456", 
             UserRole.ADMIN);

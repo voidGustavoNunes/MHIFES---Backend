@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.rfid.mhifes.repository.UserRepository;
+import com.rfid.mhifes.repository.UsuarioRepository;
 
 import java.io.IOException;
 
@@ -27,7 +27,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     UserDetailsService userDetailsService;
     
     @Autowired
-    UserRepository userRepository;
+    UsuarioRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

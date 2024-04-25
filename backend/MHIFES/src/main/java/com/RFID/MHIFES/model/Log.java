@@ -12,6 +12,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -38,13 +40,17 @@ public class Log {
 
     private Long idRegistro;
 
-    public Log(LocalDate data, LocalTime hora, String descricao, @NotNull Operacao operacao, Long idRegistro) {
+    @OneToOne
+    private Usuario usuario;
+
+    public Log(LocalDate data, LocalTime hora, String descricao, @NotNull Operacao operacao, Long idRegistro,
+            Usuario usuario) {
         this.data = data;
         this.hora = hora;
         this.descricao = descricao;
         this.operacao = operacao;
         this.idRegistro = idRegistro;
+        this.usuario = usuario;
     }
 
-    
 }
