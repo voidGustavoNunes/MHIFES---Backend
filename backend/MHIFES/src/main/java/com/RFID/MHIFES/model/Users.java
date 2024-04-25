@@ -14,6 +14,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,8 @@ public class Users implements UserDetails {
     @Column(unique = true)
     private String login;
 
+    private String nome;
+
     private String password;
 
     private UserRole role;
@@ -40,8 +43,9 @@ public class Users implements UserDetails {
         this.password = password;
     }
 
-    public Users(String login, String password, UserRole role) {
+    public Users(String login, String nome, String password, UserRole role) {
         this.login = login;
+        this.nome = nome;
         this.password = password;
         this.role = role;
     }

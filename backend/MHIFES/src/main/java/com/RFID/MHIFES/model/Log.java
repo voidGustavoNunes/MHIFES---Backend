@@ -38,12 +38,16 @@ public class Log {
 
     private Long idRegistro;
 
-    public Log(LocalDate data, LocalTime hora, String descricao, @NotNull Operacao operacao, Long idRegistro) {
+    private String usuario;
+
+    public Log(LocalDate data, LocalTime hora, String descricao, @NotNull Operacao operacao, Long idRegistro,
+            String usuario) {
         this.data = data;
         this.hora = hora;
         this.descricao = descricao;
         this.operacao = operacao;
         this.idRegistro = idRegistro;
+        this.usuario = usuario;
     }
 
     
