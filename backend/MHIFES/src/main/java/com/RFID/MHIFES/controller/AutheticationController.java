@@ -4,9 +4,11 @@ import java.io.UnsupportedEncodingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,14 +18,18 @@ import com.rfid.mhifes.config.TokenService;
 import com.rfid.mhifes.dto.AutheticationDTO;
 import com.rfid.mhifes.dto.LoginResponseDTO;
 import com.rfid.mhifes.dto.RegisterDTO;
+import com.rfid.mhifes.enums.UserRole;
 import com.rfid.mhifes.model.Users;
 import com.rfid.mhifes.repository.UserRepository;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 
 
 @RestController
 @RequestMapping("/api/auth")
+@AllArgsConstructor
 public class AutheticationController {
 
     @Autowired
@@ -62,7 +68,27 @@ public class AutheticationController {
         return ResponseEntity.ok(data);
     }
     
+    @PostConstruct
+    public void initUserAdminAndToken () throws Exception {
+        RegisterDTO registerAdmin = new RegisterDTO(
+            "Admin", 
+            "123456", 
+            UserRole.ADMIN);
 
+        register(registerAdmin);
+    }
+
+    // @GetMapping("/forAdmin")
+    // @PreAuthorize("hasRole('Admin')")
+    // public String forAdmin() {
+    //     return "This URL is only accessible to admin";
+    // }
+
+    // @GetMapping("/forUser")
+    // @PreAuthorize("hasRole('User')")
+    // public String forUser() {
+    //     return "This URL is only accessible to the user";
+    // }
     
 
 }
