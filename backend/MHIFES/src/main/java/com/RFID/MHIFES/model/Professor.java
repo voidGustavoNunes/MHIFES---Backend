@@ -1,7 +1,6 @@
 package com.rfid.mhifes.model;
 
 import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -14,10 +13,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "professor")
 @EqualsAndHashCode(callSuper = false)
-
-@AttributeOverrides({
-    @AttributeOverride(name = "curso", column = @Column(nullable = true))
-})
+@AttributeOverride(name = "curso", column = @Column(nullable = true))
 public class Professor extends Pessoa {
 
     @Column(nullable = false)

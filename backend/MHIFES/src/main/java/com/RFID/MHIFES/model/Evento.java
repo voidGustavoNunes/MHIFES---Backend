@@ -26,10 +26,10 @@ public class Evento {
 
     @Column(nullable = false)
     private LocalDate dataEvento;
-    
+
     @Column(length = 50, nullable = false)
     private String nome;
-    
+
     @Column(length = 5000, nullable = false)
     private String descricao;
 

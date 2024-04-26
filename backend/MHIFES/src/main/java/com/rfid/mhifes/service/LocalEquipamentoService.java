@@ -30,7 +30,7 @@ public class LocalEquipamentoService extends GenericServiceImpl<LocalEquipamento
     @Override
     public void excluir(@NotNull @Positive Long id) {
         LocalEquipamento localEquipamentoExistente = repository.findById(id)
-        .orElseThrow(() -> new RegistroNotFoundException(id));
+                .orElseThrow(() -> new RegistroNotFoundException(id));
 
         localEquipamentoExistente.getEquipamento().getLocalEquipamentos().remove(localEquipamentoExistente);
         localEquipamentoExistente.setEquipamento(null);

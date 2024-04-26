@@ -10,6 +10,5 @@ import lombok.EqualsAndHashCode;
 @Table(name = "coordenador")
 @EqualsAndHashCode(callSuper = false)
 public class Coordenador extends Pessoa {
-    
 
 }

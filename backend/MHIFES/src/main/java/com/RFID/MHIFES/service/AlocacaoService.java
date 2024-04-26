@@ -3,7 +3,6 @@ package com.rfid.mhifes.service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -39,7 +38,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
         Log log = new Log(LocalDate.now(), LocalTime.now(), alocacaoCriada.toString(), Operacao.INCLUSAO,
                 alocacaoCriada.getId(), usuario);
         logService.criar(log);
-        
+
         return alocacaoCriada;
     }
 

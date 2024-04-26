@@ -1,6 +1,6 @@
 package com.rfid.mhifes.enums;
 
-public enum DiaSemana{
+public enum DiaSemana {
     SEGUNDA("Segunda-feira"),
     TERCA("Terça-feira"),
     QUARTA("Quarta-feira"),

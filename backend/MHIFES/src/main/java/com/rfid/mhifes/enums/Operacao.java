@@ -1,7 +1,7 @@
 package com.rfid.mhifes.enums;
 
 public enum Operacao {
-    
+
     INCLUSAO("Inclusão"),
     ALTERACAO("Alteração"),
     EXCLUSAO("Exclusão");

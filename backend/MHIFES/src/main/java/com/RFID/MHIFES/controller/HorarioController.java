@@ -10,10 +10,10 @@ import com.rfid.mhifes.service.HorarioService;
 @Validated
 @RestController
 @RequestMapping("/api/horarios")
-public class HorarioController extends GenericController<Horario>{
+public class HorarioController extends GenericController<Horario> {
 
     protected HorarioController(HorarioService horarioService) {
         super(horarioService);
     }
-    
+
 }

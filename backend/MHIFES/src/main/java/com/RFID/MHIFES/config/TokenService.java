@@ -3,7 +3,6 @@ package com.rfid.mhifes.config;
 import java.io.UnsupportedEncodingException;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Date;
 
@@ -19,59 +18,55 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.rfid.mhifes.model.Usuario;
 
-
 @Service
 public class TokenService {
-
 
     @Value("${api.security.token.secret}")
     private String secret;
 
-    
-    public String generateToken(Usuario user) throws IllegalArgumentException, UnsupportedEncodingException{
-        try{
+    private static final String ISSUER = "auth-api";
+
+    public String generateToken(Usuario user) throws IllegalArgumentException, UnsupportedEncodingException {
+        try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             Date expirationDate = Date.from(genExpirationDate());
 
-            String token = JWT.create()
-                    .withIssuer("auth-api")
+            return JWT.create()
+                    .withIssuer(ISSUER)
                     .withSubject(user.getLogin())
                     .withExpiresAt(expirationDate)
                     .sign(algorithm);
-            return token;
         } catch (JWTCreationException exception) {
             throw new RuntimeException("Erro ao gerar token", exception);
         }
     }
 
-
-    public String validateToken(String token) throws IllegalArgumentException, UnsupportedEncodingException{
+    public String validateToken(String token) throws IllegalArgumentException, UnsupportedEncodingException {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("auth-api")
+                    .withIssuer(ISSUER)
                     .build()
                     .verify(token)
                     .getSubject();
-        } catch (JWTVerificationException exception){
+        } catch (JWTVerificationException exception) {
             return "";
         }
     }
 
-    private Instant genExpirationDate(){
+    private Instant genExpirationDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
-// EU ADICIONEI
+
+    // EU ADICIONEI
     public String getUserNameFromToken(String token) {
         try {
             JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret))
-                    .withIssuer("auth-api")
+                    .withIssuer(ISSUER)
                     .build();
             DecodedJWT decodedJwt = verifier.verify(token);
-    
-            String username = decodedJwt.getSubject();
-    
-            return username;
+
+            return decodedJwt.getSubject();
         } catch (JWTVerificationException e) {
             return null;
         } catch (UnsupportedEncodingException e) {
@@ -81,16 +76,16 @@ public class TokenService {
 
     public boolean isValidToken(String token, UserDetails userDetails) {
         String loginUser = getUserNameFromToken(token);
-        return ( loginUser.equals(userDetails.getUsername()) && !isTokenExpired(token) );
+        return (loginUser.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private boolean isTokenExpired(String token) {
         try {
             JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret))
-                .withIssuer("auth-api")
-                .build();
+                    .withIssuer(ISSUER)
+                    .build();
             DecodedJWT decodedJwt = verifier.verify(token);
-                
+
             Date expirationDate = decodedJwt.getExpiresAt();
 
             return expirationDate.before(new Date());
