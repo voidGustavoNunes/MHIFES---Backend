@@ -5,11 +5,9 @@ import java.io.UnsupportedEncodingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +50,7 @@ public class AutheticationController {
         // System.out.println(token);
         Usuario user = (Usuario) auth.getPrincipal();
 
-        return ResponseEntity.ok(new LoginResponseDTO(token, user.getNome(), user.getRole()));
+        return ResponseEntity.ok(new LoginResponseDTO(token, user.getLogin(), user.getNome(), user.getRole()));
     }
     
     @PostMapping("/register")

@@ -18,8 +18,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
-import com.rfid.mhifes.repository.UsuarioRepository;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
@@ -27,9 +25,6 @@ public class SecurityConfigurations {
 
     @Autowired
     SecurityFilter securityFilter;
-    
-    @Autowired
-    private UsuarioRepository repository;
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
