@@ -3,6 +3,7 @@ package com.rfid.mhifes.controller;
 import java.io.UnsupportedEncodingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,24 +49,28 @@ public class AutheticationController {
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((Usuario) auth.getPrincipal());
-        System.out.println(token);
+        // System.out.println(token);
+        Usuario user = (Usuario) auth.getPrincipal();
 
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        return ResponseEntity.ok(new LoginResponseDTO(token, user.getNome(), user.getRole()));
     }
     
     @PostMapping("/register")
     public ResponseEntity register (@RequestBody @Valid RegisterDTO data) {
-        
-        if(this.repository.findByLogin(data.login()) != null)
-            return ResponseEntity.badRequest().build();
+        try {
+            if(this.repository.findByLogin(data.login()) != null)
+                return ResponseEntity.badRequest().build();
 
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+            String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
 
-        Usuario newUser = new Usuario(data.login(), data.nome(), encryptedPassword, data.role());
+            Usuario newUser = new Usuario(data.login(), data.nome(), encryptedPassword, data.role());
 
-        this.repository.save(newUser);
+            this.repository.save(newUser);
 
-        return ResponseEntity.ok(data);
+            return ResponseEntity.ok(data);
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.badRequest().body("Error: Login já existente!");
+        }
     }
     
     @PostConstruct
@@ -78,18 +83,5 @@ public class AutheticationController {
 
         register(registerAdmin);
     }
-
-    // @GetMapping("/forAdmin")
-    // @PreAuthorize("hasRole('Admin')")
-    // public String forAdmin() {
-    //     return "This URL is only accessible to admin";
-    // }
-
-    // @GetMapping("/forUser")
-    // @PreAuthorize("hasRole('User')")
-    // public String forUser() {
-    //     return "This URL is only accessible to the user";
-    // }
-    
 
 }
