@@ -20,10 +20,10 @@ public class MhifesApplication {
 
 	@Bean
 	CommandLineRunner initDatabase(EquipamentoRepository equipamentoRepository,
-	LocalRepository localRepository, LocalEquipamentoRepository localEquipamentoRepository,
-	LocalController localController) {
+			LocalRepository localRepository, LocalEquipamentoRepository localEquipamentoRepository,
+			LocalController localController) {
 		return args -> {
-			
+
 			equipamentoRepository.deleteAll();
 			Equipamento equipamento = new Equipamento();
 			equipamento.setNome("Projetor");
@@ -37,11 +37,10 @@ public class MhifesApplication {
 			// Local local = new Local();
 			// local.setNome("Sala 1");
 			// local.setCapacidade(50);
-			
+
 			// Local local2 = new Local();
 			// local2.setNome("Sala 2");
 			// local2.setCapacidade(30);
-
 
 			// localEquipamentoRepository.deleteAll();
 			// LocalEquipamento localEquipamento = new LocalEquipamento();
@@ -63,9 +62,9 @@ public class MhifesApplication {
 			// equipamentos.add(equipamento2);
 
 			// local.setLocalEquipamentos(localEquipamentos);
-			
+
 			// localController.criar(local);
 			// localController.criar(local2);
-			};
-		}
+		};
+	}
 }

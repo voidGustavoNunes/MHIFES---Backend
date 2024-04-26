@@ -1,5 +1,7 @@
 package com.rfid.mhifes.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -23,5 +25,9 @@ public class LogService extends GenericServiceImpl<Log, LogRepository> {
         // Esse método não irá fazer nada porque não existe atualização de log
         return null;
     }
-    
+
+    public List<Log> buscarLogPorIdRegistro(@NotNull @Positive Long id) {
+        return repository.findByIdRegistro(id);
+    }
+
 }

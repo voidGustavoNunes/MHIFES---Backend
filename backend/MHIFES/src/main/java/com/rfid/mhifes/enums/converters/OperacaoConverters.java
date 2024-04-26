@@ -6,7 +6,7 @@ import com.rfid.mhifes.enums.Operacao;
 
 import jakarta.persistence.AttributeConverter;
 
-public class OperacaoConverters implements AttributeConverter<Operacao, String>{
+public class OperacaoConverters implements AttributeConverter<Operacao, String> {
 
     @Override
     public String convertToDatabaseColumn(Operacao operacao) {
@@ -27,6 +27,5 @@ public class OperacaoConverters implements AttributeConverter<Operacao, String>{
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
-    
-    
+
 }

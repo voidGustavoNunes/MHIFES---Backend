@@ -2,7 +2,6 @@ package com.rfid.mhifes.controller;
 
 import java.io.UnsupportedEncodingException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,38 +24,35 @@ import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
-
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor
 public class AutheticationController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UsuarioRepository repository;
+    private final UsuarioRepository repository;
 
-    @Autowired
-    private TokenService tokenService;
+    private final TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AutheticationDTO data) throws IllegalArgumentException, UnsupportedEncodingException{
+    public ResponseEntity login(@RequestBody @Valid AutheticationDTO data)
+            throws IllegalArgumentException, UnsupportedEncodingException {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
 
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((Usuario) auth.getPrincipal());
-        // System.out.println(token);
+
         Usuario user = (Usuario) auth.getPrincipal();
 
         return ResponseEntity.ok(new LoginResponseDTO(token, user.getLogin(), user.getNome(), user.getRole()));
     }
-    
+
     @PostMapping("/register")
-    public ResponseEntity register (@RequestBody @Valid RegisterDTO data) {
+    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
         try {
-            if(this.repository.findByLogin(data.login()) != null)
+            if (this.repository.findByLogin(data.login()) != null)
                 return ResponseEntity.badRequest().build();
 
             String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
@@ -70,14 +66,14 @@ public class AutheticationController {
             return ResponseEntity.badRequest().body("Error: Login já existente!");
         }
     }
-    
+
     @PostConstruct
-    public void initUserAdminAndToken () throws Exception {
+    public void initUserAdminAndToken() throws Exception {
         RegisterDTO registerAdmin = new RegisterDTO(
-            "admin@2024",
-            "Admin", 
-            "123456", 
-            UserRole.ADMIN);
+                "admin@2024",
+                "Admin",
+                "123456",
+                UserRole.ADMIN);
 
         register(registerAdmin);
     }

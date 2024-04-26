@@ -39,13 +39,12 @@ public class LocalService extends GenericServiceImpl<Local, LocalRepository> {
         return localNovo;
     }
 
-    
     @Transactional
     @Override
     public Local atualizar(@NotNull @Positive Long id, @Valid @NotNull Local local) {
         Local localExistente = repository.findById(id)
-            .orElseThrow(() -> new RegistroNotFoundException(id));
-        
+                .orElseThrow(() -> new RegistroNotFoundException(id));
+
         localExistente.setNome(local.getNome());
         localExistente.setCapacidade(local.getCapacidade());
 
@@ -70,22 +69,6 @@ public class LocalService extends GenericServiceImpl<Local, LocalRepository> {
             localEquipamentoService.excluir(equipamentoParaExcluir.getId());
         }
 
-        
-        // for (LocalEquipamento localEquipamentoExistente : localExistente.getLocalEquipamentos()) {
-        //     if(localEquipamentoExistente.getId() != null && !local.getLocalEquipamentos().contains(localEquipamentoExistente)) {
-        //         localEquipamentoService.excluir(localEquipamentoExistente.getId());
-        //     }
-        // }
-
-        // for(LocalEquipamento localEquipamentoNovo : local.getLocalEquipamentos()){
-        //     if(localEquipamentoNovo.getId() != null && local.getLocalEquipamentos().contains(localEquipamentoNovo)){
-        //         localEquipamentoService.atualizar(localEquipamentoNovo.getId(), localEquipamentoNovo);
-        //     } else {
-        //         localEquipamentoNovo.setLocal(localExistente);
-        //         localEquipamentoService.criar(localEquipamentoNovo);
-        //     }
-        // }
-        
         return repository.save(localExistente);
     }
 

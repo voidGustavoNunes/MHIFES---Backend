@@ -15,46 +15,43 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.rfid.mhifes.model.Usuario;
 
-
 @Service
 public class TokenService {
-
 
     @Value("${api.security.token.secret}")
     private String secret;
 
-    
-    public String generateToken(Usuario user) throws IllegalArgumentException, UnsupportedEncodingException{
-        try{
+    private static final String ISSUER = "auth-api";
+
+    public String generateToken(Usuario user) throws IllegalArgumentException, UnsupportedEncodingException {
+        try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             Date expirationDate = Date.from(genExpirationDate());
 
-            String token = JWT.create()
-                    .withIssuer("auth-api")
+            return JWT.create()
+                    .withIssuer(ISSUER)
                     .withSubject(user.getLogin())
                     .withExpiresAt(expirationDate)
                     .sign(algorithm);
-            return token;
         } catch (JWTCreationException exception) {
             throw new RuntimeException("Erro ao gerar token", exception);
         }
     }
 
-
-    public String validateToken(String token) throws IllegalArgumentException, UnsupportedEncodingException{
+    public String validateToken(String token) throws IllegalArgumentException, UnsupportedEncodingException {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("auth-api")
+                    .withIssuer(ISSUER)
                     .build()
                     .verify(token)
                     .getSubject();
-        } catch (JWTVerificationException exception){
+        } catch (JWTVerificationException exception) {
             return "";
         }
     }
 
-    private Instant genExpirationDate(){
+    private Instant genExpirationDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
 }

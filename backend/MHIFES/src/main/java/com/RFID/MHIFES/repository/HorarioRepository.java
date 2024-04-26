@@ -6,5 +6,4 @@ import com.rfid.mhifes.model.Horario;
 
 public interface HorarioRepository extends JpaRepository<Horario, Long> {
 
-    
 }
