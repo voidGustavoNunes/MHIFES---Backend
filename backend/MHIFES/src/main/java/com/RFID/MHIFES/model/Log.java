@@ -12,14 +12,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "log")
+@NoArgsConstructor
 public class Log {
 
     @Id
@@ -30,6 +33,7 @@ public class Log {
 
     private LocalTime hora;
 
+    @Column(length = 5000)
     private String descricao;
 
     @NotNull
@@ -39,7 +43,7 @@ public class Log {
 
     private Long idRegistro;
 
-    @OneToOne
+    @ManyToOne
     private Usuario usuario;
 
     public Log(LocalDate data, LocalTime hora, String descricao, @NotNull Operacao operacao, Long idRegistro,
