@@ -27,4 +27,13 @@ public class Periodo {
 
     @Column(length = 5000, nullable = false)
     private String descricao;
+
+    @Override
+    public String toString() {
+        return "id=" + id
+                + "\ndataInicio=" + dataInicio
+                + "\ndataFim=" + dataFim
+                + "\ndescricao=" + descricao;
+    }
+
 }

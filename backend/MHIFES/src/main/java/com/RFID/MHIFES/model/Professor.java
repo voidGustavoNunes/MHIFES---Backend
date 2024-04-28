@@ -22,4 +22,15 @@ public class Professor extends Pessoa {
     @ManyToOne
     @JoinColumn(nullable = true)
     private Coordenadoria coordenadoria;
+
+    @Override
+    public String toString() {
+        return "id=" + getId()
+                + "\ngetNome()=" + getNome()
+                + "\ngetMatricula()=" + getMatricula()
+                + "\ngetCurso()=" + getCurso()
+                + "\nehCoordenador=" + ehCoordenador
+                + "\n\tcoordenadoria=" + coordenadoria;
+    }
+
 }

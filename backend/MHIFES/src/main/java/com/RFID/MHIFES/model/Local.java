@@ -30,4 +30,13 @@ public class Local {
 
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LocalEquipamento> localEquipamentos = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "id=" + id
+                + "\nnome=" + nome
+                + "\ncapacidade=" + capacidade
+                + "\nlocalEquipamentos=" + localEquipamentos;
+    }
+
 }
