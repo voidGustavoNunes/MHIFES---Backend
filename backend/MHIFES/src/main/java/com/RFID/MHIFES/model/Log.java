@@ -1,6 +1,7 @@
 package com.rfid.mhifes.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import com.rfid.mhifes.enums.Operacao;
@@ -29,9 +30,7 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDate data;
-
-    private LocalTime hora;
+    private LocalDateTime data;
 
     @Column(length = 5000)
     private String descricao;
@@ -46,10 +45,9 @@ public class Log {
     @ManyToOne
     private Usuario usuario;
 
-    public Log(LocalDate data, LocalTime hora, String descricao, @NotNull Operacao operacao, Long idRegistro,
+    public Log(LocalDateTime data, String descricao, @NotNull Operacao operacao, Long idRegistro,
             Usuario usuario) {
         this.data = data;
-        this.hora = hora;
         this.descricao = descricao;
         this.operacao = operacao;
         this.idRegistro = idRegistro;

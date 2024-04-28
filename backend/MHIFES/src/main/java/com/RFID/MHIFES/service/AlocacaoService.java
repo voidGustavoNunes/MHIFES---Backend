@@ -1,7 +1,6 @@
 package com.rfid.mhifes.service;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -35,7 +34,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
 
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Log log = new Log(LocalDate.now(), LocalTime.now(), alocacaoCriada.toString(), Operacao.INCLUSAO,
+        Log log = new Log(LocalDateTime.now(),  alocacaoCriada.toString(), Operacao.INCLUSAO,
                 alocacaoCriada.getId(), usuario);
         logService.criar(log);
 
@@ -63,7 +62,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
 
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Log log = new Log(LocalDate.now(), LocalTime.now(), alocacaoAlterada.toString(), Operacao.ALTERACAO,
+        Log log = new Log(LocalDateTime.now(), alocacaoAlterada.toString(), Operacao.ALTERACAO,
                 alocacaoAlterada.getId(), usuario);
         logService.criar(log);
 
