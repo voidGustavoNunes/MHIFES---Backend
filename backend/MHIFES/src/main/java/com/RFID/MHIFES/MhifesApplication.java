@@ -1,15 +1,28 @@
 package com.rfid.mhifes;
 
+import java.time.LocalDate;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.rfid.mhifes.controller.LocalController;
+import com.rfid.mhifes.model.Aluno;
+import com.rfid.mhifes.model.Coordenadoria;
+import com.rfid.mhifes.model.Disciplina;
 import com.rfid.mhifes.model.Equipamento;
+import com.rfid.mhifes.model.Local;
+import com.rfid.mhifes.model.Periodo;
+import com.rfid.mhifes.model.Professor;
+import com.rfid.mhifes.repository.AlunoRepository;
+import com.rfid.mhifes.repository.CoordenadoriaRepository;
+import com.rfid.mhifes.repository.DisciplinaRepository;
 import com.rfid.mhifes.repository.EquipamentoRepository;
 import com.rfid.mhifes.repository.LocalEquipamentoRepository;
 import com.rfid.mhifes.repository.LocalRepository;
+import com.rfid.mhifes.repository.PeriodoRepository;
+import com.rfid.mhifes.repository.ProfessorRepository;
 
 @SpringBootApplication
 public class MhifesApplication {
@@ -20,8 +33,9 @@ public class MhifesApplication {
 
 	@Bean
 	CommandLineRunner initDatabase(EquipamentoRepository equipamentoRepository,
-			LocalRepository localRepository, LocalEquipamentoRepository localEquipamentoRepository,
-			LocalController localController) {
+			AlunoRepository alunoRepository, CoordenadoriaRepository coordenadoriaRepository,
+			ProfessorRepository professorRepository, DisciplinaRepository disciplinaRepository,
+			PeriodoRepository periodoRepository) {
 		return args -> {
 
 			equipamentoRepository.deleteAll();
@@ -32,39 +46,71 @@ public class MhifesApplication {
 			Equipamento equipamento2 = new Equipamento();
 			equipamento2.setNome("Notebook");
 			equipamentoRepository.save(equipamento2);
+			
+			/* */
+			alunoRepository.deleteAll();
+			Aluno aluno = new Aluno();
+			aluno.setNome("João");
+			aluno.setMatricula("123456");
+			aluno.setCurso("Engenharia de Software");
+			alunoRepository.save(aluno);
 
-			// localRepository.deleteAll();
-			// Local local = new Local();
-			// local.setNome("Sala 1");
-			// local.setCapacidade(50);
+			Aluno aluno2 = new Aluno();
+			aluno2.setNome("Maria");
+			aluno2.setMatricula("654321");
+			aluno2.setCurso("Engenharia de Software");
+			alunoRepository.save(aluno2);
 
-			// Local local2 = new Local();
-			// local2.setNome("Sala 2");
-			// local2.setCapacidade(30);
+			/* */
+			coordenadoriaRepository.deleteAll();
+			Coordenadoria coordenadoria = new Coordenadoria();
+			coordenadoria.setNome("Coordenadoria de Engenharia de Software");
+			coordenadoriaRepository.save(coordenadoria);
 
-			// localEquipamentoRepository.deleteAll();
-			// LocalEquipamento localEquipamento = new LocalEquipamento();
-			// localEquipamento.setLocal(local);
-			// localEquipamento.setEquipamento(equipamento);
-			// localEquipamento.setQuantidade(2);
+			Coordenadoria coordenadoria2 = new Coordenadoria();
+			coordenadoria2.setNome("Coordenadoria de Engenharia de Computação");
+			coordenadoriaRepository.save(coordenadoria2);
+			/* */
+			professorRepository.deleteAll();
+			Professor professor = new Professor();
+			professor.setNome("José");
+			professor.setMatricula("1234567");
+			professor.setCurso("Engenharia de Software");
+			professor.setEhCoordenador(false);
+			professor.setCoordenadoria(coordenadoria);
+			professorRepository.save(professor);
 
-			// LocalEquipamento localEquipamento2 = new LocalEquipamento();
-			// localEquipamento2.setLocal(local);
-			// localEquipamento2.setEquipamento(equipamento2);
-			// localEquipamento2.setQuantidade(1);
+			Professor professor2 = new Professor();
+			professor2.setNome("Maria");
+			professor2.setMatricula("7654321");
+			professor2.setCurso("Engenharia de Computação");
+			professor2.setEhCoordenador(false);
+			professor2.setCoordenadoria(coordenadoria2);
+			professorRepository.save(professor2);
 
-			// List<LocalEquipamento> localEquipamentos = new ArrayList<>();
-			// localEquipamentos.add(localEquipamento);
-			// localEquipamentos.add(localEquipamento2);
+			/* */
+			periodoRepository.deleteAll();
+			Periodo periodo = new Periodo();
+			periodo.setDataInicio(LocalDate.parse("2021-01-01"));
+			periodo.setDataFim(LocalDate.parse("2021-06-30"));
+			periodo.setDescricao("2021.1");
+			periodoRepository.save(periodo);
 
-			// List<Equipamento> equipamentos = new ArrayList<>();
-			// equipamentos.add(equipamento);
-			// equipamentos.add(equipamento2);
+			Periodo periodo2 = new Periodo();
+			periodo2.setDataInicio(LocalDate.parse("2021-07-01"));
+			periodo2.setDataFim(LocalDate.parse("2021-12-31"));
+			periodo2.setDescricao("2021.2");
+			periodoRepository.save(periodo2);
 
-			// local.setLocalEquipamentos(localEquipamentos);
+			/* */
+			disciplinaRepository.deleteAll();
+			Disciplina disciplina = new Disciplina();
+			disciplina.setNome("Banco de Dados");
+			disciplinaRepository.save(disciplina);
 
-			// localController.criar(local);
-			// localController.criar(local2);
+			Disciplina disciplina2 = new Disciplina();
+			disciplina2.setNome("Engenharia de Software");
+			disciplinaRepository.save(disciplina2);
 		};
 	}
 }

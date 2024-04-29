@@ -35,4 +35,11 @@ public class LocalEquipamento {
     @Column(nullable = false)
     private Integer quantidade;
 
+    @Override
+    public String toString() {
+        return "id=" + id
+                + "\nequipamento=" + equipamento
+                + "\nquantidade=" + quantidade;
+    }
+
 }

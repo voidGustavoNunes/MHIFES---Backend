@@ -19,4 +19,11 @@ public class Coordenadoria {
 
     @Column(length = 150, nullable = false)
     private String nome;
+
+    @Override
+    public String toString() {
+        return "id=" + id
+                + "\nnome=" + nome;
+    }
+
 }

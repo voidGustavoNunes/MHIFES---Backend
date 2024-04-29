@@ -1,6 +1,7 @@
 package com.rfid.mhifes.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import com.rfid.mhifes.enums.Operacao;
@@ -12,24 +13,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "log")
+@NoArgsConstructor
 public class Log {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDate data;
+    private LocalDateTime data;
 
-    private LocalTime hora;
-
+    @Column(length = 5000)
     private String descricao;
 
     @NotNull
@@ -39,13 +42,12 @@ public class Log {
 
     private Long idRegistro;
 
-    @OneToOne
+    @ManyToOne
     private Usuario usuario;
 
-    public Log(LocalDate data, LocalTime hora, String descricao, @NotNull Operacao operacao, Long idRegistro,
+    public Log(LocalDateTime data, String descricao, @NotNull Operacao operacao, Long idRegistro,
             Usuario usuario) {
         this.data = data;
-        this.hora = hora;
         this.descricao = descricao;
         this.operacao = operacao;
         this.idRegistro = idRegistro;

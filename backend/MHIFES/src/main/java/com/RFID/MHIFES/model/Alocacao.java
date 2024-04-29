@@ -67,4 +67,19 @@ public class Alocacao {
     @ManyToMany
     @JoinTable(name = "alocacao_aluno", joinColumns = @JoinColumn(name = "alocacao_id"), inverseJoinColumns = @JoinColumn(name = "aluno_id"))
     private List<Aluno> alunos = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "id=" + id
+                + "\nhorarioInicio=" + horarioInicio
+                + "\nhorarioFim=" + horarioFim
+                + "\nturma=" + turma
+                + "\ndataAula=" + dataAula
+                + "\n\tlocal=" + local
+                + "\n\tdisciplina=" + disciplina
+                + "\n\tperiodo=" + periodo
+                + "\n\tprofessor=" + professor
+                + "\n\talunos=" + alunos;
+    }
+
 }

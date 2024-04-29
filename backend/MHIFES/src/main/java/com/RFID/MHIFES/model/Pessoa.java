@@ -28,4 +28,5 @@ public class Pessoa {
 
     @Column(length = 150)
     private String curso;
+    
 }

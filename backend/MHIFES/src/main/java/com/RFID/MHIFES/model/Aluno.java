@@ -11,4 +11,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Aluno extends Pessoa {
 
+    @Override
+    public String toString() {
+        return "id=" + getId()
+                + "\ngetNome()=" + getNome()
+                + "\ngetMatricula()=" + getMatricula()
+                + "\ngetCurso()=" + getCurso();
+    }
 }

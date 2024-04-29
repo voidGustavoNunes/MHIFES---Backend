@@ -29,4 +29,11 @@ public class Equipamento {
     @OneToMany(mappedBy = "equipamento", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<LocalEquipamento> localEquipamentos;
+
+    @Override
+    public String toString() {
+        return "id=" + id
+                + "\nnome=" + nome;
+    }
+
 }
