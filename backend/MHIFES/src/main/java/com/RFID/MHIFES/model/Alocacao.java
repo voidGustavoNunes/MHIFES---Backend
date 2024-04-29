@@ -71,8 +71,8 @@ public class Alocacao {
     @Override
     public String toString() {
         return "id=" + id
-                + "\nhorarioInicio=" + horarioInicio
-                + "\nhorarioFim=" + horarioFim
+                + "\nhorarioInicio=" + horario.getHoraInicio()
+                + "\nhorarioFim=" + horario.getHoraFim()
                 + "\nturma=" + turma
                 + "\ndataAula=" + dataAula
                 + "\n\tlocal=" + local

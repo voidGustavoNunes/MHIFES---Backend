@@ -91,15 +91,15 @@ public class MhifesApplication {
 			/* */
 			periodoRepository.deleteAll();
 			Periodo periodo = new Periodo();
+			periodo.setNome("2021.1");
 			periodo.setDataInicio(LocalDate.parse("2021-01-01"));
 			periodo.setDataFim(LocalDate.parse("2021-06-30"));
-			periodo.setDescricao("2021.1");
 			periodoRepository.save(periodo);
 
 			Periodo periodo2 = new Periodo();
+			periodo2.setNome("2021.2");
 			periodo2.setDataInicio(LocalDate.parse("2021-07-01"));
 			periodo2.setDataFim(LocalDate.parse("2021-12-31"));
-			periodo2.setDescricao("2021.2");
 			periodoRepository.save(periodo2);
 
 			/* */
