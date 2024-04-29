@@ -75,7 +75,7 @@ public class MhifesApplication {
 			Professor professor = new Professor();
 			professor.setNome("José");
 			professor.setMatricula("1234567");
-			professor.setCurso("Engenharia de Software");
+			// professor.setCurso("Engenharia de Software");
 			professor.setEhCoordenador(false);
 			professor.setCoordenadoria(coordenadoria);
 			professorRepository.save(professor);
@@ -83,7 +83,7 @@ public class MhifesApplication {
 			Professor professor2 = new Professor();
 			professor2.setNome("Maria");
 			professor2.setMatricula("7654321");
-			professor2.setCurso("Engenharia de Computação");
+			// professor2.setCurso("Engenharia de Computação");
 			professor2.setEhCoordenador(false);
 			professor2.setCoordenadoria(coordenadoria2);
 			professorRepository.save(professor2);

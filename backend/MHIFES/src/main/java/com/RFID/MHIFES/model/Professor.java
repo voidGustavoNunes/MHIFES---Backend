@@ -20,7 +20,7 @@ public class Professor extends Pessoa {
     private boolean ehCoordenador;
 
     @ManyToOne
-    @JoinColumn(nullable = true)
+    @JoinColumn(nullable = false)
     private Coordenadoria coordenadoria;
 
     @Override

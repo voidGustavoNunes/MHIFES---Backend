@@ -70,16 +70,18 @@ public class Alocacao {
 
     @Override
     public String toString() {
-        return "id=" + id
-                + "\nhorarioInicio=" + horario.getHoraInicio()
-                + "\nhorarioFim=" + horario.getHoraFim()
-                + "\nturma=" + turma
-                + "\ndataAula=" + dataAula
-                + "\n\tlocal=" + local
-                + "\n\tdisciplina=" + disciplina
-                + "\n\tperiodo=" + periodo
-                + "\n\tprofessor=" + professor
-                + "\n\talunos=" + alunos;
+        return "{"
+                + "\"id\": " + id
+                //+ ", \"horarioInicio\": \"" + horario.getHoraInicio() + "\""
+                //+ ", \"horarioFim\": \"" + ho + "\""
+                + ", \"turma\": \"" + turma + "\""
+                + ", \"dataAula\": \"" + dataAula + "\""
+                // + ", \"local\": " + local.toString()
+                //+ ", \"disciplina\": " + disciplina.toString()
+                //+ ", \"periodo\": " + periodo.toString()
+                // + ", \"professor\": " + professor.toString()
+                // + ", \"aluno\": " + alunos.iterator().next().toString()
+                + "}";
     }
 
 }
