@@ -26,11 +26,6 @@ public class Horario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    @Column(name = "dia_Semana", nullable = false)
-    @Convert(converter = DiaSemanaConverters.class)
-    private DiaSemana diaSemana;
-
     @Column(nullable = false)
     private LocalTime horaInicio;
 

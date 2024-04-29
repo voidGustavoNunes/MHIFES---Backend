@@ -19,12 +19,15 @@ public class Periodo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(length = 150, nullable = false)
+    private String nome;
+
     @Column(nullable = false)
     private LocalDate dataInicio;
 
     @Column(nullable = false)
     private LocalDate dataFim;
 
-    @Column(length = 5000, nullable = false)
-    private String descricao;
+    // @Column(length = 5000, nullable = false)
+    // private String descricao;
 }

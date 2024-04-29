@@ -29,15 +29,15 @@ public class Alocacao {
     // @Column(nullable = false)
     // private Integer numAulas;
 
-    // @ManyToOne
-    // @JoinColumn(name = "horario")
-    // private Horario horario;
+    @ManyToOne
+    @JoinColumn(name = "horario")
+    private Horario horario;
 
-    @Column(nullable = false)
-    private LocalTime horarioInicio;
+    // @Column(nullable = false)
+    // private LocalTime horarioInicio;
 
-    @Column(nullable = false)
-    private LocalTime horarioFim;
+    // @Column(nullable = false)
+    // private LocalTime horarioFim;
 
     @Column(length = 30, nullable = false)
     private String turma;
