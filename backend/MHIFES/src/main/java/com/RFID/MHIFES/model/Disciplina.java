@@ -22,8 +22,10 @@ public class Disciplina {
 
     @Override
     public String toString() {
-        return "id=" + id
-                + "\nnome=" + nome;
+        return "{"
+                + "\"id\": " + id
+                + ", \"nome\": \"" + nome + "\""
+                + "}";
     }
 
 }

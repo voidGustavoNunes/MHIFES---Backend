@@ -37,9 +37,11 @@ public class LocalEquipamento {
 
     @Override
     public String toString() {
-        return "id=" + id
-                + "\nequipamento=" + equipamento
-                + "\nquantidade=" + quantidade;
+        return "{"
+                + "\"id\": " + id
+                + ", \"equipamento\": \"" + equipamento + "\""
+                + ", \"quantidade\": \"" + quantidade + "\""
+                + "}";
     }
 
 }

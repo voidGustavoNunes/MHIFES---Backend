@@ -25,12 +25,14 @@ public class Professor extends Pessoa {
 
     @Override
     public String toString() {
-        return "id=" + getId()
-                + "\ngetNome()=" + getNome()
-                + "\ngetMatricula()=" + getMatricula()
-                + "\ngetCurso()=" + getCurso()
-                + "\nehCoordenador=" + ehCoordenador
-                + "\n\tcoordenadoria=" + coordenadoria;
+        return "{"
+                + "\"id\": " + getId()
+                + ", \"nome\": \"" + getNome() + "\""
+                + ", \"matricula\": \"" + getMatricula() + "\""
+                + ", \"curso\": \"" + getCurso() + "\""
+                + ", \"ehCoordenador\": \"" + ehCoordenador + "\""
+                // + ", \"coordenadoria\": \"" + coordenadoria.toString() + "\""
+                + "}";
     }
 
 }

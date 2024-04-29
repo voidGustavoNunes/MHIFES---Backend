@@ -30,10 +30,12 @@ public class Periodo {
 
     @Override
     public String toString() {
-        return "id=" + id
-                + "\ndataInicio=" + dataInicio
-                + "\ndataFim=" + dataFim
-                + "\ndescricao=" + descricao;
+        return "{"
+                + "\"id\": " + id
+                + ", \"dataInicio\": \"" + dataInicio + "\""
+                + ", \"dataFim\": \"" + dataFim + "\""
+                + ", \"descricao\": \"" + descricao + "\""
+                + "}";
     }
 
 }

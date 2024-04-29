@@ -33,10 +33,12 @@ public class Local {
 
     @Override
     public String toString() {
-        return "id=" + id
-                + "\nnome=" + nome
-                + "\ncapacidade=" + capacidade
-                + "\nlocalEquipamentos=" + localEquipamentos;
+        return "{"
+                + "\"id\": " + id
+                + ", \"nome\": \"" + nome + "\""
+                + ", \"capacidade\": \"" + nome + "\""
+                //+ ", \"localEquipamentos\": \"" + localEquipamentos.toString() + "\""
+                + "}";
     }
 
 }
