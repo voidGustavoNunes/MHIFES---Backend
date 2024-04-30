@@ -1,11 +1,9 @@
 package com.rfid.mhifes.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import com.rfid.mhifes.enums.Operacao;
-import com.rfid.mhifes.enums.converters.OperacaoConverters;
+import com.rfid.mhifes.enums.converters.OperacaoConverter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -14,7 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -37,8 +34,8 @@ public class Log {
 
     @NotNull
     @Column(name = "operacao", nullable = false)
-    @Convert(converter = OperacaoConverters.class)
-    private Operacao operacao;
+    @Convert(converter = OperacaoConverter.class)
+    private Operacao operacao = Operacao.INCLUSAO;
 
     private Long idRegistro;
 

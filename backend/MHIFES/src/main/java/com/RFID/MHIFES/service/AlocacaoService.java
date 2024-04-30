@@ -2,6 +2,7 @@ package com.rfid.mhifes.service;
 
 import java.time.LocalDateTime;
 
+import java.util.List;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -34,7 +35,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
 
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Log log = new Log(LocalDateTime.now(),  alocacaoCriada.toString(), Operacao.INCLUSAO,
+        Log log = new Log(LocalDateTime.now(), alocacaoCriada.toString(), Operacao.INCLUSAO,
                 alocacaoCriada.getId(), usuario);
         logService.criar(log);
 
@@ -56,7 +57,6 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
                     alocacaoEditada.setDisciplina(alocacao.getDisciplina());
                     alocacaoEditada.setPeriodo(alocacao.getPeriodo());
                     alocacaoEditada.setProfessor(alocacao.getProfessor());
-                    alocacaoEditada.setAlunos(alocacao.getAlunos());
                     return repository.save(alocacaoEditada);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
 
@@ -67,5 +67,24 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
         logService.criar(log);
 
         return alocacaoAlterada;
+    }
+
+    @Override
+    public void excluir(@NotNull @Positive Long id) {
+        Alocacao alocacao = repository.findById(id)
+                .orElseThrow(() -> new RegistroNotFoundException(id));
+
+        repository.delete(alocacao);
+
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Log log = new Log(LocalDateTime.now(), alocacao.toString(), Operacao.EXCLUSAO,
+                alocacao.getId(), usuario);
+
+        logService.criar(log);
+    }
+
+    public List<Alocacao> listarInativos() {
+        return repository.findAllStatusInativo();
     }
 }

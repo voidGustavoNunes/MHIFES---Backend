@@ -8,13 +8,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.rfid.mhifes.controller.LocalController;
 import com.rfid.mhifes.model.Aluno;
 import com.rfid.mhifes.model.Coordenadoria;
 import com.rfid.mhifes.model.Disciplina;
 import com.rfid.mhifes.model.Equipamento;
 import com.rfid.mhifes.model.Horario;
-import com.rfid.mhifes.model.Local;
 import com.rfid.mhifes.model.Periodo;
 import com.rfid.mhifes.model.Professor;
 import com.rfid.mhifes.repository.AlunoRepository;
@@ -22,8 +20,6 @@ import com.rfid.mhifes.repository.CoordenadoriaRepository;
 import com.rfid.mhifes.repository.DisciplinaRepository;
 import com.rfid.mhifes.repository.EquipamentoRepository;
 import com.rfid.mhifes.repository.HorarioRepository;
-import com.rfid.mhifes.repository.LocalEquipamentoRepository;
-import com.rfid.mhifes.repository.LocalRepository;
 import com.rfid.mhifes.repository.PeriodoRepository;
 import com.rfid.mhifes.repository.ProfessorRepository;
 

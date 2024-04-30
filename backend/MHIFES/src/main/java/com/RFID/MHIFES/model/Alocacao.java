@@ -1,25 +1,31 @@
 package com.rfid.mhifes.model;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.hibernate.annotations.SQLDelete;
+
+import com.rfid.mhifes.enums.Status;
+import com.rfid.mhifes.enums.converters.StatusConverter;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name = "alocacao")
+@SQLDelete(sql = "UPDATE alocacao SET status = 'Inativo' WHERE id = ?")
+// Essa anotação faz com que as consultas sejam apenas das alocações com o
+// status igual a ativo
+// @Where(clause = "status = 'Ativo'")
 public class Alocacao {
 
     @Id
@@ -52,22 +58,13 @@ public class Alocacao {
     @JoinColumn(name = "professor")
     private Professor professor;
 
-    @ManyToMany
-    @JoinTable(name = "alocacao_aluno", joinColumns = @JoinColumn(name = "alocacao_id"), inverseJoinColumns = @JoinColumn(name = "aluno_id"))
-    private List<Aluno> alunos = new ArrayList<>();
+    @NotNull
+    @Column(name = "status", length = 10, nullable = false)
+    @Convert(converter = StatusConverter.class)
+    private Status status = Status.ATIVO;
 
     @Override
     public String toString() {
-
-        StringBuilder alunosString = new StringBuilder("[");
-        for (Aluno aluno : alunos) {
-            alunosString.append(aluno.toString()).append(", ");
-        }
-        if (!alunos.isEmpty()) {
-            alunosString.setLength(alunosString.length() - 2); // Remove a última vírgula e espaço
-        }
-        alunosString.append("]");
-
         return "{"
                 + "\"id\": " + id
                 + ", \"horarioInicio\": \"" + horario.getHoraInicio() + "\""
@@ -78,7 +75,6 @@ public class Alocacao {
                 + ", \"disciplina\": " + disciplina.toString()
                 + ", \"periodo\": " + periodo.toString()
                 + ", \"professor\": " + professor.toString()
-                + ", \"alunos\": " + alunosString.toString()
                 + "}";
     }
 

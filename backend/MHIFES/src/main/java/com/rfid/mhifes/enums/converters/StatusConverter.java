@@ -2,27 +2,28 @@ package com.rfid.mhifes.enums.converters;
 
 import java.util.stream.Stream;
 
-import com.rfid.mhifes.enums.Operacao;
+import com.rfid.mhifes.enums.Status;
 
 import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
-public class OperacaoConverters implements AttributeConverter<Operacao, String> {
+@Converter(autoApply = true)
+public class StatusConverter implements AttributeConverter<Status, String> {
 
     @Override
-    public String convertToDatabaseColumn(Operacao operacao) {
-        if (operacao == null) {
+    public String convertToDatabaseColumn(Status status) {
+        if (status == null) {
             return null;
         }
-        return operacao.getValor();
+        return status.getValor();
     }
 
     @Override
-    public Operacao convertToEntityAttribute(String valor) {
+    public Status convertToEntityAttribute(String valor) {
         if (valor == null) {
             return null;
         }
-
-        return Stream.of(Operacao.values())
+        return Stream.of(Status.values())
                 .filter(c -> c.getValor().equals(valor))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
