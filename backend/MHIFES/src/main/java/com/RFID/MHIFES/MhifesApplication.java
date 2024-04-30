@@ -1,6 +1,7 @@
 package com.rfid.mhifes;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import com.rfid.mhifes.model.Aluno;
 import com.rfid.mhifes.model.Coordenadoria;
 import com.rfid.mhifes.model.Disciplina;
 import com.rfid.mhifes.model.Equipamento;
+import com.rfid.mhifes.model.Horario;
 import com.rfid.mhifes.model.Local;
 import com.rfid.mhifes.model.Periodo;
 import com.rfid.mhifes.model.Professor;
@@ -19,6 +21,7 @@ import com.rfid.mhifes.repository.AlunoRepository;
 import com.rfid.mhifes.repository.CoordenadoriaRepository;
 import com.rfid.mhifes.repository.DisciplinaRepository;
 import com.rfid.mhifes.repository.EquipamentoRepository;
+import com.rfid.mhifes.repository.HorarioRepository;
 import com.rfid.mhifes.repository.LocalEquipamentoRepository;
 import com.rfid.mhifes.repository.LocalRepository;
 import com.rfid.mhifes.repository.PeriodoRepository;
@@ -35,7 +38,7 @@ public class MhifesApplication {
 	CommandLineRunner initDatabase(EquipamentoRepository equipamentoRepository,
 			AlunoRepository alunoRepository, CoordenadoriaRepository coordenadoriaRepository,
 			ProfessorRepository professorRepository, DisciplinaRepository disciplinaRepository,
-			PeriodoRepository periodoRepository) {
+			PeriodoRepository periodoRepository, HorarioRepository horarioRepository) {
 		return args -> {
 
 			equipamentoRepository.deleteAll();
@@ -111,6 +114,12 @@ public class MhifesApplication {
 			Disciplina disciplina2 = new Disciplina();
 			disciplina2.setNome("Engenharia de Software");
 			disciplinaRepository.save(disciplina2);
+
+			Horario horario = new Horario();
+			horario.setHoraInicio(LocalTime.parse("08:00"));
+			horario.setHoraFim(LocalTime.parse("10:00"));
+			horarioRepository.save(horario);
+
 		};
 	}
 }

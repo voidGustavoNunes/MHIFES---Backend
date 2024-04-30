@@ -33,10 +33,22 @@ public class Local {
 
     @Override
     public String toString() {
-        return "id=" + id
-                + "\nnome=" + nome
-                + "\ncapacidade=" + capacidade
-                + "\nlocalEquipamentos=" + localEquipamentos;
+
+        StringBuilder localEquipamentosString = new StringBuilder("[");
+        for (LocalEquipamento localEquipamento : localEquipamentos) {
+            localEquipamentosString.append(localEquipamento.toString()).append(", ");
+        }
+        if (!localEquipamentos.isEmpty()) {
+            localEquipamentosString.setLength(localEquipamentosString.length() - 2); // Remove a última vírgula e espaço
+        }
+        localEquipamentosString.append("]");
+
+        return "{"
+                + "\"id\": " + id
+                + ", \"nome\": \"" + nome + "\""
+                + ", \"capacidade\": " + capacidade
+                + ", \"localEquipamentos\": " + localEquipamentosString.toString()
+                + "}";
     }
 
 }

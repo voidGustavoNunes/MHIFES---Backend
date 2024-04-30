@@ -26,24 +26,12 @@ public class Alocacao {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    // @Column(nullable = false)
-    // private Integer numAulas;
-
     @ManyToOne
     @JoinColumn(name = "horario")
     private Horario horario;
 
-    // @Column(nullable = false)
-    // private LocalTime horarioInicio;
-
-    // @Column(nullable = false)
-    // private LocalTime horarioFim;
-
     @Column(length = 30, nullable = false)
     private String turma;
-
-    // @Column(length = 30, nullable = false)
-    // private String diaSemana;
 
     @Column(nullable = false)
     private LocalDate dataAula;
@@ -70,17 +58,27 @@ public class Alocacao {
 
     @Override
     public String toString() {
+
+        StringBuilder alunosString = new StringBuilder("[");
+        for (Aluno aluno : alunos) {
+            alunosString.append(aluno.toString()).append(", ");
+        }
+        if (!alunos.isEmpty()) {
+            alunosString.setLength(alunosString.length() - 2); // Remove a última vírgula e espaço
+        }
+        alunosString.append("]");
+
         return "{"
                 + "\"id\": " + id
-                //+ ", \"horarioInicio\": \"" + horario.getHoraInicio() + "\""
-                //+ ", \"horarioFim\": \"" + ho + "\""
+                + ", \"horarioInicio\": \"" + horario.getHoraInicio() + "\""
+                + ", \"horarioFim\": \"" + horario.getHoraFim() + "\""
                 + ", \"turma\": \"" + turma + "\""
                 + ", \"dataAula\": \"" + dataAula + "\""
-                // + ", \"local\": " + local.toString()
-                //+ ", \"disciplina\": " + disciplina.toString()
-                //+ ", \"periodo\": " + periodo.toString()
-                // + ", \"professor\": " + professor.toString()
-                // + ", \"aluno\": " + alunos.iterator().next().toString()
+                + ", \"local\": " + local.toString()
+                + ", \"disciplina\": " + disciplina.toString()
+                + ", \"periodo\": " + periodo.toString()
+                + ", \"professor\": " + professor.toString()
+                + ", \"alunos\": " + alunosString.toString()
                 + "}";
     }
 

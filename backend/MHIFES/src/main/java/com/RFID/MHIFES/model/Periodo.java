@@ -28,15 +28,14 @@ public class Periodo {
     @Column(nullable = false)
     private LocalDate dataFim;
 
-    // @Column(length = 5000, nullable = false)
-    // private String descricao;
-
     @Override
     public String toString() {
-        return "id=" + id
-                + "\nnome=" + nome
-                + "\ndataInicio=" + dataInicio
-                + "\ndataFim=" + dataFim;
+        return "{"
+                + "\"id\": " + id
+                + ", \"nome\": \"" + nome + "\""
+                + ", \"dataInicio\": \"" + dataInicio + "\""
+                + ", \"dataFim\": \"" + dataFim + "\""
+                + "}";
     }
 
 }

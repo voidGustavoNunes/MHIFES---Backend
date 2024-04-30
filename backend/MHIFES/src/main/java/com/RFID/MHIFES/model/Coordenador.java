@@ -13,9 +13,11 @@ public class Coordenador extends Pessoa {
 
     @Override
     public String toString() {
-        return "id=" + getId()
-                + "\ngetNome()=" + getNome()
-                + "\ngetMatricula()=" + getMatricula()
-                + "\ngetCurso()=" + getCurso();
+        return "{"
+                + "\"id\": " + getId()
+                + ", \"nome\": \"" + getNome() + "\""
+                + ", \"matricula\": \"" + getMatricula() + "\""
+                + ", \"curso\": \"" + getCurso() + "\""
+                + "}";
     }
 }
