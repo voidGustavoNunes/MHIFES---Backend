@@ -1,6 +1,7 @@
 package com.rfid.mhifes.model;
 
 import java.time.LocalDate;
+import java.time.Year;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 @Data
@@ -19,8 +21,12 @@ public class Periodo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 150, nullable = false)
-    private String nome;
+    @Column(nullable = false)
+    private Year ano;
+
+    @Min(1)
+    @Column(nullable = false)
+    private Long semestre;
 
     @Column(nullable = false)
     private LocalDate dataInicio;
@@ -32,7 +38,8 @@ public class Periodo {
     public String toString() {
         return "{"
                 + "\"id\": " + id
-                + ", \"nome\": \"" + nome + "\""
+                + ", \"ano\": \"" + ano + "\""
+                + ", \"semestre\": \"" + semestre + "\""
                 + ", \"dataInicio\": \"" + dataInicio + "\""
                 + ", \"dataFim\": \"" + dataFim + "\""
                 + "}";

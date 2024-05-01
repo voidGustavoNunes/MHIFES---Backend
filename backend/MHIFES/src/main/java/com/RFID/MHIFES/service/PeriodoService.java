@@ -24,7 +24,8 @@ public class PeriodoService extends GenericServiceImpl<Periodo, PeriodoRepositor
     public Periodo atualizar(@NotNull @Positive Long id, @Valid @NotNull Periodo periodo) {
         return repository.findById(id)
                 .map(periodoEditado -> {
-                    periodoEditado.setNome(periodo.getNome());
+                    periodoEditado.setAno(periodo.getAno());
+                    periodoEditado.setSemestre(periodo.getSemestre());
                     periodoEditado.setDataInicio(periodo.getDataInicio());
                     periodoEditado.setDataFim(periodo.getDataFim());
                     return repository.save(periodoEditado);

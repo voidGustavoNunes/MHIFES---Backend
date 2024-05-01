@@ -20,11 +20,15 @@ public class Disciplina {
     @Column(length = 150, nullable = false)
     private String nome;
 
+    @Column(length = 10, nullable = false)
+    private String sigla;
+
     @Override
     public String toString() {
         return "{"
                 + "\"id\": " + id
                 + ", \"nome\": \"" + nome + "\""
+                + ", \"sigla\": \"" + sigla + "\""
                 + "}";
     }
 

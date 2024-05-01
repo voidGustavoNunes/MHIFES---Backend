@@ -2,24 +2,33 @@ package com.rfid.mhifes;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.rfid.mhifes.model.Alocacao;
 import com.rfid.mhifes.model.Aluno;
 import com.rfid.mhifes.model.Coordenadoria;
 import com.rfid.mhifes.model.Disciplina;
 import com.rfid.mhifes.model.Equipamento;
 import com.rfid.mhifes.model.Horario;
+import com.rfid.mhifes.model.Local;
+import com.rfid.mhifes.model.LocalEquipamento;
 import com.rfid.mhifes.model.Periodo;
 import com.rfid.mhifes.model.Professor;
+import com.rfid.mhifes.repository.AlocacaoRepository;
 import com.rfid.mhifes.repository.AlunoRepository;
 import com.rfid.mhifes.repository.CoordenadoriaRepository;
 import com.rfid.mhifes.repository.DisciplinaRepository;
 import com.rfid.mhifes.repository.EquipamentoRepository;
 import com.rfid.mhifes.repository.HorarioRepository;
+import com.rfid.mhifes.repository.LocalEquipamentoRepository;
+import com.rfid.mhifes.repository.LocalRepository;
 import com.rfid.mhifes.repository.PeriodoRepository;
 import com.rfid.mhifes.repository.ProfessorRepository;
 
@@ -34,7 +43,9 @@ public class MhifesApplication {
 	CommandLineRunner initDatabase(EquipamentoRepository equipamentoRepository,
 			AlunoRepository alunoRepository, CoordenadoriaRepository coordenadoriaRepository,
 			ProfessorRepository professorRepository, DisciplinaRepository disciplinaRepository,
-			PeriodoRepository periodoRepository, HorarioRepository horarioRepository) {
+			PeriodoRepository periodoRepository, HorarioRepository horarioRepository,
+			LocalRepository localRepository, LocalEquipamentoRepository localEquipamentoRepository,
+			AlocacaoRepository alocacaoRepository) {
 		return args -> {
 
 			equipamentoRepository.deleteAll();
@@ -73,6 +84,7 @@ public class MhifesApplication {
 			professorRepository.deleteAll();
 			Professor professor = new Professor();
 			professor.setNome("José");
+			professor.setSigla("J");
 			professor.setMatricula("1234567");
 			// professor.setCurso("Engenharia de Software");
 			professor.setEhCoordenador(false);
@@ -81,6 +93,7 @@ public class MhifesApplication {
 
 			Professor professor2 = new Professor();
 			professor2.setNome("Maria");
+			professor2.setSigla("M");
 			professor2.setMatricula("7654321");
 			// professor2.setCurso("Engenharia de Computação");
 			professor2.setEhCoordenador(false);
@@ -90,13 +103,15 @@ public class MhifesApplication {
 			/* */
 			periodoRepository.deleteAll();
 			Periodo periodo = new Periodo();
-			periodo.setNome("2021.1");
+			periodo.setAno(Year.of(2021));
+			periodo.setSemestre(1L);
 			periodo.setDataInicio(LocalDate.parse("2021-01-01"));
 			periodo.setDataFim(LocalDate.parse("2021-06-30"));
 			periodoRepository.save(periodo);
 
 			Periodo periodo2 = new Periodo();
-			periodo2.setNome("2021.2");
+			periodo2.setAno(Year.of(2021));
+			periodo2.setSemestre(2L);
 			periodo2.setDataInicio(LocalDate.parse("2021-07-01"));
 			periodo2.setDataFim(LocalDate.parse("2021-12-31"));
 			periodoRepository.save(periodo2);
@@ -105,16 +120,88 @@ public class MhifesApplication {
 			disciplinaRepository.deleteAll();
 			Disciplina disciplina = new Disciplina();
 			disciplina.setNome("Banco de Dados");
+			disciplina.setSigla("BD");
 			disciplinaRepository.save(disciplina);
 
 			Disciplina disciplina2 = new Disciplina();
 			disciplina2.setNome("Engenharia de Software");
+			disciplina2.setSigla("ES");
 			disciplinaRepository.save(disciplina2);
 
 			Horario horario = new Horario();
 			horario.setHoraInicio(LocalTime.parse("08:00"));
 			horario.setHoraFim(LocalTime.parse("10:00"));
 			horarioRepository.save(horario);
+
+			Local local = new Local();
+			local.setNome("Sala 1");
+			local.setCapacidade(50);
+			local.setLocalEquipamentos(null);
+			localRepository.save(local);
+
+			Local local2 = new Local();
+			local2.setNome("Sala 2");
+			local2.setCapacidade(50);
+			local2.setLocalEquipamentos(null);
+			localRepository.save(local2);
+
+			LocalEquipamento localEquipamento = new LocalEquipamento();
+			localEquipamento.setEquipamento(equipamento);
+			localEquipamento.setLocal(local);
+			localEquipamento.setQuantidade(1);
+			localEquipamentoRepository.save(localEquipamento);
+
+			LocalEquipamento localEquipamento2 = new LocalEquipamento();
+			localEquipamento2.setEquipamento(equipamento2);
+			localEquipamento2.setLocal(local2);
+			localEquipamento2.setQuantidade(2);
+			localEquipamentoRepository.save(localEquipamento2);
+
+			List<LocalEquipamento> localEquipamentos = new ArrayList<>();
+			localEquipamentos.add(localEquipamento);
+			local.setLocalEquipamentos(localEquipamentos);
+			localRepository.save(local);
+
+			List<LocalEquipamento> localEquipamentos2 = new ArrayList<>();
+			localEquipamentos.add(localEquipamento2);
+			local2.setLocalEquipamentos(localEquipamentos2);
+			localRepository.save(local2);
+
+			Alocacao alocacao = new Alocacao();
+			List<LocalDate> datas = new ArrayList<>();
+			datas.add(LocalDate.parse("2021-01-01"));
+			alocacao.setDataAulas(datas);
+			alocacao.setDisciplina(disciplina);
+			alocacao.setPeriodo(periodo);
+			alocacao.setProfessor(professor);
+			alocacao.setLocal(local);
+			alocacao.setHorario(horario);
+			alocacao.setTurma("V01");
+			alocacaoRepository.save(alocacao);
+
+			Alocacao alocacao2 = new Alocacao();
+			List<LocalDate> datas2 = new ArrayList<>();
+			datas2.add(LocalDate.parse("2021-07-01"));
+			alocacao2.setDataAulas(datas2);
+			alocacao2.setDisciplina(disciplina2);
+			alocacao2.setPeriodo(periodo2);
+			alocacao2.setProfessor(professor2);
+			alocacao2.setLocal(local2);
+			alocacao2.setHorario(horario);
+			alocacao2.setTurma("V01");
+			alocacaoRepository.save(alocacao2);
+
+			Alocacao alocacao3 = new Alocacao();
+			datas.add(LocalDate.parse("2021-01-02"));
+			datas.add(LocalDate.parse("2021-01-03"));
+			alocacao3.setDataAulas(datas);
+			alocacao3.setDisciplina(disciplina2);
+			alocacao3.setPeriodo(periodo);
+			alocacao3.setProfessor(professor2);
+			alocacao3.setLocal(local2);
+			alocacao3.setHorario(horario);
+			alocacao3.setTurma("V01");
+			alocacaoRepository.save(alocacao3);
 
 		};
 	}

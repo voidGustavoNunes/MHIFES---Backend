@@ -16,6 +16,9 @@ import lombok.EqualsAndHashCode;
 @AttributeOverride(name = "curso", column = @Column(nullable = true))
 public class Professor extends Pessoa {
 
+    @Column(length = 50, nullable = false)
+    private String sigla;
+
     @Column(nullable = false)
     private boolean ehCoordenador;
 
@@ -28,6 +31,7 @@ public class Professor extends Pessoa {
         return "{"
                 + "\"id\": " + getId()
                 + ", \"nome\": \"" + getNome() + "\""
+                + ", \"sigla\": \"" + sigla + "\""
                 + ", \"matricula\": \"" + getMatricula() + "\""
                 + ", \"curso\": \"" + getCurso() + "\""
                 + ", \"ehCoordenador\": \"" + ehCoordenador + "\""

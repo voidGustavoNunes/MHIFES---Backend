@@ -52,7 +52,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
                     // alocacaoEditada.setHorarioFim(alocacao.getHorarioFim());
                     alocacaoEditada.setTurma(alocacao.getTurma());
                     // alocacaoEditada.setDiaSemana(alocacao.getDiaSemana());
-                    alocacaoEditada.setDataAula(alocacao.getDataAula());
+                    alocacaoEditada.setDataAulas(alocacao.getDataAulas());
                     alocacaoEditada.setLocal(alocacao.getLocal());
                     alocacaoEditada.setDisciplina(alocacao.getDisciplina());
                     alocacaoEditada.setPeriodo(alocacao.getPeriodo());

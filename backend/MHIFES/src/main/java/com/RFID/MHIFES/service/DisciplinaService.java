@@ -25,6 +25,7 @@ public class DisciplinaService extends GenericServiceImpl<Disciplina, Disciplina
         return repository.findById(id)
                 .map(disciplinaEditado -> {
                     disciplinaEditado.setNome(disciplina.getNome());
+                    disciplinaEditado.setSigla(disciplina.getSigla());
                     return repository.save(disciplinaEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }

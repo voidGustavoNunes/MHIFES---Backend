@@ -24,6 +24,7 @@ public class ProfessorService extends GenericServiceImpl<Professor, ProfessorRep
         return repository.findById(id)
                 .map(professorEditado -> {
                     professorEditado.setNome(professor.getNome());
+                    professorEditado.setSigla(professor.getSigla());
                     professorEditado.setMatricula(professor.getMatricula());
                     professorEditado.setCurso(professor.getCurso());
                     professorEditado.setEhCoordenador(professor.isEhCoordenador());
