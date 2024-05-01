@@ -47,7 +47,7 @@ public class Local {
                 + "\"id\": " + id
                 + ", \"nome\": \"" + nome + "\""
                 + ", \"capacidade\": " + capacidade
-                + ", \"localEquipamentos\": " + localEquipamentosString.toString()
+                + ", \"localEquipamentos\": " + localEquipamentosString
                 + "}";
     }
 

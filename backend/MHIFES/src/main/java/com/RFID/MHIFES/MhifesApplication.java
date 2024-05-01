@@ -20,6 +20,7 @@ import com.rfid.mhifes.model.Horario;
 import com.rfid.mhifes.model.Local;
 import com.rfid.mhifes.model.LocalEquipamento;
 import com.rfid.mhifes.model.Periodo;
+import com.rfid.mhifes.model.PeriodoDisciplina;
 import com.rfid.mhifes.model.Professor;
 import com.rfid.mhifes.repository.AlocacaoRepository;
 import com.rfid.mhifes.repository.AlunoRepository;
@@ -44,8 +45,8 @@ public class MhifesApplication {
 			AlunoRepository alunoRepository, CoordenadoriaRepository coordenadoriaRepository,
 			ProfessorRepository professorRepository, DisciplinaRepository disciplinaRepository,
 			PeriodoRepository periodoRepository, HorarioRepository horarioRepository,
-			LocalRepository localRepository, LocalEquipamentoRepository localEquipamentoRepository,
-			AlocacaoRepository alocacaoRepository) {
+			PeriodoRepository periodoDisciplinaRepository, LocalRepository localRepository, 
+			LocalEquipamentoRepository localEquipamentoRepository, AlocacaoRepository alocacaoRepository) {
 		return args -> {
 
 			equipamentoRepository.deleteAll();
@@ -56,7 +57,7 @@ public class MhifesApplication {
 			Equipamento equipamento2 = new Equipamento();
 			equipamento2.setNome("Notebook");
 			equipamentoRepository.save(equipamento2);
-			
+
 			/* */
 			alunoRepository.deleteAll();
 			Aluno aluno = new Aluno();
@@ -101,22 +102,6 @@ public class MhifesApplication {
 			professorRepository.save(professor2);
 
 			/* */
-			periodoRepository.deleteAll();
-			Periodo periodo = new Periodo();
-			periodo.setAno(Year.of(2021));
-			periodo.setSemestre(1L);
-			periodo.setDataInicio(LocalDate.parse("2021-01-01"));
-			periodo.setDataFim(LocalDate.parse("2021-06-30"));
-			periodoRepository.save(periodo);
-
-			Periodo periodo2 = new Periodo();
-			periodo2.setAno(Year.of(2021));
-			periodo2.setSemestre(2L);
-			periodo2.setDataInicio(LocalDate.parse("2021-07-01"));
-			periodo2.setDataFim(LocalDate.parse("2021-12-31"));
-			periodoRepository.save(periodo2);
-
-			/* */
 			disciplinaRepository.deleteAll();
 			Disciplina disciplina = new Disciplina();
 			disciplina.setNome("Banco de Dados");
@@ -128,6 +113,58 @@ public class MhifesApplication {
 			disciplina2.setSigla("ES");
 			disciplinaRepository.save(disciplina2);
 
+			/* */
+			periodoRepository.deleteAll();
+			Periodo periodo = new Periodo();
+			periodo.setAno(Year.of(2021));
+			periodo.setSemestre(1L);
+			periodo.setDataInicio(LocalDate.parse("2021-01-01"));
+			periodo.setDataFim(LocalDate.parse("2021-06-30"));
+
+
+			PeriodoDisciplina periodoDisciplina = new PeriodoDisciplina();
+			periodoDisciplina.setDisciplina(disciplina);
+			periodoDisciplina.setPeriodo(periodo);
+
+			List<Aluno> alunos = new ArrayList<>();
+			alunos.add(aluno);
+			alunos.add(aluno2);
+			periodoDisciplina.setAlunos(alunos);
+
+			PeriodoDisciplina periodoDisciplina2 = new PeriodoDisciplina();
+			periodoDisciplina2.setDisciplina(disciplina2);
+			periodoDisciplina2.setPeriodo(periodo);
+			periodoDisciplina2.setAlunos(alunos);
+
+			List<PeriodoDisciplina> periodoDisciplinas = new ArrayList<>();
+			periodoDisciplinas.add(periodoDisciplina);
+			periodoDisciplinas.add(periodoDisciplina2);
+			periodo.setPeriodoDisciplinas(periodoDisciplinas);
+			periodoRepository.save(periodo);
+
+			Periodo periodo2 = new Periodo();
+			periodo2.setAno(Year.of(2021));
+			periodo2.setSemestre(2L);
+			periodo2.setDataInicio(LocalDate.parse("2021-07-01"));
+			periodo2.setDataFim(LocalDate.parse("2021-12-31"));
+
+			PeriodoDisciplina periodoDisciplina3 = new PeriodoDisciplina();
+			periodoDisciplina3.setDisciplina(disciplina);
+			periodoDisciplina3.setPeriodo(periodo2);
+			periodoDisciplina3.setAlunos(alunos);
+
+			PeriodoDisciplina periodoDisciplina4 = new PeriodoDisciplina();
+			periodoDisciplina4.setDisciplina(disciplina2);
+			periodoDisciplina4.setPeriodo(periodo2);
+			periodoDisciplina4.setAlunos(alunos);
+
+			List<PeriodoDisciplina> periodoDisciplinas2 = new ArrayList<>();
+			periodoDisciplinas2.add(periodoDisciplina3);
+			periodoDisciplinas2.add(periodoDisciplina4);
+			periodo2.setPeriodoDisciplinas(periodoDisciplinas2);
+			periodoRepository.save(periodo2);
+
+			/* */
 			Horario horario = new Horario();
 			horario.setHoraInicio(LocalTime.parse("08:00"));
 			horario.setHoraFim(LocalTime.parse("10:00"));
@@ -171,8 +208,7 @@ public class MhifesApplication {
 			List<LocalDate> datas = new ArrayList<>();
 			datas.add(LocalDate.parse("2021-01-01"));
 			alocacao.setDataAulas(datas);
-			alocacao.setDisciplina(disciplina);
-			alocacao.setPeriodo(periodo);
+			alocacao.setPeriodoDisciplina(periodoDisciplina);
 			alocacao.setProfessor(professor);
 			alocacao.setLocal(local);
 			alocacao.setHorario(horario);
@@ -183,8 +219,7 @@ public class MhifesApplication {
 			List<LocalDate> datas2 = new ArrayList<>();
 			datas2.add(LocalDate.parse("2021-07-01"));
 			alocacao2.setDataAulas(datas2);
-			alocacao2.setDisciplina(disciplina2);
-			alocacao2.setPeriodo(periodo2);
+			alocacao2.setPeriodoDisciplina(periodoDisciplina2);
 			alocacao2.setProfessor(professor2);
 			alocacao2.setLocal(local2);
 			alocacao2.setHorario(horario);
@@ -195,8 +230,7 @@ public class MhifesApplication {
 			datas.add(LocalDate.parse("2021-01-02"));
 			datas.add(LocalDate.parse("2021-01-03"));
 			alocacao3.setDataAulas(datas);
-			alocacao3.setDisciplina(disciplina2);
-			alocacao3.setPeriodo(periodo);
+			alocacao3.setPeriodoDisciplina(periodoDisciplina4);
 			alocacao3.setProfessor(professor2);
 			alocacao3.setLocal(local2);
 			alocacao3.setHorario(horario);

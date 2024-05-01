@@ -48,12 +48,8 @@ public class Alocacao {
     private Local local;
 
     @ManyToOne
-    @JoinColumn(name = "disciplina")
-    private Disciplina disciplina;
-
-    @ManyToOne
-    @JoinColumn(name = "periodo")
-    private Periodo periodo;
+    @JoinColumn(name = "periodo_disciplina")
+    private PeriodoDisciplina periodoDisciplina;
 
     @ManyToOne
     @JoinColumn(name = "professor")
@@ -83,8 +79,7 @@ public class Alocacao {
                 + ", \"turma\": \"" + turma + "\""
                 + ", \"dataAula\":" + dataAulaString
                 + ", \"local\": " + local.toString()
-                + ", \"disciplina\": " + disciplina.toString()
-                + ", \"periodo\": " + periodo.toString()
+                + ", \"periodoDisciplina\": " + periodoDisciplina.toString()
                 + ", \"professor\": " + professor.toString()
                 + "}";
     }

@@ -29,7 +29,6 @@ public class LocalEquipamento {
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "equipamento_id", nullable = false)
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     private Equipamento equipamento;
 
     @Column(nullable = false)

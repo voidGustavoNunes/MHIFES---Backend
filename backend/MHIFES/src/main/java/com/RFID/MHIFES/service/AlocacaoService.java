@@ -54,8 +54,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
                     // alocacaoEditada.setDiaSemana(alocacao.getDiaSemana());
                     alocacaoEditada.setDataAulas(alocacao.getDataAulas());
                     alocacaoEditada.setLocal(alocacao.getLocal());
-                    alocacaoEditada.setDisciplina(alocacao.getDisciplina());
-                    alocacaoEditada.setPeriodo(alocacao.getPeriodo());
+                    alocacaoEditada.setPeriodoDisciplina(alocacao.getPeriodoDisciplina());
                     alocacaoEditada.setProfessor(alocacao.getProfessor());
                     return repository.save(alocacaoEditada);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));

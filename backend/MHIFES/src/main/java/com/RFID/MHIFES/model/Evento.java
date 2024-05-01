@@ -36,12 +36,6 @@ public class Evento {
     @JoinColumn(name = "horario")
     private Horario horario;
 
-    // @Column(nullable = false)
-    // private LocalTime horarioInicio;
-
-    // @Column(nullable = false)
-    // private LocalTime horarioFim;
-
     @ManyToOne
     @JoinColumn(name = "local")
     private Local local;
