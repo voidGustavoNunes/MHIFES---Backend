@@ -23,7 +23,7 @@ public class Pessoa {
     @Column(length = 150, nullable = false)
     private String nome;
 
-    @Column(length = 150, nullable = false)
+    @Column(length = 150, nullable = false, unique = true)
     private String matricula;
 
     @Column(length = 150)

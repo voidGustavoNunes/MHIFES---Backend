@@ -46,12 +46,8 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
     public Alocacao atualizar(@NotNull @Positive Long id, @Valid @NotNull Alocacao alocacao) {
         Alocacao alocacaoAlterada = repository.findById(id)
                 .map(alocacaoEditada -> {
-                    // alocacaoEditada.setNumAulas(alocacao.getNumAulas());
                     alocacaoEditada.setHorario(alocacao.getHorario());
-                    // alocacaoEditada.setHorarioInicio(alocacao.getHorarioInicio());
-                    // alocacaoEditada.setHorarioFim(alocacao.getHorarioFim());
                     alocacaoEditada.setTurma(alocacao.getTurma());
-                    // alocacaoEditada.setDiaSemana(alocacao.getDiaSemana());
                     alocacaoEditada.setDataAulas(alocacao.getDataAulas());
                     alocacaoEditada.setLocal(alocacao.getLocal());
                     alocacaoEditada.setPeriodoDisciplina(alocacao.getPeriodoDisciplina());
