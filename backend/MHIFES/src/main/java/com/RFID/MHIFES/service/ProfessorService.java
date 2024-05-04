@@ -1,5 +1,8 @@
 package com.rfid.mhifes.service;
 
+import java.util.Optional;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -23,12 +26,41 @@ public class ProfessorService extends GenericServiceImpl<Professor, ProfessorRep
     public Professor atualizar(@NotNull @Positive Long id, @Valid @NotNull Professor professor) {
         return repository.findById(id)
                 .map(professorEditado -> {
+                    validar(professor);
                     professorEditado.setNome(professor.getNome());
                     professorEditado.setSigla(professor.getSigla());
                     professorEditado.setMatricula(professor.getMatricula());
-                    // professorEditado.setCurso(professor.getCurso());
                     professorEditado.setEhCoordenador(professor.isEhCoordenador());
                     return repository.save(professorEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
+    }
+
+    @Override
+    public void validar(@Valid @NotNull Professor professor) {
+        if (professor.getMatricula() == null || professor.getMatricula().isEmpty()) {
+            throw new DataIntegrityViolationException("Matrícula não pode ser nula");
+        }
+        if (professor.getNome() == null || professor.getNome().isEmpty()) {
+            throw new DataIntegrityViolationException("Nome não pode ser nulo");
+        }
+        if (professor.getSigla() == null || professor.getSigla().isEmpty()) {
+            throw new DataIntegrityViolationException("Sigla não pode ser nula");
+        }
+        if (professor.isEhCoordenador()) {
+            throw new DataIntegrityViolationException("Professor não pode ser coordenador");
+        }
+
+        if (professor.getId() != null) {
+            Optional<Professor> optionalProfessor = repository.findById(professor.getId());
+            
+            if (optionalProfessor.isPresent() && !optionalProfessor.get().getMatricula().equals(professor.getMatricula()) && repository.existsByMatricula(professor.getMatricula())) {
+                throw new DataIntegrityViolationException("Matrícula já cadastrada");
+            }
+        } else {
+            if (repository.existsByMatricula(professor.getMatricula())) {
+                throw new DataIntegrityViolationException("Matrícula já cadastrada");
+            }
+        }
+        
     }
 }

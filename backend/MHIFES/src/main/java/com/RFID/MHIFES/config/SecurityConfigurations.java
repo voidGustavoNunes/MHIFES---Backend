@@ -44,6 +44,11 @@ public class SecurityConfigurations {
                 // .exceptionHandling((exceptionHandling) ->
                 // exceptionHandling
                 // .accessDeniedPage("/auth/access-denied"))
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        // Erro de autenticação (401). Ex: token inválido
+                        .authenticationEntryPoint((request, response, authException) -> response.sendError(401, "Não autenticado"))
+                        // Erro de autorização (403). Ex: usuário sem permissão
+                        .accessDeniedHandler((request, response, accessDeniedException) -> response.sendError(403, "Acesso negado")))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "api/auth/login").permitAll() // permitir que qualquer pessoa

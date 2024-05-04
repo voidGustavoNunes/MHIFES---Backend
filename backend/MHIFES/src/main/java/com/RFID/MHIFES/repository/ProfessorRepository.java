@@ -6,4 +6,6 @@ import com.rfid.mhifes.model.Professor;
 
 public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 
+    boolean existsByMatricula(String matricula);
+
 }

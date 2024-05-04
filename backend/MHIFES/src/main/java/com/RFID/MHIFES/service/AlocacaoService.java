@@ -31,6 +31,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
 
     @Override
     public Alocacao criar(@Valid @NotNull Alocacao alocacao) {
+        alocacao.setDiaSemana(alocacao.getDataAula().getDayOfWeek().getValue());
         Alocacao alocacaoCriada = repository.save(alocacao);
 
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -49,6 +50,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
                     alocacaoEditada.setHorario(alocacao.getHorario());
                     alocacaoEditada.setTurma(alocacao.getTurma());
                     alocacaoEditada.setDataAula(alocacao.getDataAula());
+                    alocacaoEditada.setDiaSemana(alocacao.getDataAula().getDayOfWeek().getValue());
                     alocacaoEditada.setLocal(alocacao.getLocal());
                     alocacaoEditada.setPeriodoDisciplina(alocacao.getPeriodoDisciplina());
                     alocacaoEditada.setProfessor(alocacao.getProfessor());

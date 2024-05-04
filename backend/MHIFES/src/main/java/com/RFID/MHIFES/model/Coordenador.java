@@ -17,7 +17,6 @@ public class Coordenador extends Pessoa {
                 + "\"id\": " + getId()
                 + ", \"nome\": \"" + getNome() + "\""
                 + ", \"matricula\": \"" + getMatricula() + "\""
-                // + ", \"curso\": \"" + getCurso() + "\""
                 + "}";
     }
 }

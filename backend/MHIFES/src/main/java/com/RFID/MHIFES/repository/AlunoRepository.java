@@ -6,4 +6,6 @@ import com.rfid.mhifes.model.Aluno;
 
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
+    boolean existsByMatricula(String matricula);
+
 }

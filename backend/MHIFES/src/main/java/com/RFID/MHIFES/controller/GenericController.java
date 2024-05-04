@@ -36,6 +36,7 @@ public abstract class GenericController<T> {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public T criar(@RequestBody @Valid @NotNull T entity) {
+        genericService.validar(entity);
         return genericService.criar(entity);
     }
 
