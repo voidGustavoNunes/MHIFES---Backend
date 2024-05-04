@@ -25,7 +25,7 @@ public class CoordenadorService extends GenericServiceImpl<Coordenador, Coordena
                 .map(coordenadorEditado -> {
                     coordenadorEditado.setNome(coordenador.getNome());
                     coordenadorEditado.setMatricula(coordenador.getMatricula());
-                    coordenadorEditado.setCurso(coordenador.getCurso());
+                    // coordenadorEditado.setCurso(coordenador.getCurso());
                     return repository.save(coordenadorEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }

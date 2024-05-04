@@ -24,6 +24,7 @@ public class CoordenadoriaService extends GenericServiceImpl<Coordenadoria, Coor
         return repository.findById(id)
                 .map(coordenadoriaEditada -> {
                     coordenadoriaEditada.setNome(coordenadoria.getNome());
+                    coordenadoriaEditada.setCoordenador(coordenadoria.getCoordenador());
                     return repository.save(coordenadoriaEditada);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }

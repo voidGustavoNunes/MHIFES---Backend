@@ -74,15 +74,6 @@ public class MhifesApplication {
 			alunoRepository.save(aluno2);
 
 			/* */
-			coordenadoriaRepository.deleteAll();
-			Coordenadoria coordenadoria = new Coordenadoria();
-			coordenadoria.setNome("Coordenadoria de Engenharia de Software");
-			coordenadoriaRepository.save(coordenadoria);
-
-			Coordenadoria coordenadoria2 = new Coordenadoria();
-			coordenadoria2.setNome("Coordenadoria de Engenharia de Computação");
-			coordenadoriaRepository.save(coordenadoria2);
-			/* */
 			professorRepository.deleteAll();
 			Professor professor = new Professor();
 			professor.setNome("José");
@@ -90,7 +81,6 @@ public class MhifesApplication {
 			professor.setMatricula("1234567");
 			// professor.setCurso("Engenharia de Software");
 			professor.setEhCoordenador(false);
-			professor.setCoordenadoria(coordenadoria);
 			professorRepository.save(professor);
 
 			Professor professor2 = new Professor();
@@ -99,9 +89,35 @@ public class MhifesApplication {
 			professor2.setMatricula("7654321");
 			// professor2.setCurso("Engenharia de Computação");
 			professor2.setEhCoordenador(false);
-			professor2.setCoordenadoria(coordenadoria2);
 			professorRepository.save(professor2);
+			
+			Professor professor3 = new Professor();
+			professor3.setNome("Mariana");
+			professor3.setSigla("Mar");
+			professor3.setMatricula("5654654");
+			// professor.setCurso("Engenharia de Software");
+			professor3.setEhCoordenador(true);
+			professorRepository.save(professor3);
 
+			Professor professor4 = new Professor();
+			professor4.setNome("Rodolfo");
+			professor4.setSigla("Ro");
+			professor4.setMatricula("987987");
+			// professor2.setCurso("Engenharia de Computação");
+			professor4.setEhCoordenador(true);
+			professorRepository.save(professor4);
+
+			/* */
+			coordenadoriaRepository.deleteAll();
+			Coordenadoria coordenadoria = new Coordenadoria();
+			coordenadoria.setNome("Coordenadoria de Engenharia de Software");
+			coordenadoria.setCoordenador(professor3);
+			coordenadoriaRepository.save(coordenadoria);
+
+			Coordenadoria coordenadoria2 = new Coordenadoria();
+			coordenadoria2.setNome("Coordenadoria de Engenharia de Computação");
+			coordenadoria2.setCoordenador(professor4);
+			coordenadoriaRepository.save(coordenadoria2);
 			/* */
 			disciplinaRepository.deleteAll();
 			Disciplina disciplina = new Disciplina();

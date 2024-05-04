@@ -22,9 +22,9 @@ public class Professor extends Pessoa {
     @Column(nullable = false)
     private boolean ehCoordenador;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Coordenadoria coordenadoria;
+    // @ManyToOne
+    // @JoinColumn(nullable = false)
+    // private Coordenadoria coordenadoria;
 
     @Override
     public String toString() {
@@ -33,9 +33,9 @@ public class Professor extends Pessoa {
                 + ", \"nome\": \"" + getNome() + "\""
                 + ", \"sigla\": \"" + sigla + "\""
                 + ", \"matricula\": \"" + getMatricula() + "\""
-                + ", \"curso\": \"" + getCurso() + "\""
+                // + ", \"curso\": \"" + getCurso() + "\""
                 + ", \"ehCoordenador\": \"" + ehCoordenador + "\""
-                + ", \"coordenadoria\": " + coordenadoria.toString()
+                // + ", \"coordenadoria\": " + coordenadoria.toString()
                 + "}";
     }
 
