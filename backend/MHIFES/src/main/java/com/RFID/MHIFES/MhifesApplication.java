@@ -30,6 +30,7 @@ import com.rfid.mhifes.repository.EquipamentoRepository;
 import com.rfid.mhifes.repository.HorarioRepository;
 import com.rfid.mhifes.repository.LocalEquipamentoRepository;
 import com.rfid.mhifes.repository.LocalRepository;
+import com.rfid.mhifes.repository.PeriodoDisciplinaRepository;
 import com.rfid.mhifes.repository.PeriodoRepository;
 import com.rfid.mhifes.repository.ProfessorRepository;
 
@@ -45,7 +46,7 @@ public class MhifesApplication {
 			AlunoRepository alunoRepository, CoordenadoriaRepository coordenadoriaRepository,
 			ProfessorRepository professorRepository, DisciplinaRepository disciplinaRepository,
 			PeriodoRepository periodoRepository, HorarioRepository horarioRepository,
-			PeriodoRepository periodoDisciplinaRepository, LocalRepository localRepository, 
+			PeriodoDisciplinaRepository periodoDisciplinaRepository, LocalRepository localRepository, 
 			LocalEquipamentoRepository localEquipamentoRepository, AlocacaoRepository alocacaoRepository) {
 		return args -> {
 
@@ -164,6 +165,11 @@ public class MhifesApplication {
 			periodo2.setPeriodoDisciplinas(periodoDisciplinas2);
 			periodoRepository.save(periodo2);
 
+			// periodoDisciplinaRepository.save(periodoDisciplina);
+			// periodoDisciplinaRepository.save(periodoDisciplina2);
+			// periodoDisciplinaRepository.save(periodoDisciplina3);
+			// periodoDisciplinaRepository.save(periodoDisciplina4);
+
 			/* */
 			Horario horario = new Horario();
 			horario.setHoraInicio(LocalTime.parse("08:00"));
@@ -207,7 +213,7 @@ public class MhifesApplication {
 			Alocacao alocacao = new Alocacao();
 			List<LocalDate> datas = new ArrayList<>();
 			datas.add(LocalDate.parse("2021-01-01"));
-			alocacao.setDataAulas(datas);
+			alocacao.setDataAula(datas.get(0));
 			alocacao.setPeriodoDisciplina(periodoDisciplina);
 			alocacao.setProfessor(professor);
 			alocacao.setLocal(local);
@@ -218,7 +224,7 @@ public class MhifesApplication {
 			Alocacao alocacao2 = new Alocacao();
 			List<LocalDate> datas2 = new ArrayList<>();
 			datas2.add(LocalDate.parse("2021-07-01"));
-			alocacao2.setDataAulas(datas2);
+			alocacao2.setDataAula(datas.get(0));
 			alocacao2.setPeriodoDisciplina(periodoDisciplina2);
 			alocacao2.setProfessor(professor2);
 			alocacao2.setLocal(local2);
@@ -229,7 +235,7 @@ public class MhifesApplication {
 			Alocacao alocacao3 = new Alocacao();
 			datas.add(LocalDate.parse("2021-01-02"));
 			datas.add(LocalDate.parse("2021-01-03"));
-			alocacao3.setDataAulas(datas);
+			alocacao3.setDataAula(datas.get(1));
 			alocacao3.setPeriodoDisciplina(periodoDisciplina4);
 			alocacao3.setProfessor(professor2);
 			alocacao3.setLocal(local2);

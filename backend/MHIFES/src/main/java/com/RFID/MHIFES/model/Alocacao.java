@@ -41,7 +41,8 @@ public class Alocacao {
     private String turma;
 
     @Column(nullable = false)
-    private List<LocalDate> dataAulas;
+    private LocalDate dataAula;
+    // private List<LocalDate> dataAulas;
 
     @ManyToOne
     @JoinColumn(name = "local")
@@ -63,21 +64,21 @@ public class Alocacao {
     @Override
     public String toString() {
 
-        StringBuilder dataAulaString = new StringBuilder("[");
-        for (LocalDate dataAula : dataAulas) {
-            dataAulaString.append(dataAula.toString()).append(", ");
-        }
-        if (!dataAulas.isEmpty()) {
-            dataAulaString.setLength(dataAulaString.length() - 2); // Remove a última vírgula e espaço
-        }
-        dataAulaString.append("]");
+        // StringBuilder dataAulaString = new StringBuilder("[");
+        // for (LocalDate dataAula : dataAulas) {
+        //     dataAulaString.append(dataAula.toString()).append(", ");
+        // }
+        // if (!dataAulas.isEmpty()) {
+        //     dataAulaString.setLength(dataAulaString.length() - 2); // Remove a última vírgula e espaço
+        // }
+        // dataAulaString.append("]");
 
         return "{"
                 + "\"id\": " + id
                 + ", \"horarioInicio\": \"" + horario.getHoraInicio() + "\""
                 + ", \"horarioFim\": \"" + horario.getHoraFim() + "\""
                 + ", \"turma\": \"" + turma + "\""
-                + ", \"dataAula\":" + dataAulaString
+                + ", \"dataAula\":" + dataAula
                 + ", \"local\": " + local.toString()
                 + ", \"periodoDisciplina\": " + periodoDisciplina.toString()
                 + ", \"professor\": " + professor.toString()

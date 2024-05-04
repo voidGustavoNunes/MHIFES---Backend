@@ -48,7 +48,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
                 .map(alocacaoEditada -> {
                     alocacaoEditada.setHorario(alocacao.getHorario());
                     alocacaoEditada.setTurma(alocacao.getTurma());
-                    alocacaoEditada.setDataAulas(alocacao.getDataAulas());
+                    alocacaoEditada.setDataAula(alocacao.getDataAula());
                     alocacaoEditada.setLocal(alocacao.getLocal());
                     alocacaoEditada.setPeriodoDisciplina(alocacao.getPeriodoDisciplina());
                     alocacaoEditada.setProfessor(alocacao.getProfessor());
