@@ -1,5 +1,6 @@
 package com.rfid.mhifes.model;
 
+import java.sql.Clob;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.SQLDelete;
@@ -7,9 +8,11 @@ import org.hibernate.annotations.SQLDelete;
 import com.rfid.mhifes.enums.Status;
 import com.rfid.mhifes.enums.converters.StatusConverter;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,7 +36,7 @@ public class Alocacao {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Horário é obrigatório")
+    @NotNull(message = "Horário é obrigatório")
     @ManyToOne
     @JoinColumn(name = "horario")
     private Horario horario;
@@ -42,24 +45,24 @@ public class Alocacao {
     @Column(length = 30, nullable = false)
     private String turma;
 
-    @NotBlank(message = "Data da aula é obrigatória")
+    @NotNull(message = "Data da aula é obrigatória")
     @Column(nullable = false)
     private LocalDate dataAula;
 
     @Column(nullable = false)
     private Integer diaSemana;
 
-    @NotBlank(message = "Local é obrigatório")
+    @NotNull(message = "Local é obrigatório")
     @ManyToOne
     @JoinColumn(name = "local")
     private Local local;
 
-    @NotBlank(message = "Período disciplina é obrigatório")
-    @ManyToOne
+    @NotNull(message = "Período disciplina é obrigatório")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "periodo_disciplina")
     private PeriodoDisciplina periodoDisciplina;
 
-    @NotBlank(message = "Professor é obrigatório")
+    @NotNull(message = "Professor é obrigatório")
     @ManyToOne
     @JoinColumn(name = "professor")
     private Professor professor;
@@ -68,20 +71,5 @@ public class Alocacao {
     @Column(name = "status", length = 10, nullable = false)
     @Convert(converter = StatusConverter.class)
     private Status status = Status.ATIVO;
-
-    @Override
-    public String toString() {
-
-        return "{"
-                + "\"id\": " + id
-                + ", \"horarioInicio\": \"" + horario.getHoraInicio() + "\""
-                + ", \"horarioFim\": \"" + horario.getHoraFim() + "\""
-                + ", \"turma\": \"" + turma + "\""
-                + ", \"dataAula\": \"" + dataAula + "\""
-                + ", \"local\": " + local.toString()
-                + ", \"periodoDisciplina\": " + periodoDisciplina.toString()
-                + ", \"professor\": " + professor.toString()
-                + "}";
-    }
 
 }

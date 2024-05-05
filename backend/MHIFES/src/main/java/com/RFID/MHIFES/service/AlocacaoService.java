@@ -10,7 +10,9 @@ import org.springframework.validation.annotation.Validated;
 import com.rfid.mhifes.enums.Operacao;
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.model.Alocacao;
+import com.rfid.mhifes.model.LocalEquipamento;
 import com.rfid.mhifes.model.Log;
+import com.rfid.mhifes.model.PeriodoDisciplina;
 import com.rfid.mhifes.model.Usuario;
 import com.rfid.mhifes.repository.AlocacaoRepository;
 

@@ -22,7 +22,7 @@ public class CoordenadoriaService extends GenericServiceImpl<Coordenadoria, Coor
 
     @Override
     public Coordenadoria criar(@Valid @NotNull Coordenadoria coordenadoria) {
-        if (coordenadoria.getCoordenador().isEhCoordenador()) {
+        if (!coordenadoria.getCoordenador().isEhCoordenador()) {
             throw new DataIntegrityViolationException("Coordenador não é coordenador");
         }
 

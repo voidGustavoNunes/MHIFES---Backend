@@ -30,7 +30,6 @@ public class Professor extends Pessoa {
 
     @ManyToOne
     @JoinColumn(nullable = true)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Coordenadoria coordenadoria;
 
     @Override
@@ -41,6 +40,7 @@ public class Professor extends Pessoa {
                 + ", \"sigla\": \"" + sigla + "\""
                 + ", \"matricula\": \"" + getMatricula() + "\""
                 + ", \"ehCoordenador\": \"" + ehCoordenador + "\""
+                + ", \"coordenadoria\": " + (coordenadoria != null ? coordenadoria.toString() : "")
                 + "}";
     }
 

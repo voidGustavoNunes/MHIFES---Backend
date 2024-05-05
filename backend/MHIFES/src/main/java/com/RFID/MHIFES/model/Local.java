@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -27,11 +28,11 @@ public class Local {
     @Column(length = 150, nullable = false)
     private String nome;
 
-    @NotBlank(message = "Capacidade é obrigatória")
+    @NotNull(message = "Capacidade é obrigatória")
     @Column(nullable = false)
     private Integer capacidade;
 
-    @NotBlank(message = "Equipamentos são obrigatórios")
+    @NotNull(message = "Equipamentos são obrigatórios")
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LocalEquipamento> localEquipamentos = new ArrayList<>();
 

@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
@@ -29,12 +30,12 @@ public class LocalEquipamento {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Local local;
 
-    @NotBlank(message = "Equipamento é obrigatório")
+    @NotNull(message = "Equipamento é obrigatório")
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "equipamento_id", nullable = false)
     private Equipamento equipamento;
 
-    @NotBlank(message = "Quantidade é obrigatória")
+    @NotNull(message = "Quantidade é obrigatória")
     @Positive(message = "Quantidade deve ser maior que zero")
     @Column(nullable = false)
     private Integer quantidade;

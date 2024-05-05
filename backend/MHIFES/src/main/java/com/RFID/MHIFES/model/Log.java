@@ -32,7 +32,7 @@ public class Log {
     private LocalDateTime data;
 
     @NotNull(message = "Descrição é obrigatória")
-    @Column(length = 5000)
+    @Column(length = 999999)
     private String descricao;
 
     @NotNull

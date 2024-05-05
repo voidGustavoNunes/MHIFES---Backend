@@ -15,7 +15,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -32,12 +32,12 @@ public class PeriodoDisciplina {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Periodo periodo;
 
-    @NotBlank(message = "Disciplina é obrigatória")
+    @NotNull(message = "Disciplina é obrigatória")
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "disciplina_id", nullable = false)
     private Disciplina disciplina;
 
-    @NotBlank(message = "Alunos são obrigatórios")
+    @NotNull(message = "Alunos são obrigatórios")
     @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
         name = "aluno_periodo_disciplina",
@@ -60,7 +60,6 @@ public class PeriodoDisciplina {
 
         return "{"
                 + "\"id\": " + id
-                + ", \"periodo\": " + periodo.toString()
                 + ", \"disciplina\": \"" + disciplina.toString() + "\""
                 + ", \"alunos\": " + alunosString
                 + "}";
