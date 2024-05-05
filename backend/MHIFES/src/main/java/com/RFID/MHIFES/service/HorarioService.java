@@ -1,8 +1,10 @@
 package com.rfid.mhifes.service;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.model.Equipamento;
 import com.rfid.mhifes.model.Horario;
 import com.rfid.mhifes.repository.HorarioRepository;
 
@@ -12,6 +14,7 @@ import jakarta.validation.constraints.Positive;
 
 @Service
 public class HorarioService extends GenericServiceImpl<Horario, HorarioRepository> {
+    
     public HorarioService(HorarioRepository horarioRepository) {
         super(horarioRepository);
     }
@@ -20,10 +23,30 @@ public class HorarioService extends GenericServiceImpl<Horario, HorarioRepositor
     public Horario atualizar(@NotNull @Positive Long id, @Valid @NotNull Horario horario) {
         return repository.findById(id)
                 .map(horarioEditado -> {
-                    // horarioEditado.setDiaSemana(horario.getDiaSemana());
                     horarioEditado.setHoraFim(horario.getHoraFim());
                     horarioEditado.setHoraInicio(horario.getHoraInicio());
                     return repository.save(horarioEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
+    }
+
+    @Override
+    public void validar(@Valid @NotNull Horario horario) {
+
+        if (horario.getHoraInicio() == null) {
+            throw new DataIntegrityViolationException("Hora de início não pode ser nula");
+        }
+
+        if (horario.getHoraFim() == null) {
+            throw new DataIntegrityViolationException("Hora de fim não pode ser nula");
+        }
+
+        if (horario.getHoraInicio().isAfter(horario.getHoraFim())) {
+            throw new DataIntegrityViolationException("Hora de início não pode ser maior que a hora de fim");
+        }
+
+        if(repository.existsByHoraInicioAndHoraFim(horario.getHoraInicio(), horario.getHoraFim())) {
+            throw new DataIntegrityViolationException("Horário já cadastrado");
+        }
+
     }
 }

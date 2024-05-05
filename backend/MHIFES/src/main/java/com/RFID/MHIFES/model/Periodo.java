@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
 
@@ -29,6 +30,7 @@ public class Periodo {
     private Year ano;
 
     @Min(1)
+    @Max(2)
     @Column(nullable = false)
     private Long semestre;
 
