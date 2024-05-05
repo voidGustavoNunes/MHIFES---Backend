@@ -31,6 +31,7 @@ public class ProfessorService extends GenericServiceImpl<Professor, ProfessorRep
                     professorEditado.setSigla(professor.getSigla());
                     professorEditado.setMatricula(professor.getMatricula());
                     professorEditado.setEhCoordenador(professor.isEhCoordenador());
+                    professorEditado.setCoordenadoria(professor.getCoordenadoria());
                     return repository.save(professorEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
