@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,8 +28,10 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull(message = "Data é obrigatória")
     private LocalDateTime data;
 
+    @NotNull(message = "Descrição é obrigatória")
     @Column(length = 5000)
     private String descricao;
 
@@ -37,8 +40,11 @@ public class Log {
     @Convert(converter = OperacaoConverter.class)
     private Operacao operacao = Operacao.INCLUSAO;
 
+    @NotNull(message = "ID do registro é obrigatório")
+    @Positive(message = "ID do registro deve ser positivo")
     private Long idRegistro;
 
+    @NotNull(message = "Usuário é obrigatório")
     @ManyToOne
     private Usuario usuario;
 

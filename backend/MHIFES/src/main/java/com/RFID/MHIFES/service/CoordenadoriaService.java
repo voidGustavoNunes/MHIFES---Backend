@@ -21,22 +21,26 @@ public class CoordenadoriaService extends GenericServiceImpl<Coordenadoria, Coor
     }
 
     @Override
+    public Coordenadoria criar(@Valid @NotNull Coordenadoria coordenadoria) {
+        if (coordenadoria.getCoordenador().isEhCoordenador()) {
+            throw new DataIntegrityViolationException("Coordenador não é coordenador");
+        }
+
+        return repository.save(coordenadoria);
+    }
+
+    @Override
     public Coordenadoria atualizar(@NotNull @Positive Long id, @Valid @NotNull Coordenadoria coordenadoria) {
         return repository.findById(id)
                 .map(coordenadoriaEditada -> {
-                    validar(coordenadoria);
+                    // Verifica se o coordenador é coordenador
+                    if (!coordenadoria.getCoordenador().isEhCoordenador()) {
+                        throw new DataIntegrityViolationException("Coordenador não é coordenador");
+                    }
                     coordenadoriaEditada.setNome(coordenadoria.getNome());
                     coordenadoriaEditada.setCoordenador(coordenadoria.getCoordenador());
                     return repository.save(coordenadoriaEditada);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
-    @Override
-    public void validar(@Valid @NotNull Coordenadoria coordenadoria) {
-
-        if (coordenadoria.getNome() == null || coordenadoria.getNome().isEmpty()) {
-            throw new DataIntegrityViolationException("Nome não pode ser nulo");
-        }
-        
-    }
 }

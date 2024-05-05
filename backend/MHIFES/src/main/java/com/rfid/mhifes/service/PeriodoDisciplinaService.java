@@ -1,15 +1,10 @@
 package com.rfid.mhifes.service;
 
-import java.time.LocalDate;
-
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.model.Periodo;
 import com.rfid.mhifes.model.PeriodoDisciplina;
-import com.rfid.mhifes.repository.LocalEquipamentoRepository;
 import com.rfid.mhifes.repository.PeriodoDisciplinaRepository;
 
 import jakarta.validation.Valid;
@@ -20,15 +15,8 @@ import jakarta.validation.constraints.Positive;
 @Validated
 public class PeriodoDisciplinaService extends GenericServiceImpl<PeriodoDisciplina, PeriodoDisciplinaRepository> {
 
-    DisciplinaService disciplinaService;
-
-    AlunoService alunoService;
-
-    public PeriodoDisciplinaService(PeriodoDisciplinaRepository periodoDisciplinaRepository,
-            DisciplinaService disciplinaService, AlunoService alunoService) {
+    public PeriodoDisciplinaService(PeriodoDisciplinaRepository periodoDisciplinaRepository) {
         super(periodoDisciplinaRepository);
-        this.disciplinaService = disciplinaService;
-        this.alunoService = alunoService;
     }
 
     @Override
@@ -41,19 +29,4 @@ public class PeriodoDisciplinaService extends GenericServiceImpl<PeriodoDiscipli
                     return repository.save(periodoDisciplina);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
-
-    @Override
-    public void validar(@Valid @NotNull PeriodoDisciplina periodoDisciplina) {
-
-        disciplinaService.buscarPorId(periodoDisciplina.getDisciplina().getId());
-
-        disciplinaService.validar(periodoDisciplina.getDisciplina());
-
-        periodoDisciplina.getAlunos().forEach(aluno -> {
-            alunoService.buscarPorId(aluno.getId());
-            alunoService.validar(aluno);
-        });
-
-    }
-
 }

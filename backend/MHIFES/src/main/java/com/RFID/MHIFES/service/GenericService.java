@@ -17,6 +17,4 @@ public interface GenericService<T> {
     T atualizar(@NotNull @Positive Long id, @Valid @NotNull T entity);
 
     void excluir(@NotNull @Positive Long id);
-
-    void validar(@Valid @NotNull T entity);
 }

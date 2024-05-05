@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -22,12 +23,15 @@ public class Local {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Nome é obrigatório")
     @Column(length = 150, nullable = false)
     private String nome;
 
+    @NotBlank(message = "Capacidade é obrigatória")
     @Column(nullable = false)
     private Integer capacidade;
 
+    @NotBlank(message = "Equipamentos são obrigatórios")
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LocalEquipamento> localEquipamentos = new ArrayList<>();
 

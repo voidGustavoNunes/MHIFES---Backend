@@ -1,6 +1,5 @@
 package com.rfid.mhifes.service;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -25,23 +24,9 @@ public class DisciplinaService extends GenericServiceImpl<Disciplina, Disciplina
     public Disciplina atualizar(@NotNull @Positive Long id, @Valid @NotNull Disciplina disciplina) {
         return repository.findById(id)
                 .map(disciplinaEditado -> {
-                    validar(disciplina);
                     disciplinaEditado.setNome(disciplina.getNome());
                     disciplinaEditado.setSigla(disciplina.getSigla());
                     return repository.save(disciplinaEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
-    }
-
-    @Override
-    public void validar(@Valid @NotNull Disciplina disciplina) {
-
-        if (disciplina.getNome() == null || disciplina.getNome().isEmpty()) {
-            throw new DataIntegrityViolationException("Nome não pode ser nulo");
-        }
-
-        if(disciplina.getSigla() == null || disciplina.getSigla().isEmpty()) {
-            throw new DataIntegrityViolationException("Sigla não pode ser nula");
-        }
-
     }
 }

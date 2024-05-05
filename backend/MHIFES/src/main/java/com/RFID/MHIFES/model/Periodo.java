@@ -15,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -26,20 +27,25 @@ public class Periodo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Ano é obrigatório")
     @Column(nullable = false)
     private Year ano;
 
-    @Min(1)
-    @Max(2)
+    @NotBlank(message = "Semestre é obrigatório")
+    @Min(value = 1, message = "O semestre deve ser 1 ou 2")
+    @Max(value = 2, message = "O semestre deve ser 1 ou 2")
     @Column(nullable = false)
     private Long semestre;
 
+    @NotBlank(message = "Data de início é obrigatória")
     @Column(nullable = false)
     private LocalDate dataInicio;
 
+    @NotBlank(message = "Data de fim é obrigatória")
     @Column(nullable = false)
     private LocalDate dataFim;
 
+    @NotBlank(message = "Disciplinas são obrigatórias")
     @Column(nullable = false)
     @OneToMany(mappedBy = "periodo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PeriodoDisciplina> periodoDisciplinas = new ArrayList<>();
@@ -52,7 +58,8 @@ public class Periodo {
             periodoDisciplinasString.append(periodoDisciplina.toString()).append(", ");
         }
         if (!periodoDisciplinas.isEmpty()) {
-            periodoDisciplinasString.setLength(periodoDisciplinasString.length() - 2); // Remove a última vírgula e espaço
+            periodoDisciplinasString.setLength(periodoDisciplinasString.length() - 2); // Remove a última vírgula e
+                                                                                       // espaço
         }
         periodoDisciplinasString.append("]");
 

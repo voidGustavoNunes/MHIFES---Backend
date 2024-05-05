@@ -1,6 +1,5 @@
 package com.rfid.mhifes.service;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -25,18 +24,8 @@ public class EquipamentoService extends GenericServiceImpl<Equipamento, Equipame
     public Equipamento atualizar(@NotNull @Positive Long id, @Valid @NotNull Equipamento equipamento) {
         return repository.findById(id)
                 .map(equipamentoEditado -> {
-                    validar(equipamento);
                     equipamentoEditado.setNome(equipamento.getNome());
                     return repository.save(equipamentoEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
-    }
-
-    @Override
-    public void validar(@Valid @NotNull Equipamento equipamento) {
-
-        if (equipamento.getNome() == null || equipamento.getNome().isEmpty()) {
-            throw new DataIntegrityViolationException("Nome não pode ser nulo");
-        }
-        
     }
 }

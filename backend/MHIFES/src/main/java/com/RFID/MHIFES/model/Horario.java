@@ -1,6 +1,7 @@
 package com.rfid.mhifes.model;
 
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -22,9 +23,11 @@ public class Horario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Dia da semana é obrigatório")
     @Column(nullable = false)
     private LocalTime horaInicio;
 
+    @NotBlank(message = "Dia da semana é obrigatório")
     @Column(nullable = false)
     private LocalTime horaFim;
 }

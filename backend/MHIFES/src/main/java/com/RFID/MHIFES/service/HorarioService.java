@@ -4,7 +4,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.model.Equipamento;
 import com.rfid.mhifes.model.Horario;
 import com.rfid.mhifes.repository.HorarioRepository;
 
@@ -29,7 +28,6 @@ public class HorarioService extends GenericServiceImpl<Horario, HorarioRepositor
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
-    @Override
     public void validar(@Valid @NotNull Horario horario) {
 
         if (horario.getHoraInicio() == null) {

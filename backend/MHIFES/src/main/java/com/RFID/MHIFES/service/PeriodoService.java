@@ -1,18 +1,17 @@
 package com.rfid.mhifes.service;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.model.Local;
-import com.rfid.mhifes.model.LocalEquipamento;
 import com.rfid.mhifes.model.Periodo;
 import com.rfid.mhifes.model.PeriodoDisciplina;
 import com.rfid.mhifes.repository.PeriodoRepository;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -41,59 +40,41 @@ public class PeriodoService extends GenericServiceImpl<Periodo, PeriodoRepositor
         return periodoNovo;
     }
 
+    @Transactional
     @Override
     public Periodo atualizar(@NotNull @Positive Long id, @Valid @NotNull Periodo periodo) {
-        return repository.findById(id)
-                .map(periodoEditado -> {
-                    validar(periodo);
-                    periodoEditado.setAno(periodo.getAno());
-                    periodoEditado.setSemestre(periodo.getSemestre());
-                    periodoEditado.setDataInicio(periodo.getDataInicio());
-                    periodoEditado.setDataFim(periodo.getDataFim());
-                    periodoEditado.setPeriodoDisciplinas(periodo.getPeriodoDisciplinas());
-                    return repository.save(periodoEditado);
-                }).orElseThrow(() -> new RegistroNotFoundException(id));
-    }
+        Periodo periodoEditado = repository.findById(id)
+                .orElseThrow(() -> new RegistroNotFoundException(id));
 
-    @Override
-    public void validar(@Valid @NotNull Periodo periodo) {
+        periodoEditado.setAno(periodo.getAno());
+        periodoEditado.setSemestre(periodo.getSemestre());
+        periodoEditado.setDataInicio(periodo.getDataInicio());
+        periodoEditado.setDataFim(periodo.getDataFim());
 
-        if (periodo.getAno() == null) {
-            throw new DataIntegrityViolationException("Ano não pode ser nulo");
+        List<PeriodoDisciplina> periodoDisciplinasParaExcluir = new ArrayList<>(periodoEditado.getPeriodoDisciplinas());
+
+        for(PeriodoDisciplina periodoDisciplinaNovo : periodoEditado.getPeriodoDisciplinas()) {
+            PeriodoDisciplina existente = periodoEditado.getPeriodoDisciplinas().stream()
+                    .filter(periodoDisciplina -> periodoDisciplina.getId().equals(periodoDisciplinaNovo.getId()))
+                    .findFirst()
+                    .orElse(null);
+            
+                    if(existente != null) {
+                        existente.setDisciplina(periodoDisciplinaNovo.getDisciplina());
+                        existente.setAlunos(periodoDisciplinaNovo.getAlunos());
+                        periodoDisciplinasParaExcluir.remove(existente);
+                    } else {
+                        periodoDisciplinaNovo.setPeriodo(periodoEditado);
+                        periodoEditado.getPeriodoDisciplinas().add(periodoDisciplinaNovo);
+                    }
         }
-        if (periodo.getAno().getValue() < 1900) {
-            throw new DataIntegrityViolationException("Ano deve ser maior que 1900");
+
+        for(PeriodoDisciplina periodoDisciplinaParaExcluir : periodoDisciplinasParaExcluir) {
+            periodoEditado.getPeriodoDisciplinas().remove(periodoDisciplinaParaExcluir);
+            periodoDisciplinaService.excluir(periodoDisciplinaParaExcluir.getId());
         }
-        if (periodo.getSemestre() == null) {
-            throw new DataIntegrityViolationException("Semestre não pode ser nulo");
-        }
-        if (periodo.getSemestre() < 1 || periodo.getSemestre() > 2) {
-            throw new DataIntegrityViolationException("Semestre deve ser 1 ou 2");
-        }
-        if (periodo.getDataInicio() == null) {
-            throw new DataIntegrityViolationException("Data de início não pode ser nula");
-        }
-        if (periodo.getDataFim() == null) {
-            throw new DataIntegrityViolationException("Data de fim não pode ser nula");
-        }
-        if (periodo.getDataFim().isBefore(periodo.getDataInicio())) {
-            throw new DataIntegrityViolationException("Data de fim deve ser maior que a data de início");
-        }
-        if (periodo.getDataFim().isEqual(periodo.getDataInicio())) {
-            throw new DataIntegrityViolationException("Data de fim não pode ser igual a data de início");
-        }
-        if (periodo.getDataInicio().isBefore(LocalDate.parse("1900-01-01"))) {
-            throw new DataIntegrityViolationException("Data de início deve ser maior que 01/01/1900");
-        }
-        if (periodo.getDataFim().isBefore(LocalDate.parse("1900-01-01"))) {
-            throw new DataIntegrityViolationException("Data de fim deve ser maior que 01/01/1900");
-        }
-        if (periodo.getPeriodoDisciplinas() == null || periodo.getPeriodoDisciplinas().isEmpty()) {
-            throw new DataIntegrityViolationException("Deve haver pelo menos uma disciplina no período");
-        }
-        periodo.getPeriodoDisciplinas().forEach(periodoDisciplina -> {
-            periodoDisciplinaService.validar(periodoDisciplina);
-        });
+
+        return repository.save(periodoEditado);
     }
 
 }
