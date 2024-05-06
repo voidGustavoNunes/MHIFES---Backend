@@ -60,6 +60,7 @@ public class PeriodoDisciplina {
 
         return "{"
                 + "\"id\": " + id
+                + ", \"periodo\": " + periodo.toString()
                 + ", \"disciplina\": " + disciplina.toString()
                 + ", \"alunos\": " + alunosString
                 + "}";

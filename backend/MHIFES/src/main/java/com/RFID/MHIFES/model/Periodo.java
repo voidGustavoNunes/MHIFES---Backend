@@ -52,24 +52,12 @@ public class Periodo {
 
     @Override
     public String toString() {
-
-        StringBuilder periodoDisciplinasString = new StringBuilder("[");
-        for (PeriodoDisciplina periodoDisciplina : periodoDisciplinas) {
-            periodoDisciplinasString.append(periodoDisciplina.toString()).append(", ");
-        }
-        if (!periodoDisciplinas.isEmpty()) {
-            periodoDisciplinasString.setLength(periodoDisciplinasString.length() - 2); // Remove a última vírgula e
-                                                                                       // espaço
-        }
-        periodoDisciplinasString.append("]");
-
         return "{"
                 + "\"id\": " + id
                 + ", \"ano\": \"" + ano + "\""
                 + ", \"semestre\": \"" + semestre + "\""
                 + ", \"dataInicio\": \"" + dataInicio + "\""
                 + ", \"dataFim\": \"" + dataFim + "\""
-                + ", \"periodoDisciplinas\": " + periodoDisciplinasString
                 + "}";
     }
 

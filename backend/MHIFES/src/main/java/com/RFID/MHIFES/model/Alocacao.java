@@ -77,8 +77,7 @@ public class Alocacao {
 
         return "{"
                 + "\"id\": " + id
-                + ", \"horarioInicio\": \"" + horario.getHoraInicio() + "\""
-                + ", \"horarioFim\": \"" + horario.getHoraFim() + "\""
+                + ", \"horario\": " + horario.toString()
                 + ", \"turma\": \"" + turma + "\""
                 + ", \"dataAula\": \"" + dataAula + "\""
                 + ", \"local\": " + local.toString()

@@ -19,7 +19,7 @@ import jakarta.persistence.Id;
 @Table(name = "horario")
 @EqualsAndHashCode(callSuper = false)
 public class Horario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -31,4 +31,14 @@ public class Horario {
     @NotNull(message = "Dia da semana é obrigatório")
     @Column(nullable = false)
     private LocalTime horaFim;
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": " + id
+                + ", \"horaInicio\": \"" + horaInicio + "\""
+                + ", \"horaFim\": \"" + horaFim + "\""
+                + "}";
+    }
+
 }
