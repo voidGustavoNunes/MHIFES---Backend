@@ -72,4 +72,18 @@ public class Alocacao {
     @Convert(converter = StatusConverter.class)
     private Status status = Status.ATIVO;
 
+    @Override
+    public String toString() {
+
+        return "{"
+                + "\"id\": " + id
+                + ", \"horarioInicio\": \"" + horario.getHoraInicio() + "\""
+                + ", \"horarioFim\": \"" + horario.getHoraFim() + "\""
+                + ", \"turma\": \"" + turma + "\""
+                + ", \"dataAula\": \"" + dataAula + "\""
+                + ", \"local\": " + local.toString()
+                + ", \"periodoDisciplina\": " + periodoDisciplina.toString()
+                + ", \"professor\": " + professor.toString()
+                + "}";
+    }
 }

@@ -40,7 +40,7 @@ public class Professor extends Pessoa {
                 + ", \"sigla\": \"" + sigla + "\""
                 + ", \"matricula\": \"" + getMatricula() + "\""
                 + ", \"ehCoordenador\": \"" + ehCoordenador + "\""
-                + ", \"coordenadoria\": " + (coordenadoria != null ? coordenadoria.toString() : "")
+                + ", \"coordenadoria\": " + (coordenadoria != null ? coordenadoria.toString() : null)
                 + "}";
     }
 
