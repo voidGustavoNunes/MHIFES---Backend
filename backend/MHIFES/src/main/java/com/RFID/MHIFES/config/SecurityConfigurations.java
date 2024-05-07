@@ -53,7 +53,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "api/auth/login").permitAll() // permitir que qualquer pessoa
                                                                                         // consiga fazer login
-                        .requestMatchers(HttpMethod.POST, "api/auth/register").permitAll() // permitir que qualquer
+                        // .requestMatchers(HttpMethod.POST, "api/auth/register").permitAll() // permitir que qualquer
                                                                                            // pessoa consiga se
                                                                                            // cadastrar
 

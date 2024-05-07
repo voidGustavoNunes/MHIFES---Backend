@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -24,7 +25,7 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Data do evento é obrigatória")
+    @NotNull(message = "Data do evento é obrigatória")
     @Column(nullable = false)
     private LocalDate dataEvento;
 
@@ -36,12 +37,12 @@ public class Evento {
     @Column(length = 5000, nullable = false)
     private String descricao;
 
-    @NotBlank(message = "Horário é obrigatório")
+    @NotNull(message = "Horário é obrigatório")
     @ManyToOne
     @JoinColumn(name = "horario")
     private Horario horario;
 
-    @NotBlank(message = "Local é obrigatório")
+    @NotNull(message = "Local é obrigatório")
     @ManyToOne
     @JoinColumn(name = "local")
     private Local local;

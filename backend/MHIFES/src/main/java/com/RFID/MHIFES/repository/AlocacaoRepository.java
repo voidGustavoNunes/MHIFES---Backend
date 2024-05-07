@@ -10,7 +10,7 @@ import com.rfid.mhifes.model.Alocacao;
 
 public interface AlocacaoRepository extends JpaRepository<Alocacao, Long> {
 
-    @Query("SELECT a FROM Alocacao a WHERE a.status = 'Ativo'")
+    @Query("SELECT a FROM Alocacao a")
     List<Alocacao> findAll();
 
     @Query("SELECT a FROM Alocacao a WHERE a.status = 'Inativo'")

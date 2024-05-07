@@ -58,7 +58,7 @@ public class Alocacao {
     private Local local;
 
     @NotNull(message = "Período disciplina é obrigatório")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "periodo_disciplina")
     private PeriodoDisciplina periodoDisciplina;
 

@@ -33,12 +33,12 @@ public class PeriodoDisciplina {
     private Periodo periodo;
 
     @NotNull(message = "Disciplina é obrigatória")
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "disciplina_id", nullable = false)
     private Disciplina disciplina;
 
     @NotNull(message = "Alunos são obrigatórios")
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany
     @JoinTable(
         name = "aluno_periodo_disciplina",
         joinColumns = @JoinColumn(name = "periodo_disciplina_id"),
