@@ -53,9 +53,9 @@ public class PeriodoService extends GenericServiceImpl<Periodo, PeriodoRepositor
 
         List<PeriodoDisciplina> periodoDisciplinasParaExcluir = new ArrayList<>(periodoEditado.getPeriodoDisciplinas());
 
-        for(PeriodoDisciplina periodoDisciplinaNovo : periodoEditado.getPeriodoDisciplinas()) {
+        for(PeriodoDisciplina periodoDisciplinaNovo : periodo.getPeriodoDisciplinas()) {
             PeriodoDisciplina existente = periodoEditado.getPeriodoDisciplinas().stream()
-                    .filter(periodoDisciplina -> periodoDisciplina.getId().equals(periodoDisciplinaNovo.getId()))
+                    .filter(e -> e.getId().equals(periodoDisciplinaNovo.getId()))
                     .findFirst()
                     .orElse(null);
             
