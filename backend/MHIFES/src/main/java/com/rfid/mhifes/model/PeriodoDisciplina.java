@@ -3,9 +3,8 @@ package com.rfid.mhifes.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,7 +28,7 @@ public class PeriodoDisciplina {
 
     @ManyToOne
     @JoinColumn(name = "periodo_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonBackReference
     private Periodo periodo;
 
     @NotNull(message = "Disciplina é obrigatória")
