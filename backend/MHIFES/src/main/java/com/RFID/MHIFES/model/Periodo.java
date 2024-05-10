@@ -5,7 +5,9 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -50,7 +52,6 @@ public class Periodo {
     @NotNull(message = "Disciplinas são obrigatórias")
     @Column(nullable = false)
     @OneToMany(mappedBy = "periodo", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<PeriodoDisciplina> periodoDisciplinas = new ArrayList<>();
 
     @Override
