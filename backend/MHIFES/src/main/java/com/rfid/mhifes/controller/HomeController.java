@@ -25,7 +25,12 @@ public class HomeController {
     }
 
     @GetMapping("/relatorio/disciplinas_turma/{ano}/{semestre}")
-    public String gerarRelatorioDisciplinaTurma(@PathVariable Year ano, @PathVariable Long semestre) throws FileNotFoundException, JRException {
+    public String gerarRelatorioDisciplinaTurma(@PathVariable Integer ano, @PathVariable Long semestre) throws FileNotFoundException, JRException {
         return reportService.gerarRelatorioDisciplinaTurma(ano, semestre);
+    }
+
+    @GetMapping("/relatorio/horarios_turma/{ano}/{semestre}")
+    public String gerarRelatorioHorarioTurma(@PathVariable Integer ano, @PathVariable Long semestre) throws FileNotFoundException, JRException {
+        return reportService.gerarRelatorioHorarioPorTurma(ano, semestre);
     }
 }

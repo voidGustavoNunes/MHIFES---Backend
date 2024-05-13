@@ -46,16 +46,21 @@ public class SecurityConfigurations {
                 // .accessDeniedPage("/auth/access-denied"))
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         // Erro de autenticação (401). Ex: token inválido
-                        .authenticationEntryPoint((request, response, authException) -> response.sendError(401, "Não autenticado"))
+                        .authenticationEntryPoint(
+                                (request, response, authException) -> response.sendError(401, "Não autenticado"))
                         // Erro de autorização (403). Ex: usuário sem permissão
-                        .accessDeniedHandler((request, response, accessDeniedException) -> response.sendError(403, "Acesso negado")))
+                        .accessDeniedHandler(
+                                (request, response, accessDeniedException) -> response.sendError(403, "Acesso negado")))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "api/auth/login").permitAll() // permitir que qualquer pessoa
                                                                                         // consiga fazer login
-                        // .requestMatchers(HttpMethod.POST, "api/auth/register").permitAll() // permitir que qualquer
-                                                                                           // pessoa consiga se
-                                                                                           // cadastrar
+                        .requestMatchers(HttpMethod.GET, "/api/home/**").permitAll() // permitir que qualquer pessoa consiga
+                                                                                    // acessar a home
+                        // .requestMatchers(HttpMethod.POST, "api/auth/register").permitAll() //
+                        // permitir que qualquer
+                        // pessoa consiga se
+                        // cadastrar
 
                         .requestMatchers("/api/**").hasRole("ADMIN")
                         // .requestMatchers(HttpMethod.POST, "/disciplina").hasRole("ADMIN")

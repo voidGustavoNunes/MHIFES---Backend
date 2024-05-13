@@ -3,11 +3,16 @@ package com.rfid.mhifes.service;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.Year;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -21,10 +26,15 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 @Validated
 @Service
 public class ReportService {
+
+    @Autowired
+    private DataSource dataSource;
 
     private final AlocacaoRepository alocacaoRepository;
 
@@ -32,33 +42,56 @@ public class ReportService {
         this.alocacaoRepository = alocacaoRepository;
     }
 
-    public String gerarRelatorioDisciplinaTurma(Year ano, Long semestre) throws FileNotFoundException, JRException {
+    public String gerarRelatorioDisciplinaTurma(Integer ano, Long semestre) {
 
-        String path = System.getProperty("user.home") + File.separator + "Downloads";
-        
-        List<Alocacao> alocacoes = null;
+        try (Connection conn = dataSource.getConnection()) {
 
-        // Buscando dados
-        if (ano != null && semestre != null) {
-            alocacoes = alocacaoRepository.findByAnoAndSemestre(ano, semestre);
-        } else if (ano != null) {
-            alocacoes = alocacaoRepository.findByAno(ano);
-        } else if (semestre != null) {
-            alocacoes = alocacaoRepository.findBySemestre(semestre);
-        } else {
-            alocacoes = alocacaoRepository.findAll();
+            String path = System.getProperty("user.home") + File.separator + "Downloads";
+
+            JasperDesign jasperDesign = JRXmlLoader
+                    .load(getClass().getResourceAsStream("/relatorio_disciplinas_turma.jrxml"));
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+            // Adicionar parâmetros ao relatório
+            Map<String, Object> params = new HashMap<>();
+            params.put("XANO", ano);
+            params.put("XSEMESTRE", semestre);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, conn);
+            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\Relatório de Disciplinas por Turma.pdf");
+            return "Relatório gerado com sucesso em: " + path;
+        } catch (JRException e) {
+            return "Erro ao gerar relatório";
+        } catch (SQLException e) {
+            return "Erro ao conectar ao banco de dados";
         }
+    }
 
-        // Carregando arquivo e compilando relatório
-        InputStream inputStream = getClass().getResourceAsStream("/relatorio_disciplinas_turma.jrxml");
-        JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alocacoes);
-        Map<String, Object> parameters = new HashMap<>();
-        // Caso algum parâmetro seja necessário
-        // parameters.put("createdBy", "MHIFES");
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-        JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\Relatório de Disciplinas por Turma.pdf");
-        return "Relatório gerado com sucesso em: " + path;
+    public String gerarRelatorioHorarioPorTurma(Integer ano, Long semestre) {
+
+        try (Connection conn = dataSource.getConnection()) {
+
+            String path = System.getProperty("user.home") + File.separator + "Downloads";
+
+            JasperDesign jasperDesign = JRXmlLoader
+                    .load(getClass().getResourceAsStream("/relatorio_horarios_turma.jrxml"));
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+            // Adicionar parâmetros ao relatório
+            Map<String, Object> params = new HashMap<>();
+            params.put("XANO", ano);
+            params.put("XSEMESTRE", semestre);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, conn);
+            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\Relatório de Horario por Turma.pdf");
+            return "Relatório gerado com sucesso em: " + path;
+        } catch (JRException e) {
+            return "Erro ao gerar relatório";
+        } catch (SQLException e) {
+            return "Erro ao conectar ao banco de dados";
+        }
     }
 
 }
