@@ -62,7 +62,10 @@ public class SecurityConfigurations {
                         // pessoa consiga se
                         // cadastrar
 
+                        .requestMatchers("/api/alocacoes").hasRole("USER")
                         .requestMatchers("/api/**").hasRole("ADMIN")
+                        // .requestMatchers("/home").permitAll()
+                        // .requestMatchers("/home").hasAnyRole("ADMIN", "USER") // Role ADMIN
                         // .requestMatchers(HttpMethod.POST, "/disciplina").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
