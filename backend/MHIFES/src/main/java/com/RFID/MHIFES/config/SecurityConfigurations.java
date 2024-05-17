@@ -62,7 +62,8 @@ public class SecurityConfigurations {
                         // pessoa consiga se
                         // cadastrar
 
-                        .requestMatchers("/api/alocacoes").hasRole("USER")
+                        .requestMatchers("/api/alocacoes").permitAll()
+                        .requestMatchers("/api/coordenadorias").permitAll()
                         .requestMatchers("/api/**").hasRole("ADMIN")
                         // .requestMatchers("/home").permitAll()
                         // .requestMatchers("/home").hasAnyRole("ADMIN", "USER") // Role ADMIN
