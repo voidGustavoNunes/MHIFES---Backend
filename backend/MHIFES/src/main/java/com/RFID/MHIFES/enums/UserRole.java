@@ -1,4 +1,4 @@
-package com.rfid.mhifes.enums;
+package com.RFID.MHIFES.enums;
 
 public enum UserRole {
     ADMIN("admin"),

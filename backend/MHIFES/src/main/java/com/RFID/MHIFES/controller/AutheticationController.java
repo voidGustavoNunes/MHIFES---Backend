@@ -1,4 +1,4 @@
-package com.rfid.mhifes.controller;
+package com.RFID.MHIFES.controller;
 
 import java.io.UnsupportedEncodingException;
 
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rfid.mhifes.config.TokenService;
-import com.rfid.mhifes.dto.AutheticationDTO;
-import com.rfid.mhifes.dto.LoginResponseDTO;
-import com.rfid.mhifes.dto.RegisterDTO;
-import com.rfid.mhifes.enums.UserRole;
-import com.rfid.mhifes.model.Usuario;
-import com.rfid.mhifes.repository.UsuarioRepository;
+import com.RFID.MHIFES.config.TokenService;
+import com.RFID.MHIFES.dto.AutheticationDTO;
+import com.RFID.MHIFES.dto.LoginResponseDTO;
+import com.RFID.MHIFES.dto.RegisterDTO;
+import com.RFID.MHIFES.enums.UserRole;
+import com.RFID.MHIFES.model.Usuario;
+import com.RFID.MHIFES.repository.UsuarioRepository;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;

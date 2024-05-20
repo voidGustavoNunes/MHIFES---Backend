@@ -1,12 +1,12 @@
-package com.rfid.mhifes.controller;
+package com.RFID.MHIFES.controller;
 
 import org.springframework.validation.annotation.Validated;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rfid.mhifes.model.Disciplina;
-import com.rfid.mhifes.service.DisciplinaService;
+import com.RFID.MHIFES.model.Disciplina;
+import com.RFID.MHIFES.service.DisciplinaService;
 
 @Validated
 @RestController

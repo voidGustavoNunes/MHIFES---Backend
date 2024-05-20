@@ -1,11 +1,11 @@
-package com.rfid.mhifes.service;
+package com.RFID.MHIFES.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.rfid.mhifes.repository.UsuarioRepository;
+import com.RFID.MHIFES.repository.UsuarioRepository;
 
 @Service
 public class AuthorizationService implements UserDetailsService {

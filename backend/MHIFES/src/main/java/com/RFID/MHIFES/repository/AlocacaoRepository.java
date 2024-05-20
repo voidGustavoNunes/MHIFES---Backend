@@ -1,4 +1,4 @@
-package com.rfid.mhifes.repository;
+package com.RFID.MHIFES.repository;
 
 import java.time.Year;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.rfid.mhifes.model.Alocacao;
+import com.RFID.MHIFES.model.Alocacao;
 
 import net.sf.jasperreports.engine.JasperPrint;
 

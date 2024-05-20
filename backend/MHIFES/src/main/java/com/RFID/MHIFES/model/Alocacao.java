@@ -1,12 +1,12 @@
-package com.rfid.mhifes.model;
+package com.RFID.MHIFES.model;
 
 import java.sql.Clob;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.SQLDelete;
 
-import com.rfid.mhifes.enums.Status;
-import com.rfid.mhifes.enums.converters.StatusConverter;
+import com.RFID.MHIFES.enums.Status;
+import com.RFID.MHIFES.enums.converters.StatusConverter;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

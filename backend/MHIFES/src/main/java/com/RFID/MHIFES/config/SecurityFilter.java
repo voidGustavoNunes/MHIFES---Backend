@@ -1,4 +1,4 @@
-package com.rfid.mhifes.config;
+package com.RFID.MHIFES.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.rfid.mhifes.repository.UsuarioRepository;
+import com.RFID.MHIFES.repository.UsuarioRepository;
 
 import java.io.IOException;
 

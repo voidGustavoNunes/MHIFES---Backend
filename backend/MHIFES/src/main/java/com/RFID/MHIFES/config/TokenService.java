@@ -1,4 +1,4 @@
-package com.rfid.mhifes.config;
+package com.RFID.MHIFES.config;
 
 import java.io.UnsupportedEncodingException;
 import java.time.Instant;
@@ -13,7 +13,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.rfid.mhifes.model.Usuario;
+import com.RFID.MHIFES.model.Usuario;
 
 @Service
 public class TokenService {

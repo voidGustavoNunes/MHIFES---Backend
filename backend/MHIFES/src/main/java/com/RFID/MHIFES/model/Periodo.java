@@ -1,4 +1,4 @@
-package com.rfid.mhifes.model;
+package com.RFID.MHIFES.model;
 
 import java.time.LocalDate;
 import java.time.Year;

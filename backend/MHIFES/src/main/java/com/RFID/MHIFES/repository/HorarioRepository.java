@@ -1,10 +1,10 @@
-package com.rfid.mhifes.repository;
+package com.RFID.MHIFES.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalTime;
 
-import com.rfid.mhifes.model.Horario;
+import com.RFID.MHIFES.model.Horario;
 
 public interface HorarioRepository extends JpaRepository<Horario, Long> {
 

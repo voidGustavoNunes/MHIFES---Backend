@@ -1,4 +1,4 @@
-package com.rfid.mhifes.exception;
+package com.RFID.MHIFES.exception;
 
 public class DataIntegrityViolationException extends RuntimeException {
 

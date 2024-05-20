@@ -1,4 +1,4 @@
-package com.rfid.mhifes.dto;
+package com.RFID.MHIFES.dto;
 
 public record AutheticationDTO(String login, String password) {
 

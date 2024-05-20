@@ -1,9 +1,9 @@
-package com.rfid.mhifes.model;
+package com.RFID.MHIFES.model;
 
 import java.time.LocalDateTime;
 
-import com.rfid.mhifes.enums.Operacao;
-import com.rfid.mhifes.enums.converters.OperacaoConverter;
+import com.RFID.MHIFES.enums.Operacao;
+import com.RFID.MHIFES.enums.converters.OperacaoConverter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;

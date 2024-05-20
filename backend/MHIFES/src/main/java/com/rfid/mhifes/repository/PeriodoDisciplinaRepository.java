@@ -1,8 +1,8 @@
-package com.rfid.mhifes.repository;
+package com.RFID.MHIFES.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.rfid.mhifes.model.PeriodoDisciplina;
+import com.RFID.MHIFES.model.PeriodoDisciplina;
 
 public interface PeriodoDisciplinaRepository extends JpaRepository<PeriodoDisciplina, Long> {
 

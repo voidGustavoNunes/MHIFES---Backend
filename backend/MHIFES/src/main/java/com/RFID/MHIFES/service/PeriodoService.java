@@ -1,4 +1,4 @@
-package com.rfid.mhifes.service;
+package com.RFID.MHIFES.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.model.Periodo;
-import com.rfid.mhifes.model.PeriodoDisciplina;
-import com.rfid.mhifes.repository.PeriodoRepository;
+import com.RFID.MHIFES.exception.RegistroNotFoundException;
+import com.RFID.MHIFES.model.Periodo;
+import com.RFID.MHIFES.model.PeriodoDisciplina;
+import com.RFID.MHIFES.repository.PeriodoRepository;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

@@ -1,13 +1,13 @@
-package com.rfid.mhifes.controller;
+package com.RFID.MHIFES.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.rfid.mhifes.exception.DataIntegrityViolationException;
-import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.exception.UniqueException;
+import com.RFID.MHIFES.exception.DataIntegrityViolationException;
+import com.RFID.MHIFES.exception.RegistroNotFoundException;
+import com.RFID.MHIFES.exception.UniqueException;
 
 @RestControllerAdvice
 public class AplicationControllerAdvice {

@@ -1,6 +1,6 @@
-package com.rfid.mhifes.dto;
+package com.RFID.MHIFES.dto;
 
-import com.rfid.mhifes.enums.UserRole;
+import com.RFID.MHIFES.enums.UserRole;
 
 public record RegisterDTO(String login, String nome, String password, UserRole role) {
 

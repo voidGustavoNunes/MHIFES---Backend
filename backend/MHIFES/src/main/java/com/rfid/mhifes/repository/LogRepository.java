@@ -1,8 +1,8 @@
-package com.rfid.mhifes.repository;
+package com.RFID.MHIFES.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.rfid.mhifes.model.Log;
+import com.RFID.MHIFES.model.Log;
 import java.util.List;
 
 public interface LogRepository extends JpaRepository<Log, Long> {

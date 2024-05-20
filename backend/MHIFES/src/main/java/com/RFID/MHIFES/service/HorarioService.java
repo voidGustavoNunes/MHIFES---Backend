@@ -1,11 +1,11 @@
-package com.rfid.mhifes.service;
+package com.RFID.MHIFES.service;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.model.Horario;
-import com.rfid.mhifes.repository.HorarioRepository;
+import com.RFID.MHIFES.exception.RegistroNotFoundException;
+import com.RFID.MHIFES.model.Horario;
+import com.RFID.MHIFES.repository.HorarioRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
