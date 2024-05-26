@@ -1,12 +1,12 @@
-package com.RFID.MHIFES.service;
+package com.rfid.mhifes.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.RFID.MHIFES.model.Log;
-import com.RFID.MHIFES.repository.LogRepository;
+import com.rfid.mhifes.model.Log;
+import com.rfid.mhifes.repository.LogRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

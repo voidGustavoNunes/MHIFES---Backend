@@ -1,6 +1,4 @@
-package com.RFID.MHIFES.model;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.rfid.mhifes.model;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
@@ -20,6 +18,9 @@ import lombok.EqualsAndHashCode;
 @AttributeOverride(name = "curso", column = @Column(nullable = true))
 public class Professor extends Pessoa {
 
+    @Column(length = 200, nullable = true)
+    private String email;
+
     @NotBlank(message = "Sigla é obrigatória")
     @Column(length = 50, nullable = false)
     private String sigla;
@@ -37,6 +38,7 @@ public class Professor extends Pessoa {
         return "{"
                 + "\"id\": " + getId()
                 + ", \"nome\": \"" + getNome() + "\""
+                + ", \"email\": \"" + email + "\""
                 + ", \"sigla\": \"" + sigla + "\""
                 + ", \"matricula\": \"" + getMatricula() + "\""
                 + ", \"ehCoordenador\": \"" + ehCoordenador + "\""

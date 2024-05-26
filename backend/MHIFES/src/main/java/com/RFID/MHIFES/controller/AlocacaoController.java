@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.controller;
+package com.rfid.mhifes.controller;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.RFID.MHIFES.model.Alocacao;
-import com.RFID.MHIFES.model.Log;
-import com.RFID.MHIFES.service.AlocacaoService;
-import com.RFID.MHIFES.service.LogService;
+import com.rfid.mhifes.model.Alocacao;
+import com.rfid.mhifes.model.Log;
+import com.rfid.mhifes.service.AlocacaoService;
+import com.rfid.mhifes.service.LogService;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

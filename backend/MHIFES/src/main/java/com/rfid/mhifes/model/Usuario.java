@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import java.util.Collection;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.RFID.MHIFES.enums.UserRole;
+import com.rfid.mhifes.enums.UserRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

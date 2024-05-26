@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -21,7 +21,7 @@ import jakarta.persistence.Id;
 public class Horario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Dia da semana é obrigatório")

@@ -1,9 +1,9 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import java.time.LocalDateTime;
 
-import com.RFID.MHIFES.enums.Operacao;
-import com.RFID.MHIFES.enums.converters.OperacaoConverter;
+import com.rfid.mhifes.enums.Operacao;
+import com.rfid.mhifes.enums.converters.OperacaoConverter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class Log {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Data é obrigatória")

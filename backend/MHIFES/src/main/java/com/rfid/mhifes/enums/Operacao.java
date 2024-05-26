@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.enums;
+package com.rfid.mhifes.enums;
 
 public enum Operacao {
 

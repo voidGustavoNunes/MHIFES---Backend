@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import java.time.LocalDate;
 import java.time.Year;
@@ -28,7 +28,7 @@ import lombok.Data;
 public class Periodo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Ano é obrigatório")

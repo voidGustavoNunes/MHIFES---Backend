@@ -1,14 +1,12 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
-import java.sql.Clob;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.SQLDelete;
 
-import com.RFID.MHIFES.enums.Status;
-import com.RFID.MHIFES.enums.converters.StatusConverter;
+import com.rfid.mhifes.enums.Status;
+import com.rfid.mhifes.enums.converters.StatusConverter;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -33,7 +31,7 @@ import lombok.Data;
 public class Alocacao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Horário é obrigatório")
@@ -45,14 +43,12 @@ public class Alocacao {
     @Column(length = 30, nullable = false)
     private String turma;
 
-    @NotNull(message = "Data da aula é obrigatória")
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate dataAula;
 
     @Column(nullable = false)
     private Integer diaSemana;
 
-    @NotNull(message = "Local é obrigatório")
     @ManyToOne
     @JoinColumn(name = "local")
     private Local local;

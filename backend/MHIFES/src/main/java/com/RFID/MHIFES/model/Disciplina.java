@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,15 +15,15 @@ import lombok.Data;
 public class Disciplina {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Nome é obrigatório")
-    @Column(length = 150, nullable = false)
+    @Column(length = 255, nullable = false)
     private String nome;
 
     @NotBlank(message = "Sigla é obrigatória")
-    @Column(length = 10, nullable = false)
+    @Column(length = 50, nullable = false)
     private String sigla;
 
     @Override

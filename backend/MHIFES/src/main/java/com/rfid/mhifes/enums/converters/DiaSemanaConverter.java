@@ -1,8 +1,8 @@
-package com.RFID.MHIFES.enums.converters;
+package com.rfid.mhifes.enums.converters;
 
 import java.util.stream.Stream;
 
-import com.RFID.MHIFES.enums.DiaSemana;
+import com.rfid.mhifes.enums.DiaSemana;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

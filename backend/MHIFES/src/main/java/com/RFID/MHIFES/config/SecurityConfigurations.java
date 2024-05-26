@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.config;
+package com.rfid.mhifes.config;
 
 import java.util.List;
 

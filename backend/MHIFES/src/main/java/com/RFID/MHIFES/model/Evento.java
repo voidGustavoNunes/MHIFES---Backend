@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.model;
+package com.rfid.mhifes.model;
 
 import java.time.LocalDate;
 
@@ -22,7 +22,7 @@ import lombok.EqualsAndHashCode;
 public class Evento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Data do evento é obrigatória")

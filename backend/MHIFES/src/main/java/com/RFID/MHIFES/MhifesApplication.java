@@ -1,4 +1,4 @@
-package com.RFID.MHIFES;
+package com.rfid.mhifes;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,28 +11,28 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.RFID.MHIFES.model.Alocacao;
-import com.RFID.MHIFES.model.Aluno;
-import com.RFID.MHIFES.model.Coordenadoria;
-import com.RFID.MHIFES.model.Disciplina;
-import com.RFID.MHIFES.model.Equipamento;
-import com.RFID.MHIFES.model.Horario;
-import com.RFID.MHIFES.model.Local;
-import com.RFID.MHIFES.model.LocalEquipamento;
-import com.RFID.MHIFES.model.Periodo;
-import com.RFID.MHIFES.model.PeriodoDisciplina;
-import com.RFID.MHIFES.model.Professor;
-import com.RFID.MHIFES.repository.AlocacaoRepository;
-import com.RFID.MHIFES.repository.AlunoRepository;
-import com.RFID.MHIFES.repository.CoordenadoriaRepository;
-import com.RFID.MHIFES.repository.DisciplinaRepository;
-import com.RFID.MHIFES.repository.EquipamentoRepository;
-import com.RFID.MHIFES.repository.HorarioRepository;
-import com.RFID.MHIFES.repository.LocalEquipamentoRepository;
-import com.RFID.MHIFES.repository.LocalRepository;
-import com.RFID.MHIFES.repository.PeriodoDisciplinaRepository;
-import com.RFID.MHIFES.repository.PeriodoRepository;
-import com.RFID.MHIFES.repository.ProfessorRepository;
+import com.rfid.mhifes.model.Alocacao;
+import com.rfid.mhifes.model.Aluno;
+import com.rfid.mhifes.model.Coordenadoria;
+import com.rfid.mhifes.model.Disciplina;
+import com.rfid.mhifes.model.Equipamento;
+import com.rfid.mhifes.model.Horario;
+import com.rfid.mhifes.model.Local;
+import com.rfid.mhifes.model.LocalEquipamento;
+import com.rfid.mhifes.model.Periodo;
+import com.rfid.mhifes.model.PeriodoDisciplina;
+import com.rfid.mhifes.model.Professor;
+import com.rfid.mhifes.repository.AlocacaoRepository;
+import com.rfid.mhifes.repository.AlunoRepository;
+import com.rfid.mhifes.repository.CoordenadoriaRepository;
+import com.rfid.mhifes.repository.DisciplinaRepository;
+import com.rfid.mhifes.repository.EquipamentoRepository;
+import com.rfid.mhifes.repository.HorarioRepository;
+import com.rfid.mhifes.repository.LocalEquipamentoRepository;
+import com.rfid.mhifes.repository.LocalRepository;
+import com.rfid.mhifes.repository.PeriodoDisciplinaRepository;
+import com.rfid.mhifes.repository.PeriodoRepository;
+import com.rfid.mhifes.repository.ProfessorRepository;
 
 @SpringBootApplication
 public class MhifesApplication {

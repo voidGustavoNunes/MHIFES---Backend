@@ -1,4 +1,4 @@
-package com.RFID.MHIFES.service;
+package com.rfid.mhifes.service;
 
 import java.time.LocalDateTime;
 
@@ -7,14 +7,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.RFID.MHIFES.enums.Operacao;
-import com.RFID.MHIFES.exception.RegistroNotFoundException;
-import com.RFID.MHIFES.model.Alocacao;
-import com.RFID.MHIFES.model.LocalEquipamento;
-import com.RFID.MHIFES.model.Log;
-import com.RFID.MHIFES.model.PeriodoDisciplina;
-import com.RFID.MHIFES.model.Usuario;
-import com.RFID.MHIFES.repository.AlocacaoRepository;
+import com.rfid.mhifes.enums.Operacao;
+import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.model.Alocacao;
+import com.rfid.mhifes.model.LocalEquipamento;
+import com.rfid.mhifes.model.Log;
+import com.rfid.mhifes.model.PeriodoDisciplina;
+import com.rfid.mhifes.model.Usuario;
+import com.rfid.mhifes.repository.AlocacaoRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
