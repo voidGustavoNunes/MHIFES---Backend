@@ -9,4 +9,5 @@ public interface LogRepository extends JpaRepository<Log, Long> {
 
     List<Log> findByIdRegistro(Long idRegistro);
 
+    
 }

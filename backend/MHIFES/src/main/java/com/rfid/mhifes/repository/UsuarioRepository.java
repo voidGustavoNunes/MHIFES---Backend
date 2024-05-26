@@ -8,4 +8,6 @@ import com.rfid.mhifes.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 
     UserDetails findByLogin(String login);
+
+    
 }

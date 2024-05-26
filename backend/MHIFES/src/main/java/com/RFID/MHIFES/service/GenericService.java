@@ -2,6 +2,9 @@ package com.rfid.mhifes.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -17,4 +20,6 @@ public interface GenericService<T> {
     T atualizar(@NotNull @Positive Long id, @Valid @NotNull T entity);
 
     void excluir(@NotNull @Positive Long id);
+
+    Page<T> listar(Pageable pageable);
 }

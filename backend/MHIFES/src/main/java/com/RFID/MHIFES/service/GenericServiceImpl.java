@@ -1,5 +1,7 @@
 package com.rfid.mhifes.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
@@ -21,6 +23,11 @@ public abstract class GenericServiceImpl<T, R extends JpaRepository<T, Long>> im
     @Override
     public List<T> listar() {
         return repository.findAll();
+    }
+
+    @Override
+    public Page<T> listar(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override
