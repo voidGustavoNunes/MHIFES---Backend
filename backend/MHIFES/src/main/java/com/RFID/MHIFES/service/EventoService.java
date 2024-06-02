@@ -3,8 +3,8 @@ package com.rfid.mhifes.service;
 import org.springframework.stereotype.Service;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.model.Evento;
-import com.rfid.mhifes.repository.EventoRepository;
+import com.rfid.mhifes.model.postgres.Evento;
+import com.rfid.mhifes.repository.postgres.EventoRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

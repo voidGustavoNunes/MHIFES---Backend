@@ -17,8 +17,8 @@ import com.rfid.mhifes.dto.AutheticationDTO;
 import com.rfid.mhifes.dto.LoginResponseDTO;
 import com.rfid.mhifes.dto.RegisterDTO;
 import com.rfid.mhifes.enums.UserRole;
-import com.rfid.mhifes.model.Usuario;
-import com.rfid.mhifes.repository.UsuarioRepository;
+import com.rfid.mhifes.model.postgres.Usuario;
+import com.rfid.mhifes.repository.postgres.UsuarioRepository;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;

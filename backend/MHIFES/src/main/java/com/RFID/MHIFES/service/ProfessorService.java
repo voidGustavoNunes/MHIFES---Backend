@@ -5,8 +5,8 @@ import org.springframework.validation.annotation.Validated;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.exception.UniqueException;
-import com.rfid.mhifes.model.Professor;
-import com.rfid.mhifes.repository.ProfessorRepository;
+import com.rfid.mhifes.model.postgres.Professor;
+import com.rfid.mhifes.repository.postgres.ProfessorRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

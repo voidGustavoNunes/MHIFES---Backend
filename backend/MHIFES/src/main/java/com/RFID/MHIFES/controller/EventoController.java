@@ -5,7 +5,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rfid.mhifes.model.Evento;
+import com.rfid.mhifes.model.postgres.Evento;
 import com.rfid.mhifes.service.EventoService;
 
 @Validated

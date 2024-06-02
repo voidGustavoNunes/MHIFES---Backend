@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.rfid.mhifes.repository.UsuarioRepository;
+import com.rfid.mhifes.repository.postgres.UsuarioRepository;
 
 import java.io.IOException;
 

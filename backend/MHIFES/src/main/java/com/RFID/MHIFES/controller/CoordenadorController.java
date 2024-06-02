@@ -4,7 +4,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rfid.mhifes.model.Coordenador;
+import com.rfid.mhifes.model.postgres.Coordenador;
 import com.rfid.mhifes.service.CoordenadorService;
 
 @Validated

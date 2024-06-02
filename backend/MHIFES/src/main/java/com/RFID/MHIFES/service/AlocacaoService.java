@@ -9,12 +9,12 @@ import org.springframework.validation.annotation.Validated;
 
 import com.rfid.mhifes.enums.Operacao;
 import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.model.Alocacao;
-import com.rfid.mhifes.model.LocalEquipamento;
-import com.rfid.mhifes.model.Log;
-import com.rfid.mhifes.model.PeriodoDisciplina;
-import com.rfid.mhifes.model.Usuario;
-import com.rfid.mhifes.repository.AlocacaoRepository;
+import com.rfid.mhifes.model.postgres.Alocacao;
+import com.rfid.mhifes.model.postgres.LocalEquipamento;
+import com.rfid.mhifes.model.postgres.Log;
+import com.rfid.mhifes.model.postgres.PeriodoDisciplina;
+import com.rfid.mhifes.model.postgres.Usuario;
+import com.rfid.mhifes.repository.postgres.AlocacaoRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.model.PeriodoDisciplina;
-import com.rfid.mhifes.repository.PeriodoDisciplinaRepository;
+import com.rfid.mhifes.model.postgres.PeriodoDisciplina;
+import com.rfid.mhifes.repository.postgres.PeriodoDisciplinaRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

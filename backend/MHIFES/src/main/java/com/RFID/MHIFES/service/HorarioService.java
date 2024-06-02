@@ -4,8 +4,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.model.Horario;
-import com.rfid.mhifes.repository.HorarioRepository;
+import com.rfid.mhifes.model.postgres.Horario;
+import com.rfid.mhifes.repository.postgres.HorarioRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

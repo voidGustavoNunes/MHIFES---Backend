@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rfid.mhifes.model.Local;
+import com.rfid.mhifes.model.postgres.Local;
 import com.rfid.mhifes.service.LocalService;
 
 import jakarta.validation.Valid;

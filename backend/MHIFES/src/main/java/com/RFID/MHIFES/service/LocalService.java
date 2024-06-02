@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.model.Local;
-import com.rfid.mhifes.model.LocalEquipamento;
-import com.rfid.mhifes.repository.LocalRepository;
+import com.rfid.mhifes.model.postgres.Local;
+import com.rfid.mhifes.model.postgres.LocalEquipamento;
+import com.rfid.mhifes.repository.postgres.LocalRepository;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

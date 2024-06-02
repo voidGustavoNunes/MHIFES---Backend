@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rfid.mhifes.model.Alocacao;
-import com.rfid.mhifes.model.Log;
+import com.rfid.mhifes.model.postgres.Alocacao;
+import com.rfid.mhifes.model.postgres.Log;
 import com.rfid.mhifes.service.AlocacaoService;
 import com.rfid.mhifes.service.LogService;
 
