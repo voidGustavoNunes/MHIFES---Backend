@@ -24,62 +24,67 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Usuario implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private String id;
 
-    @Column(unique = true)
-    private String login;
+	@Column(unique = true)
+	private String login;
 
-    private String nome;
+	private String nome;
 
-    private String password;
+	private String password;
 
-    private UserRole role;
+	private UserRole role;
 
-    public Usuario(String login, String password) {
-        this.login = login;
-        this.password = password;
-    }
+	public Usuario(String login, String password) {
+		this.login = login;
+		this.password = password;
+	}
 
-    public Usuario(String login, String nome, String password, UserRole role) {
-        this.login = login;
-        this.nome = nome;
-        this.password = password;
-        this.role = role;
-    }
+	public Usuario(String login, String nome, String password, UserRole role) {
+		this.login = login;
+		this.nome = nome;
+		this.password = password;
+		this.role = role;
+	}
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UserRole.ADMIN)
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else
-            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if (this.role == UserRole.ADMIN)
+			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+		else
+			return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	}
 
-    @Override
-    public String getUsername() {
-        return login;
-    }
+	@Override
+	public String getPassword() {
+		return password;
+	}
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	@Override
+	public String getUsername() {
+		return login;
+	}
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
 }

@@ -16,33 +16,24 @@ import org.springframework.transaction.PlatformTransactionManager;
 import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
-@EnableJpaRepositories(
-    basePackages = "com.rfid.mhifes.repository.mysql",
-    entityManagerFactoryRef = "mysqlEntityManagerFactory",
-        transactionManagerRef = "mysqlTransactionManager"
-)
+@EnableJpaRepositories(basePackages = "com.rfid.mhifes.repository.mysql", entityManagerFactoryRef = "mysqlEntityManagerFactory", transactionManagerRef = "mysqlTransactionManager")
 public class MySQLConfig {
 
-    @Bean(name = "mysqlDataSource")
-    @ConfigurationProperties(prefix = "mysql.datasource")
-    public DataSource dataSource() {
-        return DataSourceBuilder.create().build();
-    }
+	@Bean(name = "mysqlDataSource")
+	@ConfigurationProperties(prefix = "mysql.datasource")
+	public DataSource dataSource() {
+		return DataSourceBuilder.create().build();
+	}
 
-    @Bean(name = "mysqlEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            EntityManagerFactoryBuilder builder,
-            @Qualifier("mysqlDataSource") DataSource dataSource) {
-        return builder
-                .dataSource(dataSource)
-                .packages("com.rfid.mhifes.model.mysql")
-                .persistenceUnit("mysql")
-                .build();
-    }
+	@Bean(name = "mysqlEntityManagerFactory")
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
+			@Qualifier("mysqlDataSource") DataSource dataSource) {
+		return builder.dataSource(dataSource).packages("com.rfid.mhifes.model.mysql").persistenceUnit("mysql").build();
+	}
 
-    @Bean(name = "mysqlTransactionManager")
-    public PlatformTransactionManager transactionManager(
-            @Qualifier("mysqlEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
-        return new JpaTransactionManager(entityManagerFactory);
-    }
+	@Bean(name = "mysqlTransactionManager")
+	public PlatformTransactionManager transactionManager(
+			@Qualifier("mysqlEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+		return new JpaTransactionManager(entityManagerFactory);
+	}
 }

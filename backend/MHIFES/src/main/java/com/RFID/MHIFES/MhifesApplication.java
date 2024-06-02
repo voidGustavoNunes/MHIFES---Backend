@@ -1,28 +1,12 @@
 package com.rfid.mhifes;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Year;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.rfid.mhifes.model.postgres.Alocacao;
-import com.rfid.mhifes.model.postgres.Aluno;
-import com.rfid.mhifes.model.postgres.Coordenadoria;
-import com.rfid.mhifes.model.postgres.Disciplina;
-import com.rfid.mhifes.model.postgres.Equipamento;
-import com.rfid.mhifes.model.postgres.Horario;
-import com.rfid.mhifes.model.postgres.Local;
-import com.rfid.mhifes.model.postgres.LocalEquipamento;
-import com.rfid.mhifes.model.postgres.Periodo;
-import com.rfid.mhifes.model.postgres.PeriodoDisciplina;
-import com.rfid.mhifes.model.postgres.Professor;
 import com.rfid.mhifes.repository.postgres.AlocacaoRepository;
 import com.rfid.mhifes.repository.postgres.AlunoRepository;
 import com.rfid.mhifes.repository.postgres.CoordenadoriaRepository;
@@ -36,6 +20,8 @@ import com.rfid.mhifes.repository.postgres.PeriodoRepository;
 import com.rfid.mhifes.repository.postgres.ProfessorRepository;
 
 @SpringBootApplication
+@EnableConfigurationProperties
+@EntityScan(basePackages = { "com.rfid.mhifes.model.postgres" })
 public class MhifesApplication {
 
 	public static void main(String[] args) {
@@ -43,12 +29,12 @@ public class MhifesApplication {
 	}
 
 	@Bean
-	CommandLineRunner initDatabase(EquipamentoRepository equipamentoRepository,
-			AlunoRepository alunoRepository, CoordenadoriaRepository coordenadoriaRepository,
-			ProfessorRepository professorRepository, DisciplinaRepository disciplinaRepository,
-			PeriodoRepository periodoRepository, HorarioRepository horarioRepository,
-			PeriodoDisciplinaRepository periodoDisciplinaRepository, LocalRepository localRepository, 
-			LocalEquipamentoRepository localEquipamentoRepository, AlocacaoRepository alocacaoRepository) {
+	CommandLineRunner initDatabase(EquipamentoRepository equipamentoRepository, AlunoRepository alunoRepository,
+			CoordenadoriaRepository coordenadoriaRepository, ProfessorRepository professorRepository,
+			DisciplinaRepository disciplinaRepository, PeriodoRepository periodoRepository,
+			HorarioRepository horarioRepository, PeriodoDisciplinaRepository periodoDisciplinaRepository,
+			LocalRepository localRepository, LocalEquipamentoRepository localEquipamentoRepository,
+			AlocacaoRepository alocacaoRepository) {
 		return args -> {
 
 			// equipamentoRepository.deleteAll();
@@ -122,7 +108,6 @@ public class MhifesApplication {
 			// periodo.setSemestre(1L);
 			// periodo.setDataInicio(LocalDate.parse("2021-01-01"));
 			// periodo.setDataFim(LocalDate.parse("2021-06-30"));
-
 
 			// PeriodoDisciplina periodoDisciplina = new PeriodoDisciplina();
 			// periodoDisciplina.setDisciplina(disciplina);

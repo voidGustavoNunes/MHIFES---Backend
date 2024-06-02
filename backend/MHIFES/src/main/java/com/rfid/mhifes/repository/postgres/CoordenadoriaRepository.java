@@ -9,4 +9,6 @@ import com.rfid.mhifes.model.postgres.Coordenadoria;
 public interface CoordenadoriaRepository extends JpaRepository<Coordenadoria, Long> {
 
     Page<Coordenadoria> findAll(Pageable pageable);
+
+    Coordenadoria findByNome(String nome);
 }

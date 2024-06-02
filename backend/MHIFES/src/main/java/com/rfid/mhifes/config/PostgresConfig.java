@@ -17,36 +17,28 @@ import org.springframework.transaction.PlatformTransactionManager;
 import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
-@EnableJpaRepositories(
-    basePackages = "com.rfid.mhifes.repository.postgres",
-    entityManagerFactoryRef = "postgresEntityManagerFactory",
-        transactionManagerRef = "postgresTransactionManager"
-)
+@EnableJpaRepositories(basePackages = "com.rfid.mhifes.repository.postgres", entityManagerFactoryRef = "postgresEntityManagerFactory", transactionManagerRef = "postgresTransactionManager")
 public class PostgresConfig {
 
-    @Primary
-    @Bean(name = "postgresDataSource")
-    @ConfigurationProperties(prefix = "postgres.datasource")
-    public DataSource dataSource() {
-        return DataSourceBuilder.create().build();
-    }
+	@Primary
+	@Bean(name = "postgresDataSource")
+	@ConfigurationProperties(prefix = "postgres.datasource")
+	public DataSource dataSource() {
+		return DataSourceBuilder.create().build();
+	}
 
-    @Primary
-    @Bean(name = "postgresEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            EntityManagerFactoryBuilder builder,
-            @Qualifier("postgresDataSource") DataSource dataSource) {
-        return builder
-                .dataSource(dataSource)
-                .packages("com.rfid.mhifes.model.postgres")
-                .persistenceUnit("postgres")
-                .build();
-    }
+	@Primary
+	@Bean(name = "postgresEntityManagerFactory")
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
+			@Qualifier("postgresDataSource") DataSource dataSource) {
+		return builder.dataSource(dataSource).packages("com.rfid.mhifes.model.postgres").persistenceUnit("postgres")
+				.build();
+	}
 
-    @Primary
-    @Bean(name = "postgresTransactionManager")
-    public PlatformTransactionManager transactionManager(
-            @Qualifier("postgresEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
-        return new JpaTransactionManager(entityManagerFactory);
-    }
+	@Primary
+	@Bean(name = "postgresTransactionManager")
+	public PlatformTransactionManager transactionManager(
+			@Qualifier("postgresEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+		return new JpaTransactionManager(entityManagerFactory);
+	}
 }

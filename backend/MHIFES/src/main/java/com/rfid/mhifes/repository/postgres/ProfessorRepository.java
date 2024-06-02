@@ -8,7 +8,9 @@ import com.rfid.mhifes.model.postgres.Professor;
 
 public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 
-    boolean existsByMatricula(String matricula);
+	boolean existsByMatricula(String matricula);
 
-    Page<Professor> findAll(Pageable pageable);
+	Page<Professor> findAll(Pageable pageable);
+
+	Professor findByMatricula(String matricula);
 }

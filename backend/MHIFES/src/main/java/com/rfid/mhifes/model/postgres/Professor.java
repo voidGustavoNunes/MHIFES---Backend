@@ -10,13 +10,23 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "professor")
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @AttributeOverride(name = "curso", column = @Column(nullable = true))
 public class Professor extends Pessoa {
+
+	public Professor(String nome, String matricula, String sigla) {
+		this.setNome(nome);
+		this.setMatricula(matricula);
+		this.sigla = sigla;
+		this.ehCoordenador = false;
+		this.coordenadoria = null;
+	}
 
 	@NotBlank(message = "Sigla é obrigatória")
 	@Column(length = 50, nullable = false)
