@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.rfid.mhifes.enums.Status;
@@ -72,8 +74,7 @@ public class DataMigrationService {
 			Professor professor = verificarEAtualizarProfessor(mysqlAlocacao.getProfessor1());
 
 			// Verifica e cadastra o Periodo, Disciplina e PeriodoDisciplina
-			PeriodoDisciplina periodoDisciplina = verificarEAtualizarPeriodoDisciplina(mysqlAlocacao.getAno(),
-					Long.valueOf(mysqlAlocacao.getSemestre()), mysqlAlocacao.getDisciplinaMySQL());
+			PeriodoDisciplina periodoDisciplina = verificarEAtualizarPeriodoDisciplina(mysqlAlocacao.getAno(), Long.valueOf(mysqlAlocacao.getSemestre()), mysqlAlocacao.getDisciplinaMySQL());
 
 			for (AulaMySQL aulaMySQL : mysqlAlocacao.getAulas()) {
 
@@ -190,5 +191,9 @@ public class DataMigrationService {
 			horario.setHoraFim(labelMySQL.getFim());
 			return horarioRepository.save(horario);
 		}
+	}
+	
+	public List<AlocacaoMySQL> listarAlocacaoMySQL() {
+		return alocacaoMySQLRepository.findAll();
 	}
 }

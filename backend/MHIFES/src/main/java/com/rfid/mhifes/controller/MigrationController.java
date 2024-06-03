@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rfid.mhifes.model.mysql.AlocacaoMySQL;
 import com.rfid.mhifes.service.DataMigrationService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("api/migrate")
@@ -23,5 +26,10 @@ public class MigrationController {
 	public ResponseEntity<?> migrateAlocacoes(@RequestBody List<AlocacaoMySQL> mysqlAlocacoes) {
 		dataMigrationService.migrateData(mysqlAlocacoes);
 		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("alocacoes-mysql")
+	public List<AlocacaoMySQL> listaMysql() {
+		return dataMigrationService.listarAlocacaoMySQL();
 	}
 }

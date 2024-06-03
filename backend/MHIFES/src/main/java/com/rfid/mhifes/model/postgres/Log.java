@@ -39,9 +39,10 @@ public class Log {
     @Column(name = "operacao", nullable = false)
     @Convert(converter = OperacaoConverter.class)
     private Operacao operacao = Operacao.INCLUSAO;
-
+    
     @NotNull(message = "ID do registro é obrigatório")
     @Positive(message = "ID do registro deve ser positivo")
+    @Column(name = "id_registro")
     private Long idRegistro;
 
     @NotNull(message = "Usuário é obrigatório")
