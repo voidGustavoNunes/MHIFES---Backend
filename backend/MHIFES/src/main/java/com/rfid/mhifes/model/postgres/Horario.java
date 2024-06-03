@@ -25,11 +25,11 @@ public class Horario {
     private Long id;
 
     @NotNull(message = "Dia da semana é obrigatório")
-    @Column(nullable = false)
+    @Column(nullable = false, name ="hora_inicio")
     private LocalTime horaInicio;
 
     @NotNull(message = "Dia da semana é obrigatório")
-    @Column(nullable = false)
+    @Column(nullable = false, name ="hora_fim")
     private LocalTime horaFim;
 
     @Override

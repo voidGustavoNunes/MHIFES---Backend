@@ -33,7 +33,7 @@ public class Professor extends Pessoa {
 	private String sigla;
 
 	@NotNull(message = "Coordenador é obrigatório")
-	@Column(nullable = false)
+	@Column(nullable = false, name = "eh_coordenador")
 	private boolean ehCoordenador;
 
 	@ManyToOne

@@ -43,10 +43,10 @@ public class Alocacao {
     @Column(length = 30, nullable = false)
     private String turma;
 
-    @Column(nullable = true)
+    @Column(nullable = true, name ="data_aula")
     private LocalDate dataAula;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name ="dia_semana")
     private Integer diaSemana;
 
     @ManyToOne

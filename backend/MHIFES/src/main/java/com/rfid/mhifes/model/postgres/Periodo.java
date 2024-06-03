@@ -47,11 +47,11 @@ public class Periodo {
 	private Long semestre;
 
 	@NotNull(message = "Data de início é obrigatória")
-	@Column(nullable = false)
+	@Column(nullable = false, name ="data_inicio")
 	private LocalDate dataInicio;
 
 	@NotNull(message = "Data de fim é obrigatória")
-	@Column(nullable = false)
+	@Column(nullable = false, name ="data_fim")
 	private LocalDate dataFim;
 
 	@NotNull(message = "Disciplinas são obrigatórias")

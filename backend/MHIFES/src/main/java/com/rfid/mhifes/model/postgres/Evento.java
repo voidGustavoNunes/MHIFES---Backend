@@ -26,7 +26,7 @@ public class Evento {
     private Long id;
 
     @NotNull(message = "Data do evento é obrigatória")
-    @Column(nullable = false)
+    @Column(nullable = false, name ="data_evento")
     private LocalDate dataEvento;
 
     @NotBlank(message = "Nome é obrigatório")
