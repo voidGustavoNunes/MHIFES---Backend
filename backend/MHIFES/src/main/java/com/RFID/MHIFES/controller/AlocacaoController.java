@@ -43,7 +43,7 @@ public class AlocacaoController extends GenericController<Alocacao> {
 	public Page<Alocacao> listarAtivos(@RequestParam @NotNull @PositiveOrZero Integer page,
 			@RequestParam @NotNull @Positive Integer size) {
 		Pageable pageable = PageRequest.of(page, size);
-		return alocacaoService.listarInativos(pageable);
+		return alocacaoService.listarAtivos(pageable);
 	}
 
 	@GetMapping("/inativos")

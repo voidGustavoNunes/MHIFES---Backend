@@ -76,7 +76,7 @@ public class Alocacao {
                 + ", \"horario\": " + horario.toString()
                 + ", \"turma\": \"" + turma + "\""
                 + ", \"dataAula\": \"" + dataAula + "\""
-                + ", \"local\": " + local.toString()
+                + ", \"local\": " + (local == null ? null: local.toString())
                 + ", \"periodoDisciplina\": " + periodoDisciplina.toString()
                 + ", \"professor\": " + professor.toString()
                 + "}";
