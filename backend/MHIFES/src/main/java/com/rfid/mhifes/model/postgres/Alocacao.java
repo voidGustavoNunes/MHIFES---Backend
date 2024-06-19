@@ -30,55 +30,53 @@ import lombok.Data;
 // @Where(clause = "status = 'Ativo'")
 public class Alocacao {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @NotNull(message = "Horário é obrigatório")
-    @ManyToOne
-    @JoinColumn(name = "horario")
-    private Horario horario;
+	@NotNull(message = "Horário é obrigatório")
+	@ManyToOne
+	@JoinColumn(name = "horario")
+	private Horario horario;
 
-    @NotBlank(message = "Turma é obrigatória")
-    @Column(length = 30, nullable = false)
-    private String turma;
+	@NotBlank(message = "Turma é obrigatória")
+	@Column(length = 30, nullable = false)
+	private String turma;
 
-    @Column(nullable = true, name ="data_aula")
-    private LocalDate dataAula;
+	@Column(nullable = true, name = "data_aula")
+	private LocalDate dataAula;
 
-    @Column(nullable = false, name ="dia_semana")
-    private Integer diaSemana;
+	@Column(nullable = false, name = "dia_semana")
+	private Integer diaSemana;
 
-    @ManyToOne
-    @JoinColumn(name = "local")
-    private Local local;
+	@ManyToOne
+	@JoinColumn(name = "local")
+	private Local local;
 
-    @NotNull(message = "Período disciplina é obrigatório")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "periodo_disciplina")
-    private PeriodoDisciplina periodoDisciplina;
+	@NotNull(message = "Período disciplina é obrigatório")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "periodo_disciplina")
+	private PeriodoDisciplina periodoDisciplina;
 
-    @NotNull(message = "Professor é obrigatório")
-    @ManyToOne
-    @JoinColumn(name = "professor")
-    private Professor professor;
+	@NotNull(message = "Professor é obrigatório")
+	@ManyToOne
+	@JoinColumn(name = "professor")
+	private Professor professor;
 
-    @NotNull
-    @Column(name = "status", length = 10, nullable = false)
-    @Convert(converter = StatusConverter.class)
-    private Status status = Status.ATIVO;
+	@NotNull
+	@Column(name = "status", length = 10, nullable = false)
+	@Convert(converter = StatusConverter.class)
+	private Status status = Status.ATIVO;
 
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 
-        return "{"
-                + "\"id\": " + id
-                + ", \"horario\": " + horario.toString()
-                + ", \"turma\": \"" + turma + "\""
-                + ", \"dataAula\": \"" + dataAula + "\""
-                + ", \"local\": " + (local == null ? null: local.toString())
-                + ", \"periodoDisciplina\": " + periodoDisciplina.toString()
-                + ", \"professor\": " + professor.toString()
-                + "}";
-    }
+		return "{" + "\"id\": " + id + ", \"horario\": " + horario
+				.toString() + ", \"turma\": \"" + turma + "\"" + ", \"dataAula\": \"" + dataAula + "\"" + ", \"local\": " + (local != null
+						? local.toString()
+						: null) + ", \"periodoDisciplina\": " + (periodoDisciplina != null
+								? periodoDisciplina.toString()
+								: null) + ", \"professor\": " + (professor != null ? professor.toString()
+										: professor) + "}";
+	}
 }

@@ -52,8 +52,9 @@ public class PeriodoDisciplina {
 		}
 		alunosString.append("]");
 
-		return "{" + "\"id\": " + id + ", \"periodo\": " + periodo.toString() + ", \"disciplina\": " + disciplina
-				.toString() + ", \"alunos\": " + alunosString + "}";
+		return "{" + "\"id\": " + id + ", \"periodo\": " + (periodo != null ? periodo.toString()
+				: null) + ", \"disciplina\": " + (disciplina != null ? disciplina.toString()
+						: null) + ", \"alunos\": " + alunosString + "}";
 	}
 
 }
