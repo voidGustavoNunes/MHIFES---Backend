@@ -1,11 +1,15 @@
 package com.rfid.mhifes.service;
 
 import com.rfid.mhifes.enums.Operacao;
+import com.rfid.mhifes.enums.Status;
 import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.exception.ValidationException;
 import com.rfid.mhifes.model.postgres.Alocacao;
+import com.rfid.mhifes.model.postgres.Evento;
 import com.rfid.mhifes.model.postgres.Log;
 import com.rfid.mhifes.model.postgres.Usuario;
 import com.rfid.mhifes.repository.postgres.AlocacaoRepository;
+import com.rfid.mhifes.repository.postgres.EventoRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -16,20 +20,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @Validated
 @Service
 public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoRepository> {
 
     private final LogService logService;
+    private final EventoRepository eventoRepository;
 
-    public AlocacaoService(AlocacaoRepository alocacaoRepository, LogService logService) {
+    public AlocacaoService(AlocacaoRepository alocacaoRepository, LogService logService, EventoRepository eventoRepository) {
         super(alocacaoRepository);
         this.logService = logService;
+        this.eventoRepository = eventoRepository;
     }
 
     @Override
     public Alocacao criar(@Valid @NotNull Alocacao alocacao) {
+        validarAlocacao(alocacao);
+
         alocacao.setDiaSemana(alocacao.getDataAula().getDayOfWeek().getValue());
         Alocacao alocacaoCriada = repository.save(alocacao);
 
@@ -43,6 +53,8 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
 
     @Override
     public Alocacao atualizar(@NotNull @Positive Long id, @Valid @NotNull Alocacao alocacao) {
+        validarAlocacao(alocacao);
+
         Alocacao alocacaoAlterada = repository.findById(id).map(alocacaoEditada -> {
             alocacaoEditada.setHorario(alocacao.getHorario());
             alocacaoEditada.setTurma(alocacao.getTurma());
@@ -84,5 +96,74 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
 
     public Page<Alocacao> listarInativos(Pageable pageable) {
         return repository.findAllStatusInativo(pageable);
+    }
+
+    private void validarAlocacao(Alocacao alocacao) {
+        // Verificar se existe alguma alocação ativa com o mesmo horário,
+        // na mesma data aula, no mesmo local
+        Optional<Alocacao> alocacaoExistente = repository.findByHorarioAndDataAulaAndLocalAndStatus(
+                alocacao.getHorario(), alocacao.getDataAula(), alocacao.getLocal(), Status.ATIVO);
+
+        if (alocacaoExistente.isPresent()) {
+            throw new ValidationException("Já existe uma alocação ativa cadastrada para o horário (" +
+                    alocacaoExistente.get().getHorario().getHoraInicio().toString() + " - " +
+                    alocacaoExistente.get().getHorario().getHoraFim().toString() + "), " +
+                    "no local " + alocacaoExistente.get().getLocal().getNome() + " e na data " +
+                    alocacaoExistente.get().getDataAula().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " selecionada.");
+        }
+
+        // Verificar se existe alguma alocação ativa com o mesmo horário,
+        // na mesma data aula, na mesma turma e no mesmo local
+        alocacaoExistente = repository.findByHorarioAndDataAulaAndTurmaAndLocalAndStatus(
+                alocacao.getHorario(), alocacao.getDataAula(), alocacao.getTurma(), alocacao.getLocal(), Status.ATIVO);
+
+        if (alocacaoExistente.isPresent()) {
+            throw new ValidationException("Já existe uma alocação ativa cadastrada para o horário (" +
+                    alocacaoExistente.get().getHorario().getHoraInicio().toString() + " - " +
+                    alocacaoExistente.get().getHorario().getHoraFim().toString() + "), " +
+                    "na turma " + alocacaoExistente.get().getTurma() + ", no local " +
+                    alocacaoExistente.get().getLocal().getNome() + " e na data " +
+                    alocacaoExistente.get().getDataAula().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " selecionada.");
+        }
+
+        // Verificar se existe alguma alocação ativa com o mesmo horário,
+        // na mesma data aula, para o mesmo professor e no mesmo local
+        alocacaoExistente = repository.findByHorarioAndDataAulaAndProfessorAndLocalAndStatus(
+                alocacao.getHorario(), alocacao.getDataAula(), alocacao.getProfessor(), alocacao.getLocal(), Status.ATIVO);
+
+        if (alocacaoExistente.isPresent()) {
+            throw new ValidationException("Já existe uma alocação ativa cadastrada para o horário (" +
+                    alocacaoExistente.get().getHorario().getHoraInicio().toString() + " - " +
+                    alocacaoExistente.get().getHorario().getHoraFim().toString() + "), " +
+                    "para o professor " + alocacaoExistente.get().getProfessor().getNome() + ", no local " +
+                    alocacaoExistente.get().getLocal().getNome() + " e na data " +
+                    alocacaoExistente.get().getDataAula().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " selecionada.");
+        }
+
+        // Verificar se existe alguma alocação ativa com o mesmo horário,
+        // na mesma data aula, para o mesmo período e disciplina e no mesmo local
+        alocacaoExistente = repository.findByHorarioAndDataAulaAndPeriodoDisciplinaAndLocalAndStatus(
+                alocacao.getHorario(), alocacao.getDataAula(), alocacao.getPeriodoDisciplina(), alocacao.getLocal(), Status.ATIVO);
+
+        if (alocacaoExistente.isPresent()) {
+            throw new ValidationException("Já existe uma alocação ativa cadastrada para o horário (" +
+                    alocacaoExistente.get().getHorario().getHoraInicio().toString() + " - " +
+                    alocacaoExistente.get().getHorario().getHoraFim().toString() + "), " +
+                    "para a disciplina " + alocacaoExistente.get().getPeriodoDisciplina().getDisciplina().getNome() + ", no local " +
+                    alocacaoExistente.get().getLocal().getNome() + " e na data " +
+                    alocacaoExistente.get().getDataAula().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " selecionada.");
+        }
+
+        // Verificar se existe algum evento com o mesmo horário, na mesma data e no mesmo local
+        Optional<Evento> eventoExistente = eventoRepository.findByHorarioAndDataEventoAndLocal(
+                alocacao.getHorario(), alocacao.getDataAula(), alocacao.getLocal());
+
+        if (eventoExistente.isPresent()) {
+            throw new ValidationException("Já existe um evento cadastrado para o horário (" +
+                    eventoExistente.get().getHorario().getHoraInicio().toString() + " - " +
+                    eventoExistente.get().getHorario().getHoraFim().toString() + "), " +
+                    "no local " + eventoExistente.get().getLocal().getNome() + " e na data " +
+                    eventoExistente.get().getDataEvento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " selecionada.");
+        }
     }
 }

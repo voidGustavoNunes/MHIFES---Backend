@@ -1,16 +1,14 @@
 package com.rfid.mhifes.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-
 import com.rfid.mhifes.exception.RegistroNotFoundException;
-import com.rfid.mhifes.exception.UniqueException;
+import com.rfid.mhifes.exception.ValidationException;
 import com.rfid.mhifes.model.postgres.Professor;
 import com.rfid.mhifes.repository.postgres.ProfessorRepository;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Validated
 @Service
@@ -23,8 +21,12 @@ public class ProfessorService extends GenericServiceImpl<Professor, ProfessorRep
     @Override
     public Professor criar(@Valid @NotNull Professor professor) {
 
+        if (professor.getCoordenadoria() == null && !professor.isEhCoordenador()) {
+            throw new ValidationException("Professor deve estar vinculado a uma coordenadoria");
+        }
+
         if (repository.existsByMatricula(professor.getMatricula())) {
-            throw new UniqueException("Matrícula já cadastrada", "matricula");
+            throw new ValidationException("Matrícula já cadastrada");
         }
 
         return repository.save(professor);
@@ -32,13 +34,17 @@ public class ProfessorService extends GenericServiceImpl<Professor, ProfessorRep
 
     @Override
     public Professor atualizar(@NotNull @Positive Long id, @Valid @NotNull Professor professor) {
+        if (professor.getCoordenadoria() == null && !professor.isEhCoordenador()) {
+            throw new ValidationException("Professor deve estar vinculado a uma coordenadoria");
+        }
+
         return repository.findById(id)
                 .map(professorEditado -> {
                     // Valida se a matrícula já está cadastrada para outro professor ou se a
                     // matrícula é a mesma
                     if (!professorEditado.getMatricula().equals(professor.getMatricula())
                             && repository.existsByMatricula(professor.getMatricula())) {
-                        throw new UniqueException("Matrícula já cadastrada", "matricula");
+                        throw new ValidationException("Matrícula já cadastrada");
                     }
                     professorEditado.setNome(professor.getNome());
                     professorEditado.setSigla(professor.getSigla());
