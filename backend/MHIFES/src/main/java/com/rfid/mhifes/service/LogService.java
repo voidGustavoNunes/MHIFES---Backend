@@ -1,16 +1,14 @@
 package com.rfid.mhifes.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-
 import com.rfid.mhifes.model.postgres.Log;
 import com.rfid.mhifes.repository.postgres.LogRepository;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 @Service
 @Validated
@@ -30,4 +28,7 @@ public class LogService extends GenericServiceImpl<Log, LogRepository> {
         return repository.findByIdRegistro(id);
     }
 
+    public Log buscarUltimoLogPorIdRegistro(@NotNull @Positive Long id) {
+        return repository.findLastByIdRegistro(id);
+    }
 }
