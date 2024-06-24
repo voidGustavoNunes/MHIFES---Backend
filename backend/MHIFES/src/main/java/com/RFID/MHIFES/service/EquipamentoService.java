@@ -1,5 +1,7 @@
 package com.rfid.mhifes.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -28,4 +30,8 @@ public class EquipamentoService extends GenericServiceImpl<Equipamento, Equipame
                     return repository.save(equipamentoEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
+	
+	public Page<Equipamento> acharNome(String substring, Pageable pageable) {
+		return repository.findByNomeContaining(substring, pageable);
+	}
 }

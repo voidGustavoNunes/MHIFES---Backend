@@ -1,10 +1,13 @@
 package com.rfid.mhifes.service;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.model.postgres.Aluno;
 import com.rfid.mhifes.model.postgres.Coordenadoria;
 import com.rfid.mhifes.repository.postgres.CoordenadoriaRepository;
 
@@ -43,4 +46,7 @@ public class CoordenadoriaService extends GenericServiceImpl<Coordenadoria, Coor
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
+	public Page<Coordenadoria> acharNome(String substring, Pageable pageable) {
+		return repository.findByNomeContaining(substring, pageable);
+	}
 }

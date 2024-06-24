@@ -1,6 +1,7 @@
 package com.rfid.mhifes.service;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -85,5 +86,33 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
 
 	public Page<Alocacao> listarInativos(Pageable pageable) {
 		return repository.findAllStatusInativo(pageable);
+	}
+
+	// FILTER ALOCAÇÃO ATIVO
+	public Page<Alocacao> acharProfessorAtivo(String substring, Pageable pageable) {
+		return repository.findByProfessorContainingAt(substring, pageable);
+	}
+	public Page<Alocacao> acharLocalAtivo(String substring, Pageable pageable) {
+		return repository.findByLocalContainingAt(substring, pageable);
+	}
+	public Page<Alocacao> acharDisciplinaAtivo(String substring, Pageable pageable) {
+		return repository.findByDisciplinaContainingAt(substring, pageable);
+	}
+	public Page<Alocacao> acharHorarioAtivo(LocalTime time, Pageable pageable) {
+		return repository.findByTimeAt(time, pageable);
+	}
+
+	// FILTER ALOCAÇÃO INATIVO
+	public Page<Alocacao> acharProfessorInativo(String substring, Pageable pageable) {
+		return repository.findByProfessorContainingInat(substring, pageable);
+	}
+	public Page<Alocacao> acharLocalInativo(String substring, Pageable pageable) {
+		return repository.findByLocalContainingInat(substring, pageable);
+	}
+	public Page<Alocacao> acharDisciplinaInativo(String substring, Pageable pageable) {
+		return repository.findByDisciplinaContainingInat(substring, pageable);
+	}
+	public Page<Alocacao> acharHorarioInativo(LocalTime time, Pageable pageable) {
+		return repository.findByTimeInat(time, pageable);
 	}
 }

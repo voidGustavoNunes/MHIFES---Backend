@@ -1,9 +1,12 @@
 package com.rfid.mhifes.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.model.postgres.Aluno;
 import com.rfid.mhifes.model.postgres.Disciplina;
 import com.rfid.mhifes.repository.postgres.DisciplinaRepository;
 
@@ -29,4 +32,12 @@ public class DisciplinaService extends GenericServiceImpl<Disciplina, Disciplina
                     return repository.save(disciplinaEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
+    
+	
+	public Page<Disciplina> acharNome(String substring, Pageable pageable) {
+		return repository.findByNomeContaining(substring, pageable);
+	}
+	public Page<Disciplina> acharSigla(String substring, Pageable pageable) {
+		return repository.findBySiglaContaining(substring, pageable);
+	}
 }

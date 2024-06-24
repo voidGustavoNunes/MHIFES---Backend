@@ -3,6 +3,8 @@ package com.rfid.mhifes.repository.postgres;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.rfid.mhifes.model.postgres.Professor;
 
@@ -13,4 +15,13 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 	Page<Professor> findAll(Pageable pageable);
 
 	Professor findByMatricula(String matricula);
+    
+	@Query("SELECT p FROM Professor p, Pessoa ps WHERE p.id = ps.id AND LOWER(ps.nome) LIKE LOWER(CONCAT('%', :substring, '%'))")
+	Page<Professor> findByNomeContaining(@Param("substring") String substring, Pageable pageable);
+    
+	@Query("SELECT p FROM Professor p, Pessoa ps WHERE p.id = ps.id AND LOWER(ps.sigla) LIKE LOWER(CONCAT('%', :substring, '%'))")
+	Page<Professor> findBySiglaContaining(@Param("substring") String substring, Pageable pageable);
+    
+	@Query("SELECT p FROM Professor p, Pessoa ps WHERE p.id = ps.id AND LOWER(ps.matricula) LIKE LOWER(CONCAT('%', :substring, '%'))")
+	Page<Professor> findByMatriculaContaining(@Param("substring") String substring, Pageable pageable);
 }

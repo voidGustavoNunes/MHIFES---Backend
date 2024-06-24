@@ -1,5 +1,6 @@
 package com.rfid.mhifes.controller;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -51,6 +52,71 @@ public class AlocacaoController extends GenericController<Alocacao> {
 			@RequestParam @NotNull @Positive Integer size) {
 		Pageable pageable = PageRequest.of(page, size);
 		return alocacaoService.listarInativos(pageable);
+	}
+
+	// FILTER ALOCAÇÃO ATIVO
+	@GetMapping("/ativos/filter/professor")
+	public Page<Alocacao> acharProfessorAtivo(@RequestParam @NotNull @PositiveOrZero Integer page,
+			@RequestParam @NotNull @Positive Integer size, @RequestParam @NotNull String substring) {
+		Pageable pageable = PageRequest.of(page, size);
+		return alocacaoService.acharProfessorAtivo(substring, pageable);
+	}
+	@GetMapping("/ativos/filter/local")
+	public Page<Alocacao> acharLocalAtivo(@RequestParam @NotNull @PositiveOrZero Integer page,
+			@RequestParam @NotNull @Positive Integer size, @RequestParam @NotNull String substring) {
+		Pageable pageable = PageRequest.of(page, size);
+		return alocacaoService.acharLocalAtivo(substring, pageable);
+	}
+	@GetMapping("/ativos/filter/disciplina")
+	public Page<Alocacao> acharDisciplinaAtivo(@RequestParam @NotNull @PositiveOrZero Integer page,
+			@RequestParam @NotNull @Positive Integer size, @RequestParam @NotNull String substring) {
+		Pageable pageable = PageRequest.of(page, size);
+		System.out.println("\n"+substring+"\n");
+		return alocacaoService.acharDisciplinaAtivo(substring, pageable);
+	}
+	@GetMapping("/ativos/filter/horario")
+	public Page<Alocacao> acharHorarioAtivo(@RequestParam @NotNull @PositiveOrZero Integer page,
+			@RequestParam @NotNull @Positive Integer size, @RequestParam @NotNull String time) {
+		Pageable pageable = PageRequest.of(page, size);
+		
+        // String[] parts = time.split(":");
+        // int hour = Integer.parseInt(parts[0]);
+        // int minute = Integer.parseInt(parts[1]);
+        // LocalTime localTime = LocalTime.of(hour, minute);
+		LocalTime localTime = LocalTime.parse(time);
+		return alocacaoService.acharHorarioAtivo(localTime, pageable);
+	}
+
+	// FILTER ALOCAÇÃO INATIVO
+	@GetMapping("/inativos/filter/professor")
+	public Page<Alocacao> acharProfessorInativo(@RequestParam @NotNull @PositiveOrZero Integer page,
+			@RequestParam @NotNull @Positive Integer size, @RequestParam @NotNull String substring) {
+		Pageable pageable = PageRequest.of(page, size);
+		return alocacaoService.acharProfessorInativo(substring, pageable);
+	}
+	@GetMapping("/inativos/filter/local")
+	public Page<Alocacao> acharLocalInativo(@RequestParam @NotNull @PositiveOrZero Integer page,
+			@RequestParam @NotNull @Positive Integer size, @RequestParam @NotNull String substring) {
+		Pageable pageable = PageRequest.of(page, size);
+		return alocacaoService.acharLocalInativo(substring, pageable);
+	}
+	@GetMapping("/inativos/filter/disciplina")
+	public Page<Alocacao> acharDisciplinaInativo(@RequestParam @NotNull @PositiveOrZero Integer page,
+			@RequestParam @NotNull @Positive Integer size, @RequestParam @NotNull String substring) {
+		Pageable pageable = PageRequest.of(page, size);
+		return alocacaoService.acharDisciplinaInativo(substring, pageable);
+	}
+	@GetMapping("/inativos/filter/horario")
+	public Page<Alocacao> acharHorarioInativo(@RequestParam @NotNull @PositiveOrZero Integer page,
+			@RequestParam @NotNull @Positive Integer size, @RequestParam @NotNull String time) {
+		Pageable pageable = PageRequest.of(page, size);
+		
+        // String[] parts = time.split(":");
+        // int hour = Integer.parseInt(parts[0]);
+        // int minute = Integer.parseInt(parts[1]);
+        // LocalTime localTime = LocalTime.of(hour, minute);
+		LocalTime localTime = LocalTime.parse(time);
+		return alocacaoService.acharHorarioInativo(localTime, pageable);
 	}
 
 }

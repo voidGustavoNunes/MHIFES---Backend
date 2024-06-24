@@ -1,8 +1,12 @@
 package com.rfid.mhifes.service;
 
+import java.time.LocalDate;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -77,4 +81,10 @@ public class PeriodoService extends GenericServiceImpl<Periodo, PeriodoRepositor
         return repository.save(periodoEditado);
     }
 
+	public Page<Periodo> acharDia(String substring, Pageable pageable) {
+		return repository.findByDiaContaining(substring, pageable);
+	}
+	public Page<Periodo> acharAno(Year ano, Pageable pageable) {
+		return repository.findByAnoContaining(ano, pageable);
+	}
 }

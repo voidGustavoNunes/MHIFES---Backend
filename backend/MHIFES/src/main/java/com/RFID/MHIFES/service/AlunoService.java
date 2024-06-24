@@ -1,10 +1,13 @@
 package com.rfid.mhifes.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.exception.UniqueException;
+import com.rfid.mhifes.model.postgres.Alocacao;
 import com.rfid.mhifes.model.postgres.Aluno;
 import com.rfid.mhifes.repository.postgres.AlunoRepository;
 
@@ -43,5 +46,13 @@ public class AlunoService extends GenericServiceImpl<Aluno, AlunoRepository> {
 			alunoEditado.setCurso(aluno.getCurso());
 			return repository.save(alunoEditado);
 		}).orElseThrow(() -> new RegistroNotFoundException(id));
+	}
+
+	
+	public Page<Aluno> acharNome(String substring, Pageable pageable) {
+		return repository.findByNomeContaining(substring, pageable);
+	}
+	public Page<Aluno> acharMatricula(String substring, Pageable pageable) {
+		return repository.findByMatriculaContaining(substring, pageable);
 	}
 }

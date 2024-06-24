@@ -1,9 +1,11 @@
 package com.rfid.mhifes.repository.postgres;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Year;
 import java.util.List;
 
+import org.antlr.v4.runtime.atn.SemanticContext.AND;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -45,4 +47,34 @@ public interface AlocacaoRepository extends JpaRepository<Alocacao, Long> {
 
 	boolean existsByDataAulaAndHorarioAndPeriodoDisciplinaAndStatus(LocalDate dataAtual, Horario horario,
 			PeriodoDisciplina periodoDisciplina, Status status);
+
+
+	// FILTER ALOCAÇÃO ATIVO
+	@Query("SELECT a FROM Alocacao a JOIN a.professor p, Pessoa ps WHERE a.status = 'Ativo' AND p.id = ps.id AND LOWER(ps.nome) LIKE LOWER(CONCAT('%', :substring, '%'))")
+	Page<Alocacao> findByProfessorContainingAt(@Param("substring") String substring, Pageable pageable);
+
+	@Query("SELECT a FROM Alocacao a JOIN a.local al WHERE a.status = 'Ativo' AND LOWER(al.nome) LIKE LOWER(CONCAT('%', :substring, '%'))")
+	Page<Alocacao> findByLocalContainingAt(@Param("substring") String substring, Pageable pageable);
+
+	// @Query("SELECT a FROM Alocacao a JOIN Disciplina ds AND a.periodo_disciplina pd WHERE a.status = 'Ativo' AND ds.id = pd.disciplina AND LOWER(ds.nome) LIKE LOWER(CONCAT('%', :substring, '%'))")
+	@Query("SELECT a FROM Alocacao a JOIN a.periodoDisciplina pd JOIN pd.disciplina ds WHERE a.status = 'Ativo' AND LOWER(ds.nome) LIKE LOWER(CONCAT('%', :substring, '%'))")
+	Page<Alocacao> findByDisciplinaContainingAt(@Param("substring") String substring, Pageable pageable);
+
+    @Query("SELECT a FROM Alocacao a JOIN a.horario h WHERE a.status = 'Ativo' AND h.horaInicio = :time")
+    Page<Alocacao> findByTimeAt(@Param("time") LocalTime time, Pageable pageable);
+
+
+	// FILTER ALOCAÇÃO INATIVO
+	@Query("SELECT a FROM Alocacao a JOIN a.professor p, Pessoa ps WHERE a.status = 'Inativo' AND p.id = ps.id AND LOWER(ps.nome) LIKE LOWER(CONCAT('%', :substring, '%'))")
+	Page<Alocacao> findByProfessorContainingInat(@Param("substring") String substring, Pageable pageable);
+
+	@Query("SELECT a FROM Alocacao a JOIN a.local al WHERE a.status = 'Inativo' AND LOWER(al.nome) LIKE LOWER(CONCAT('%', :substring, '%'))")
+	Page<Alocacao> findByLocalContainingInat(@Param("substring") String substring, Pageable pageable);
+
+	// @Query("SELECT a FROM Alocacao a JOIN Disciplina ds AND a.periodo_disciplina pd WHERE a.status = 'Inativo' AND ds.id = pd.disciplina_id AND LOWER(ds.nome) LIKE LOWER(CONCAT('%', :substring, '%'))")
+	@Query("SELECT a FROM Alocacao a JOIN a.periodoDisciplina pd JOIN pd.disciplina ds WHERE a.status = 'Inativo' AND LOWER(ds.nome) LIKE LOWER(CONCAT('%', :substring, '%'))")
+	Page<Alocacao> findByDisciplinaContainingInat(@Param("substring") String substring, Pageable pageable);
+
+	@Query("SELECT a FROM Alocacao a JOIN a.horario h WHERE a.status = 'Inativo' AND h.horaInicio = :time")
+    Page<Alocacao> findByTimeInat(@Param("time") LocalTime time, Pageable pageable);
 }
