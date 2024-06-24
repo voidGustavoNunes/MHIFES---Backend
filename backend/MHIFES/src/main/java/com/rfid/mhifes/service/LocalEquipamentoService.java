@@ -1,15 +1,13 @@
 package com.rfid.mhifes.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.model.postgres.LocalEquipamento;
 import com.rfid.mhifes.repository.postgres.LocalEquipamentoRepository;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Service
 @Validated

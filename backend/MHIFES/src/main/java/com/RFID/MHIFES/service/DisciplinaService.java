@@ -1,6 +1,7 @@
 package com.rfid.mhifes.service;
 
 import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.exception.ValidationException;
 import com.rfid.mhifes.model.postgres.Disciplina;
 import com.rfid.mhifes.model.postgres.PeriodoDisciplina;
 import com.rfid.mhifes.repository.postgres.DisciplinaRepository;
@@ -10,7 +11,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -46,7 +46,7 @@ public class DisciplinaService extends GenericServiceImpl<Disciplina, Disciplina
         List<PeriodoDisciplina> periodosDisciplina = periodoDisciplinaRepository.findByDisciplina(disciplina);
 
         if (!periodosDisciplina.isEmpty()) {
-            throw new DataIntegrityViolationException("Disciplina não pode ser removida pois possui períodos vinculados.");
+            throw new ValidationException("Disciplina não pode ser removida pois possui períodos vinculados.");
         }
 
         repository.delete(disciplina);

@@ -3,9 +3,11 @@ package com.rfid.mhifes.service;
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.exception.ValidationException;
 import com.rfid.mhifes.model.postgres.Alocacao;
+import com.rfid.mhifes.model.postgres.Evento;
 import com.rfid.mhifes.model.postgres.Local;
 import com.rfid.mhifes.model.postgres.LocalEquipamento;
 import com.rfid.mhifes.repository.postgres.AlocacaoRepository;
+import com.rfid.mhifes.repository.postgres.EventoRepository;
 import com.rfid.mhifes.repository.postgres.LocalRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -24,6 +26,9 @@ public class LocalService extends GenericServiceImpl<Local, LocalRepository> {
 
     @Autowired
     private AlocacaoRepository alocacaoRepository;
+
+    @Autowired
+    private EventoRepository eventoRepository;
 
     private final LocalEquipamentoService localEquipamentoService;
 
@@ -87,6 +92,13 @@ public class LocalService extends GenericServiceImpl<Local, LocalRepository> {
         if (!alocacoes.isEmpty()) {
             throw new ValidationException("Local não pode ser removido pois possui alocações vinculadas.");
         }
+
+        List<Evento> eventos = eventoRepository.findByLocal(local);
+
+        if (!eventos.isEmpty()) {
+            throw new ValidationException("Local não pode ser removido pois possui eventos vinculados.");
+        }
+
 
         repository.delete(local);
     }
