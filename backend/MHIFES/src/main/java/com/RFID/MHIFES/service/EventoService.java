@@ -77,7 +77,7 @@ public class EventoService extends GenericServiceImpl<Evento, EventoRepository> 
         Optional<Evento> eventoExistente = repository.findByHorarioAndDataEventoAndLocal(
                 evento.getHorario(), evento.getDataEvento(), evento.getLocal());
 
-        if (eventoExistente.isPresent()) {
+        if (eventoExistente.isPresent() && !eventoExistente.get().getId().equals(evento.getId())) {
             throw new ValidationException("Já existe um evento cadastrado para o horário (" +
                     eventoExistente.get().getHorario().getHoraInicio().toString() + " - " +
                     eventoExistente.get().getHorario().getHoraFim().toString() + "), " +

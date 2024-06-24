@@ -1,23 +1,31 @@
 package com.rfid.mhifes.service;
 
+import com.rfid.mhifes.exception.RegistroNotFoundException;
+import com.rfid.mhifes.model.postgres.Coordenadoria;
+import com.rfid.mhifes.model.postgres.Professor;
+import com.rfid.mhifes.repository.postgres.CoordenadoriaRepository;
+import com.rfid.mhifes.repository.postgres.ProfessorRepository;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.model.postgres.Aluno;
-import com.rfid.mhifes.model.postgres.Coordenadoria;
-import com.rfid.mhifes.repository.postgres.CoordenadoriaRepository;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import java.util.List;
 
 @Validated
 @Service
 public class CoordenadoriaService extends GenericServiceImpl<Coordenadoria, CoordenadoriaRepository> {
+
+    @Autowired
+    private ProfessorRepository professorRepository;
 
     public CoordenadoriaService(CoordenadoriaRepository coordenadoriaRepository) {
         super(coordenadoriaRepository);
@@ -49,4 +57,22 @@ public class CoordenadoriaService extends GenericServiceImpl<Coordenadoria, Coor
 	public Page<Coordenadoria> acharNome(String substring, Pageable pageable) {
 		return repository.findByNomeContaining(substring, pageable);
 	}
+    @Override
+    @Transactional
+    public void excluir(Long id) {
+        Coordenadoria coordenadoria = repository.findById(id).orElseThrow(() -> new RegistroNotFoundException(id));
+
+        if (coordenadoria.getCoordenador() != null) {
+            throw new DataIntegrityViolationException("Coordenadoria não pode ser removida pois possui um coordenador vinculado.");
+        }
+
+        List<Professor> professores = professorRepository.findByCoordenadoria(coordenadoria);
+
+        if (!professores.isEmpty()) {
+            throw new DataIntegrityViolationException("Coordenadoria não pode ser removida pois possui professores vinculados.");
+        }
+
+        repository.delete(coordenadoria);
+    }
+
 }

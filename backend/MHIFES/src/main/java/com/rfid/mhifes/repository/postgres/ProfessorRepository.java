@@ -1,18 +1,20 @@
 package com.rfid.mhifes.repository.postgres;
 
+import com.rfid.mhifes.model.postgres.Coordenadoria;
+import com.rfid.mhifes.model.postgres.Professor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.rfid.mhifes.model.postgres.Professor;
+import java.util.List;
 
 public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 
-	boolean existsByMatricula(String matricula);
+    boolean existsByMatricula(String matricula);
 
-	Page<Professor> findAll(Pageable pageable);
+    Page<Professor> findAll(Pageable pageable);
 
 	Professor findByMatricula(String matricula);
     
@@ -24,4 +26,6 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
     
 	@Query("SELECT p FROM Professor p, Pessoa ps WHERE p.id = ps.id AND LOWER(ps.matricula) LIKE LOWER(CONCAT('%', :substring, '%'))")
 	Page<Professor> findByMatriculaContaining(@Param("substring") String substring, Pageable pageable);
+
+    List<Professor> findByCoordenadoria(Coordenadoria coordenadoria);
 }
