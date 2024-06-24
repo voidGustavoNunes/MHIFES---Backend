@@ -30,10 +30,10 @@ public class Log {
     @NotNull(message = "Data é obrigatória")
     private LocalDateTime data;
 
-    @Column(length = 999999)
+    @Column(length = 999999, name = "descricao_nova")
     private String descricaoNova;
 
-    @Column(length = 999999)
+    @Column(length = 999999, name = "descricao_antiga")
     private String descricaoAntiga;
 
     @NotNull
