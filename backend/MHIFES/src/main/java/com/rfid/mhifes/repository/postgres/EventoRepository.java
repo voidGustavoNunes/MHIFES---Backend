@@ -3,13 +3,16 @@ package com.rfid.mhifes.repository.postgres;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.rfid.mhifes.model.postgres.Evento;
+import com.rfid.mhifes.model.postgres.Horario;
+import com.rfid.mhifes.model.postgres.Local;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.rfid.mhifes.model.postgres.Evento;
+import java.util.Optional;
 
 public interface EventoRepository extends JpaRepository<Evento, Long> {
 
@@ -23,4 +26,6 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
     
     @Query("SELECT e FROM Evento e JOIN e.horario h WHERE h.horaInicio = :time")
     Page<Evento> findByTimeInicio(@Param("time") LocalTime time, Pageable pageable);
+
+    Optional<Evento> findByHorarioAndDataEventoAndLocal(Horario horario, LocalDate dataEvento, Local local);
 }

@@ -32,8 +32,9 @@ public class Coordenadoria {
 
 	@Override
 	public String toString() {
-		return "{" + "\"id\": " + id + ", \"nome\": \"" + nome + "\"" + ", \"coordenador\": " + coordenador
-				.toString() + "}";
+		return "{" + "\"id\": " + id + ", \"nome\": \"" + nome + "\"" + ", \"coordenador\": " + (coordenador != null
+				? coordenador.toString()
+				: null) + "}";
 	}
 
 }
