@@ -1,18 +1,33 @@
 package com.rfid.mhifes.service;
 
+import com.rfid.mhifes.exception.DataIntegrityViolationException;
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.exception.ValidationException;
+import com.rfid.mhifes.model.postgres.Alocacao;
+import com.rfid.mhifes.model.postgres.Coordenadoria;
 import com.rfid.mhifes.model.postgres.Professor;
+import com.rfid.mhifes.repository.postgres.AlocacaoRepository;
+import com.rfid.mhifes.repository.postgres.CoordenadoriaRepository;
 import com.rfid.mhifes.repository.postgres.ProfessorRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 @Validated
 @Service
 public class ProfessorService extends GenericServiceImpl<Professor, ProfessorRepository> {
+
+    @Autowired
+    private AlocacaoRepository alocacaoRepository;
+
+    @Autowired
+    private CoordenadoriaRepository coordenadoriaRepository;
 
     public ProfessorService(ProfessorRepository professorRepository) {
         super(professorRepository);
@@ -53,5 +68,29 @@ public class ProfessorService extends GenericServiceImpl<Professor, ProfessorRep
                     professorEditado.setCoordenadoria(professor.getCoordenadoria());
                     return repository.save(professorEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
+    }
+
+    @Override
+    @Transactional
+    public void excluir(Long id) {
+        Professor professor = repository.findById(id)
+                .orElseThrow(() -> new RegistroNotFoundException(id));
+
+        List<Alocacao> alocacoes = alocacaoRepository.findByProfessor(professor);
+        if (!alocacoes.isEmpty()) {
+            throw new DataIntegrityViolationException("O professor não pode ser removido pois está associado a uma ou várias alocações.");
+        }
+
+        Coordenadoria coordenadoria = coordenadoriaRepository.findByCoordenador(professor);
+
+        if (professor.isEhCoordenador() && coordenadoria != null) {
+            throw new DataIntegrityViolationException("O professor não pode ser removido pois é coordenador de uma coordenadoria.");
+        }
+
+        if (!professor.isEhCoordenador() && professor.getCoordenadoria() != null) {
+            throw new DataIntegrityViolationException("O professor não pode ser removido pois está vinculado a uma coordenadoria.");
+        }
+
+        repository.delete(professor);
     }
 }

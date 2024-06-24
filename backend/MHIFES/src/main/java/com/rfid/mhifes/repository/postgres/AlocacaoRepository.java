@@ -55,4 +55,8 @@ public interface AlocacaoRepository extends JpaRepository<Alocacao, Long> {
     Optional<Alocacao> findByHorarioAndDataAulaAndProfessorAndLocalAndStatus(Horario horario, LocalDate dataAula, Professor professor, Local local, Status status);
 
     Optional<Alocacao> findByHorarioAndDataAulaAndPeriodoDisciplinaAndLocalAndStatus(Horario horario, LocalDate dataAula, PeriodoDisciplina periodoDisciplina, Local local, Status status);
+
+    List<Alocacao> findByProfessor(Professor professor);
+
+    List<Alocacao> findByLocal(Local local);
 }

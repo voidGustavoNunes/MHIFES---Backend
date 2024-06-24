@@ -104,7 +104,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
         Optional<Alocacao> alocacaoExistente = repository.findByHorarioAndDataAulaAndLocalAndStatus(
                 alocacao.getHorario(), alocacao.getDataAula(), alocacao.getLocal(), Status.ATIVO);
 
-        if (alocacaoExistente.isPresent()) {
+        if (alocacaoExistente.isPresent() && !alocacaoExistente.get().getId().equals(alocacao.getId())) {
             throw new ValidationException("Já existe uma alocação ativa cadastrada para o horário (" +
                     alocacaoExistente.get().getHorario().getHoraInicio().toString() + " - " +
                     alocacaoExistente.get().getHorario().getHoraFim().toString() + "), " +
@@ -117,7 +117,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
         alocacaoExistente = repository.findByHorarioAndDataAulaAndTurmaAndLocalAndStatus(
                 alocacao.getHorario(), alocacao.getDataAula(), alocacao.getTurma(), alocacao.getLocal(), Status.ATIVO);
 
-        if (alocacaoExistente.isPresent()) {
+        if (alocacaoExistente.isPresent() && !alocacaoExistente.get().getId().equals(alocacao.getId())) {
             throw new ValidationException("Já existe uma alocação ativa cadastrada para o horário (" +
                     alocacaoExistente.get().getHorario().getHoraInicio().toString() + " - " +
                     alocacaoExistente.get().getHorario().getHoraFim().toString() + "), " +
@@ -131,7 +131,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
         alocacaoExistente = repository.findByHorarioAndDataAulaAndProfessorAndLocalAndStatus(
                 alocacao.getHorario(), alocacao.getDataAula(), alocacao.getProfessor(), alocacao.getLocal(), Status.ATIVO);
 
-        if (alocacaoExistente.isPresent()) {
+        if (alocacaoExistente.isPresent() && !alocacaoExistente.get().getId().equals(alocacao.getId())) {
             throw new ValidationException("Já existe uma alocação ativa cadastrada para o horário (" +
                     alocacaoExistente.get().getHorario().getHoraInicio().toString() + " - " +
                     alocacaoExistente.get().getHorario().getHoraFim().toString() + "), " +
@@ -145,7 +145,7 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
         alocacaoExistente = repository.findByHorarioAndDataAulaAndPeriodoDisciplinaAndLocalAndStatus(
                 alocacao.getHorario(), alocacao.getDataAula(), alocacao.getPeriodoDisciplina(), alocacao.getLocal(), Status.ATIVO);
 
-        if (alocacaoExistente.isPresent()) {
+        if (alocacaoExistente.isPresent() && !alocacaoExistente.get().getId().equals(alocacao.getId())) {
             throw new ValidationException("Já existe uma alocação ativa cadastrada para o horário (" +
                     alocacaoExistente.get().getHorario().getHoraInicio().toString() + " - " +
                     alocacaoExistente.get().getHorario().getHoraFim().toString() + "), " +
