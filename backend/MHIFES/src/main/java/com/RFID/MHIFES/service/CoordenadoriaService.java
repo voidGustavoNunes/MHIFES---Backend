@@ -11,8 +11,12 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import com.rfid.mhifes.model.postgres.Aluno;
 
 import java.util.List;
 
@@ -50,6 +54,9 @@ public class CoordenadoriaService extends GenericServiceImpl<Coordenadoria, Coor
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
+	public Page<Coordenadoria> acharNome(String substring, Pageable pageable) {
+		return repository.findByNomeContaining(substring, pageable);
+	}
     @Override
     @Transactional
     public void excluir(Long id) {

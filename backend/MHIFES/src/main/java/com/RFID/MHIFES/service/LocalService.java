@@ -1,5 +1,13 @@
 package com.rfid.mhifes.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.exception.ValidationException;
 import com.rfid.mhifes.model.postgres.Alocacao;
@@ -14,8 +22,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +88,12 @@ public class LocalService extends GenericServiceImpl<Local, LocalRepository> {
         return repository.save(localExistente);
     }
 
+	public Page<Local> acharNome(String substring, Pageable pageable) {
+		return repository.findByNomeContaining(substring, pageable);
+	}
+	public Page<Local> acharCapacidade(Integer capa, Pageable pageable) {
+		return repository.findByCapacidadeContaining(capa, pageable);
+	}
     @Override
     @Transactional
     public void excluir(Long id) {

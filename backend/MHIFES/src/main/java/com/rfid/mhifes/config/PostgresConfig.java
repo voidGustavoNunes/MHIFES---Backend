@@ -1,5 +1,7 @@
 package com.rfid.mhifes.config;
 
+import java.util.HashMap;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,4 +43,16 @@ public class PostgresConfig {
 			@Qualifier("postgresEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
 		return new JpaTransactionManager(entityManagerFactory);
 	}
+
+	// @Primary
+    // @Bean(name = "postgresEntityManagerFactory")
+    // public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
+    //         @Qualifier("postgresDataSource") DataSource dataSource) {
+    //     Map<String, Object> properties = new HashMap<>();
+    //     properties.put("hibernate.hbm2ddl.auto", "create");
+    //     properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+
+    //     return builder.dataSource(dataSource).packages("com.rfid.mhifes.model.postgres").persistenceUnit("postgres")
+    //             .properties(properties).build();
+    // }
 }

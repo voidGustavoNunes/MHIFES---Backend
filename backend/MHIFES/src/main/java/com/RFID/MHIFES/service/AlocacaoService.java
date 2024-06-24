@@ -1,5 +1,8 @@
 package com.rfid.mhifes.service;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import com.rfid.mhifes.enums.Operacao;
 import com.rfid.mhifes.enums.Status;
 import com.rfid.mhifes.exception.RegistroNotFoundException;
@@ -19,7 +22,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -166,4 +168,32 @@ public class AlocacaoService extends GenericServiceImpl<Alocacao, AlocacaoReposi
                     eventoExistente.get().getDataEvento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " selecionada.");
         }
     }
+
+	// FILTER ALOCAÇÃO ATIVO
+	public Page<Alocacao> acharProfessorAtivo(String substring, Pageable pageable) {
+		return repository.findByProfessorContainingAt(substring, pageable);
+	}
+	public Page<Alocacao> acharLocalAtivo(String substring, Pageable pageable) {
+		return repository.findByLocalContainingAt(substring, pageable);
+	}
+	public Page<Alocacao> acharDisciplinaAtivo(String substring, Pageable pageable) {
+		return repository.findByDisciplinaContainingAt(substring, pageable);
+	}
+	public Page<Alocacao> acharHorarioAtivo(LocalTime time, Pageable pageable) {
+		return repository.findByTimeAt(time, pageable);
+	}
+
+	// FILTER ALOCAÇÃO INATIVO
+	public Page<Alocacao> acharProfessorInativo(String substring, Pageable pageable) {
+		return repository.findByProfessorContainingInat(substring, pageable);
+	}
+	public Page<Alocacao> acharLocalInativo(String substring, Pageable pageable) {
+		return repository.findByLocalContainingInat(substring, pageable);
+	}
+	public Page<Alocacao> acharDisciplinaInativo(String substring, Pageable pageable) {
+		return repository.findByDisciplinaContainingInat(substring, pageable);
+	}
+	public Page<Alocacao> acharHorarioInativo(LocalTime time, Pageable pageable) {
+		return repository.findByTimeInat(time, pageable);
+	}
 }

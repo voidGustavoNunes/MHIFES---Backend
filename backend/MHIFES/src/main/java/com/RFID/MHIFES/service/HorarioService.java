@@ -1,5 +1,12 @@
 package com.rfid.mhifes.service;
 
+import java.time.LocalTime;
+
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.exception.ValidationException;
 import com.rfid.mhifes.model.postgres.Alocacao;
@@ -80,4 +87,11 @@ public class HorarioService extends GenericServiceImpl<Horario, HorarioRepositor
 
         repository.delete(horario);
     }
+    
+	public Page<Horario> acharTimeInicio(LocalTime time, Pageable pageable) {
+		return repository.findByTimeInicio(time, pageable);
+	}
+	public Page<Horario> acharTimeFim(LocalTime time, Pageable pageable) {
+		return repository.findByTimeFim(time, pageable);
+	}
 }

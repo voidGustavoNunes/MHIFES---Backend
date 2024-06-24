@@ -1,5 +1,10 @@
 package com.rfid.mhifes.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
 import com.rfid.mhifes.exception.DataIntegrityViolationException;
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.exception.ValidationException;
@@ -69,6 +74,16 @@ public class ProfessorService extends GenericServiceImpl<Professor, ProfessorRep
                     return repository.save(professorEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
+    
+	public Page<Professor> acharNome(String substring, Pageable pageable) {
+		return repository.findByNomeContaining(substring, pageable);
+	}
+	public Page<Professor> acharSigla(String substring, Pageable pageable) {
+		return repository.findBySiglaContaining(substring, pageable);
+	}
+	public Page<Professor> acharMatricula(String substring, Pageable pageable) {
+		return repository.findByMatriculaContaining(substring, pageable);
+	}
 
     @Override
     @Transactional

@@ -62,12 +62,11 @@ public class SecurityConfigurations {
                         // pessoa consiga se
                         // cadastrar
 
-                        .requestMatchers("/api/alocacoes").permitAll()
-                        .requestMatchers("/api/coordenadorias").permitAll()
-                        .requestMatchers("/api/**").hasRole("ADMIN")
-                        // .requestMatchers("/home").permitAll()
-                        // .requestMatchers("/home").hasAnyRole("ADMIN", "USER") // Role ADMIN
-                        // .requestMatchers(HttpMethod.POST, "/disciplina").hasRole("ADMIN")
+                        .requestMatchers("/api/alocacoes/**").permitAll()
+                        .requestMatchers("/api/coordenadorias/**").permitAll()
+                        // .requestMatchers("/api/**").hasRole("ADMIN")
+                        .requestMatchers("/api/eventos/**").hasRole("USER")
+                        .requestMatchers("/api/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 

@@ -1,5 +1,10 @@
 package com.rfid.mhifes.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.exception.ValidationException;
 import com.rfid.mhifes.model.postgres.Equipamento;
@@ -11,8 +16,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
@@ -35,6 +38,10 @@ public class EquipamentoService extends GenericServiceImpl<Equipamento, Equipame
                     return repository.save(equipamentoEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
+	
+	public Page<Equipamento> acharNome(String substring, Pageable pageable) {
+		return repository.findByNomeContaining(substring, pageable);
+	}
 
     @Override
     @Transactional

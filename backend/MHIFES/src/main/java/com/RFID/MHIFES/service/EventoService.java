@@ -1,5 +1,11 @@
 package com.rfid.mhifes.service;
 
+import java.time.LocalTime;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import com.rfid.mhifes.enums.Status;
 import com.rfid.mhifes.exception.RegistroNotFoundException;
 import com.rfid.mhifes.exception.ValidationException;
@@ -10,7 +16,6 @@ import com.rfid.mhifes.repository.postgres.EventoRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -44,6 +49,16 @@ public class EventoService extends GenericServiceImpl<Evento, EventoRepository> 
                     return repository.save(eventoEditado);
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
+    
+	public Page<Evento> acharNome(String substring, Pageable pageable) {
+		return repository.findByNomeContaining(substring, pageable);
+	}
+	public Page<Evento> acharDia(String substring, Pageable pageable) {
+		return repository.findByDiaContaining(substring, pageable);
+	}
+	public Page<Evento> acharTimeInicio(LocalTime time, Pageable pageable) {
+		return repository.findByTimeInicio(time, pageable);
+	}
 
     private void validarEvento(Evento evento) {
         // Verificar se existe alguma alocação ativa com o mesmo horário, na mesma data e no mesmo local
