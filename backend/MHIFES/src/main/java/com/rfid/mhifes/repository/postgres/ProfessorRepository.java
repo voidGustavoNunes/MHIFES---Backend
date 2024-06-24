@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 
@@ -16,7 +17,8 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 
     Page<Professor> findAll(Pageable pageable);
 
-	Professor findByMatricula(String matricula);
+    @Query("SELECT p FROM Professor p WHERE p.matricula = :matricula")
+    Optional<Professor> findFirstByMatricula(@Param("matricula") String matricula);
     
 	@Query("SELECT p FROM Professor p, Pessoa ps WHERE p.id = ps.id AND LOWER(ps.nome) LIKE LOWER(CONCAT('%', :substring, '%'))")
 	Page<Professor> findByNomeContaining(@Param("substring") String substring, Pageable pageable);

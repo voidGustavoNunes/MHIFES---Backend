@@ -115,19 +115,26 @@ public class MigrationService {
             }
         }
     }
-
+// *
     public Professor verificarEAtualizarProfessor(ProfessorMySQL professorMySQL) {
         // Verifica se o professor existe no banco de dados pelo campo matricula
-        Professor professor = professorRepository.findByMatricula(professorMySQL.getMatricula());
+        Optional<Professor> professorOptional = professorRepository.findFirstByMatricula(professorMySQL.getMatricula()).stream().findFirst();
 
-        // Se o professor não existir, salva o novo professor
-        if (professor == null) {
-            professor = new Professor(professorMySQL.getNome(), professorMySQL.getMatricula(),
-                    gerarSigla(professorMySQL.getNome()));
-            professor = professorRepository.save(professor);
+        if (professorOptional.isPresent()) {
+            Professor professor = professorOptional.get();
+           
+            // Se o professor não existir, salva o novo professor
+            if (professor == null) {
+                professor = new Professor(professorMySQL.getNome(), professorMySQL.getMatricula(),
+                        gerarSigla(professorMySQL.getNome()));
+                professor = professorRepository.save(professor);
+            }
+
+            return professor;
+        } else {
+            // Tratar o caso em que o professorMySQL não é encontrado
+            throw new RuntimeException("ProfessorMySQL não encontrado.");
         }
-
-        return professor;
     }
 
     private String gerarSigla(String nome) {
@@ -139,7 +146,7 @@ public class MigrationService {
         }
         return siglaBuilder.toString().toUpperCase();
     }
-
+// *
     private PeriodoDisciplina verificarEAtualizarPeriodoDisciplina(Year ano, Long semestre,
                                                                    DisciplinaMySQL disciplinaMySQL) {
 
@@ -147,7 +154,7 @@ public class MigrationService {
         Disciplina disciplina = verificarECriarDisciplina(disciplinaMySQL);
 
         Optional<PeriodoDisciplina> periodoDisciplinaExistente = periodoDisciplinaRepository
-                .findByPeriodoAndDisciplina(periodo, disciplina);
+                .findByPeriodoAndDisciplina(periodo, disciplina).stream().findFirst();
 
         if (periodoDisciplinaExistente.isPresent()) {
             return periodoDisciplinaExistente.get();
@@ -158,9 +165,9 @@ public class MigrationService {
             return periodoDisciplinaRepository.save(periodoDisciplina);
         }
     }
-
+// *
     private Periodo verificarECriarPeriodo(Year ano, Long semestre) {
-        Optional<Periodo> periodoExistente = periodoRepository.findByAnoAndSemestre(ano, semestre);
+        Optional<Periodo> periodoExistente = periodoRepository.findFirstByAnoAndSemestre(ano, semestre).stream().findFirst();
 
         if (periodoExistente.isPresent()) {
             return periodoExistente.get();
@@ -171,10 +178,9 @@ public class MigrationService {
             return periodoRepository.save(periodo);
         }
     }
-
+// *
     private Disciplina verificarECriarDisciplina(DisciplinaMySQL disciplinaMySQL) {
-        Optional<Disciplina> disciplinaExistente = disciplinaRepository.findByNomeAndSigla(disciplinaMySQL.getNome(),
-                disciplinaMySQL.getSigla());
+        Optional<Disciplina> disciplinaExistente = disciplinaRepository.findFirstByNomeAndSigla(disciplinaMySQL.getNome(), disciplinaMySQL.getSigla()).stream().findFirst();
 
         if (disciplinaExistente.isPresent()) {
             return disciplinaExistente.get();
@@ -183,23 +189,29 @@ public class MigrationService {
             return disciplinaRepository.save(disciplina);
         }
     }
-
+// *
     private Horario verificarECriarHorario(AulaMySQL aulaMySQL) {
 
         // Por enquanto dividido por 6 porque as tabelas do samha são malucas
-        LabelMySQL labelMySQL = labelMySQLRepository.findByNumeroAndTurno(aulaMySQL.getNumero(),
-                aulaMySQL.getTurno() / 6);
+        Optional<LabelMySQL> labelMySQLOptional = labelMySQLRepository.findFirstByNumeroAndTurno(aulaMySQL.getNumero(), aulaMySQL.getTurno() / 6).stream().findFirst();
 
-        Optional<Horario> horarioExistente = horarioRepository.findByHoraInicioAndHoraFim(labelMySQL.getInicio(),
-                labelMySQL.getFim());
+        if (labelMySQLOptional.isPresent()) {
+            LabelMySQL labelMySQL = labelMySQLOptional.get();
+            
+            Optional<Horario> horarioExistente = horarioRepository.findByHoraInicioAndHoraFim(labelMySQL.getInicio(),
+                    labelMySQL.getFim()).stream().findFirst();
 
-        if (horarioExistente.isPresent()) {
-            return horarioExistente.get();
+            if (horarioExistente.isPresent()) {
+                return horarioExistente.get();
+            } else {
+                Horario horario = new Horario();
+                horario.setHoraInicio(labelMySQL.getInicio());
+                horario.setHoraFim(labelMySQL.getFim());
+                return horarioRepository.save(horario);
+            }
         } else {
-            Horario horario = new Horario();
-            horario.setHoraInicio(labelMySQL.getInicio());
-            horario.setHoraFim(labelMySQL.getFim());
-            return horarioRepository.save(horario);
+            // Tratar o caso em que o labelMySQL não é encontrado
+            throw new RuntimeException("LabelMySQL não encontrado para a aula: " + aulaMySQL);
         }
     }
 

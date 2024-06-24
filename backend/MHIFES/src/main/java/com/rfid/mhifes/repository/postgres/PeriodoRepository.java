@@ -16,7 +16,8 @@ public interface PeriodoRepository extends JpaRepository<Periodo, Long> {
 
 	Page<Periodo> findAll(Pageable pageable);
 
-	Optional<Periodo> findByAnoAndSemestre(Year ano, Long semestre);
+    @Query("SELECT p FROM Periodo p WHERE p.ano = :ano AND p.semestre = :semestre")
+    Optional<Periodo> findFirstByAnoAndSemestre(@Param("ano") Year ano, @Param("semestre") Long semestre);
     
 	@Query("SELECT p FROM Periodo p WHERE p.dataInicio = TO_DATE(:dia, 'DD/MM/YYYY')")
 	Page<Periodo> findByDiaContaining(@Param("dia") String dia, Pageable pageable);

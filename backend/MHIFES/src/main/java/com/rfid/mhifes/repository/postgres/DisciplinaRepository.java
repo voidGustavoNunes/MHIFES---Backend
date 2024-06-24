@@ -14,8 +14,9 @@ public interface DisciplinaRepository extends JpaRepository<Disciplina, Long> {
 
     Page<Disciplina> findAll(Pageable pageable);
 
-    Optional<Disciplina> findByNomeAndSigla(String nome, String sigla);
-    
+    @Query("SELECT d FROM Disciplina d WHERE d.nome = :nome AND d.sigla = :sigla")
+    Optional<Disciplina> findFirstByNomeAndSigla(@Param("nome") String nome, @Param("sigla") String sigla);
+
 	@Query("SELECT d FROM Disciplina d WHERE LOWER(d.nome) LIKE LOWER(CONCAT('%', :substring, '%'))")
 	Page<Disciplina> findByNomeContaining(@Param("substring") String substring, Pageable pageable);
     
